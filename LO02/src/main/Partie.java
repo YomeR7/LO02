@@ -43,7 +43,7 @@ public class Partie {
 			ia[i] = IA;
 		}
 				
-		Manche manche1 = new Manche(nbIA, moi, ia);
+		Manche manche1 = new Manche(nbIA, moi, ia, modeComptage);
 		
 	}
 
