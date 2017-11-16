@@ -18,6 +18,10 @@ public class Paquet {
 		String valeur[] = {"2","3","4","5","6","7","8","9","10","Valet","Dame","Roi","As"};
 		String couleur[] = {"Pique","Carreau","Trefle","Coeur"};
 		
+		if (Partie.modeComptage == negatif) {//
+			int points[] = { 20, 3, 4, 5, 6, 20, 50, 9, 20, 20, 10, 10, 50}; 
+			
+		}
 		int k = 0;
 		for (int i=0;i<couleur.length;i++) {
 			for (int j=0;j<valeur.length;j++) {

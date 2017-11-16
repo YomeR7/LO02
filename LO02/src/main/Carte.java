@@ -9,7 +9,15 @@ public class Carte {
 		this.valeur = valeur;
 		this.couleur = couleur;
 	}
+	//surcharge quand le mode de comptage est en négatif
+	public Carte(String valeur, String couleur, int points) {
+		super();
+		this.valeur = valeur;
+		this.couleur = couleur;
+		this.points = points;
+	}
 	
+
 	public Carte() {
 		this.valeur = null;
 		this.couleur = null;
@@ -25,6 +33,12 @@ public class Carte {
 	}
 	public void setCouleur(String couleur) {
 		this.couleur = couleur;
+	}	
+	public int getPoints() {
+		return points;
+	}
+	public void setPoints(int points) {
+		this.points = points;
 	}
 	@Override
 	public String toString() {
