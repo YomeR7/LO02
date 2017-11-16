@@ -18,7 +18,7 @@ public class JoueurPhysique extends Joueur {
 	public void choisirUneCarte(Tas leTas, Paquet lePaquet) {
 		// TODO Auto-generated method stub
 		Scanner sc = new Scanner(System.in);
-		System.out.println("\nChoisis une de tes cartes (1 ou 2 ou 3 etc) ou choisis 0 pour piocher une carte.");
+		System.out.println("\nChoisis une de tes cartes (1 ou 2 ou 3 etc)\n0 : Piocher une carte");
 		numCarte = sc.nextInt();
 		if (numCarte != 0 && numCarte != 13) {
 			carteChoisi = sesCartes.get(numCarte-1);
