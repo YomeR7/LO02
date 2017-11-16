@@ -45,11 +45,6 @@ public class Manche {
 		
 		lePaquet.melanger();
 		lePaquet.distribuer(nbIA+1, lesJoueurs);
-		/*lePaquet.afficherCartes();
-		for (int i=0;i<nbIA+1;i++) {
-			System.out.println("\nLes cartes du joueur " + i + " sont:");
-			lesJoueurs[i].getSesCartes();
-			} */
 		
 		StringBuffer sb = new StringBuffer();
 		sc = new Scanner(System.in);
@@ -61,8 +56,7 @@ public class Manche {
 		
 		rnd = (int) (lesJoueurs.length*(Math.random()));
 		joueurEnCours = lesJoueurs[rnd];
-		//joueurEnCours = lesJoueurs[nbIA];
-		
+				
 		Tas leTas = new Tas(lePaquet);
 		leTas.afficherCarteVisible();
 		

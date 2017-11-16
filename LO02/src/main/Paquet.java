@@ -9,7 +9,6 @@ public class Paquet {
 	
 	private int nbCarte = 52;
 	private ArrayList<Carte> cartes; 
-	private static int posPaquet=0;
 
 	public Paquet() {
 		super();
@@ -40,28 +39,22 @@ public class Paquet {
 		} else if (nbJ == 2) {
 			carteParJoueur = 10;
 		}
-		joueurs[0].setSesCartes(new ArrayList<Carte>(cartes.subList(0, 6)));
 		for (int i=0;i<nbJ;i++) {
-			 joueurs[i].setSesCartes(new ArrayList<Carte>(cartes.subList(carteParJoueur*i, carteParJoueur*i+carteParJoueur)));
-		}
-		for (int i = 0; i < (nbCarte-carteParJoueur*nbJ);i++){
-			cartes.set(i, cartes.get(i+carteParJoueur*nbJ));
-		}
-		for (int i = (nbCarte-carteParJoueur*nbJ);i < nbCarte;i++) {
-			cartes.set(i, new Carte());
+			ArrayList<Carte> cartesDuJoueur = new ArrayList<Carte>(cartes.subList(0, carteParJoueur));
+			joueurs[i].setSesCartes(cartesDuJoueur);
+			cartes.removeAll(cartesDuJoueur); 
 		}
 	}
 	
 	public void afficherCartes() {
-		 for (int i=0;i<nbCarte;i++) {
+		 for (int i=0;i<cartes.size();i++) {
 			System.out.println(cartes.get(i));
 		} 
 	}
 	
 	public Carte piocherUneCarte() {
-		Carte cartePioche = cartes.get(posPaquet);
-		cartes.set(posPaquet, new Carte());
-		posPaquet++;
+		Carte cartePioche = cartes.get(0);
+		cartes.remove(0);
 		return cartePioche;
 	}
 }
