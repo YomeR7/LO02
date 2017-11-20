@@ -81,5 +81,13 @@ public class Joueur {
 		// TODO Auto-generated method stub
 		return this.id;
 	}
+
+	public void compterSesPoints() {
+		// TODO Auto-generated method stub
+		for (int i = 0; i < sesCartes.size(); i++) {
+			score += sesCartes.get(i).getPoint();
+		}
+		System.out.println(this.nom + " a marqué " + this.score + " points.\n" );
+	}
 	
 }

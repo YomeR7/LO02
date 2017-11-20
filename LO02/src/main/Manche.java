@@ -31,19 +31,13 @@ public class Manche {
 		this.joueurEnCours = joueurEnCours;
 	}
 
-	public Manche(int nbIA, Joueur moi, Joueur[] ia) {
+	public Manche(Joueur[] lesJoueurs, byte modeComptage) {
 		super();
 		
 		Paquet lePaquet = new Paquet();
-		
-		Joueur lesJoueurs[] = new Joueur[nbIA+1];
-		for (int i=0;i<nbIA;i++) {
-			lesJoueurs[i] = ia[i];
-		}
-		lesJoueurs[nbIA] = moi;
-		
+				
 		lePaquet.melanger();
-		lePaquet.distribuer(nbIA+1, lesJoueurs);
+		lePaquet.distribuer(lesJoueurs.length, lesJoueurs);
 		
 		StringBuffer sb = new StringBuffer();
 		sc = new Scanner(System.in);
@@ -66,20 +60,36 @@ public class Manche {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			jouerTour(leTas,lesJoueurs,nbIA,lePaquet);
+			jouerTour(leTas,lesJoueurs,modeComptage,lePaquet);
 		}
 	}
 
-	private void jouerTour(Tas leTas,Joueur[] lesJoueurs, int nbIA, Paquet lePaquet) {
+	private void jouerTour(Tas leTas,Joueur[] lesJoueurs, byte modeComptage, Paquet lePaquet) {
 		// TODO Auto-generated method stub
 		System.out.println("C'est au tour de " + joueurEnCours.getNom() + "\n");
 		if (joueurEnCours instanceof JoueurPhysique) {
+			((JoueurPhysique) joueurEnCours).trierCartes();
 			((JoueurPhysique) joueurEnCours).afficherCartes();
 			joueurEnCours.choisirUneCarte(leTas,lePaquet);
 		} else {
 			joueurEnCours.choisirUneCarte(leTas,lePaquet); 
 		}
-		joueurEnCours = lesJoueurs[(joueurEnCours.getId()+sens)%(nbIA+1)];
+		
+		if (joueurEnCours.getSesCartes().size() != 0) {
+			joueurEnCours = lesJoueurs[(joueurEnCours.getId()+sens)%(lesJoueurs.length)];
+		} else {
+			mancheFinie(modeComptage, lesJoueurs);
+		}
+	}
+
+	private void mancheFinie(byte modeComptage, Joueur[] lesJoueurs) {
+		// TODO Auto-generated method stub
+		if (modeComptage == 0) {
+			System.out.println(joueurEnCours.getNom() + " a gagné la manche!\n");
+			for (int i = 0; i<lesJoueurs.length; i++) {
+				lesJoueurs[i].compterSesPoints();
+			}
+		}
 	}
 	
 }

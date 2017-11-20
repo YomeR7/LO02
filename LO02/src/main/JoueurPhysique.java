@@ -19,16 +19,18 @@ public class JoueurPhysique extends Joueur {
 
 	public void choisirUneCarte(Tas leTas, Paquet lePaquet) {
 		// TODO Auto-generated method stub
-		trierCartes();
 		Scanner sc = new Scanner(System.in);
-		System.out.println("\nChoisis une de tes cartes (1 ou 2 ou 3 etc)\n0 : Piocher une carte");
+		System.out.println("\nChoisis une de tes cartes (entre 1 et " + sesCartes.size() +")\n0 : Piocher une carte");
 		numCarte = sc.nextInt();
-		if (numCarte != 0 && numCarte != 13) {
+		if (numCarte != 0 && numCarte <= sesCartes.size()) {
 			carteChoisi = sesCartes.get(numCarte-1);
 			//System.out.println(carteChoisi);
 			this.poserCarte(leTas,lePaquet);
 		} else if (numCarte == 13) {
 			System.out.println(leTas.getCartesDessous());
+		} else if (numCarte > sesCartes.size()) {
+			System.out.println("Tu n'as pas autant de cartes! Choisis une carte entre 1 et " + sesCartes.size());
+			this.choisirUneCarte(leTas,lePaquet);
 		} else {
 			sesCartes.add(lePaquet.piocherUneCarte());
 			leTas.afficherCarteVisible();
@@ -47,10 +49,6 @@ public class JoueurPhysique extends Joueur {
 		        }
 		    }
 		});
-		
-		//Collections.sort(sesCartes,  new Comparator<Carte>() {
-			
-		//});
 	}
 
 }

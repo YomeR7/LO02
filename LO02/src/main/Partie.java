@@ -11,9 +11,8 @@ import java.util.Scanner;
 
 public class Partie {
 	
-	private String modeComptage;
-	private byte nbIA,test;
-	private Scanner sc,s;
+	private byte nbIA,test,modeComptage;
+	private Scanner sc;
 	
 	/**
 	 * Le constructeur partie crée tout le système du jeu: choix du nom du joueur, nombre d'IA, leurs difficultés puis lance les manches du jeu.
@@ -32,26 +31,27 @@ public class Partie {
 		//System.out.println(moi.getNom());
 		
 		System.out.println("Veuillez choisir le mode de comptage (positif ou negatif)");
-		s = new Scanner(System.in);
-		modeComptage = s.nextLine();
+		modeComptage = sc.nextByte();
 		
-		JoueurArtificiel ia[] = new JoueurArtificiel[nbIA];
+		Joueur[] lesJoueurs = new Joueur[nbIA+1];
 		for (byte i=0;i<nbIA;i++) {
 			System.out.println("\nChoisir la difficulté de l'IA"+(i+1)+" (1,2 ou 3)");
 			byte diff = sc.nextByte();
 			JoueurArtificiel IA = new JoueurArtificiel("IA"+(i+1),i,diff);
-			ia[i] = IA;
+			lesJoueurs[i] = IA;
 		}
+		
+		lesJoueurs[nbIA] = moi;
 				
-		Manche manche1 = new Manche(nbIA, moi, ia);
+		Manche manche1 = new Manche(lesJoueurs, modeComptage);
 		
 	}
 
 	
-	public String getModeComptage() {
+	public byte getModeComptage() {
 		return modeComptage;
 	}
-	public void setModeComptage(String modeComptage) {
+	public void setModeComptage(byte modeComptage) {
 		this.modeComptage = modeComptage;
 	}
 	public int getNbIA() {

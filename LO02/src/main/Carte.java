@@ -30,4 +30,9 @@ public class Carte {
 	public String toString() {
 		return valeur + " de " + couleur;
 	}
+
+	public byte getPoint() {
+		// TODO Auto-generated method stub
+		return this.points;
+	}
 }
