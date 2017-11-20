@@ -7,7 +7,7 @@ import java.util.List;
 
 public class Paquet {
 	
-	private int nbCarte = 52;
+	private byte nbCarte = 52;
 	private ArrayList<Carte> cartes; 
 
 	public Paquet() {

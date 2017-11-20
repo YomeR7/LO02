@@ -12,7 +12,7 @@ import java.util.Scanner;
 public class Partie {
 	
 	private String modeComptage;
-	private int nbIA,test;
+	private byte nbIA,test;
 	private Scanner sc,s;
 	
 	/**
@@ -27,7 +27,7 @@ public class Partie {
 		String nomJoueur = sc.nextLine();
 		
 		System.out.println("Veuillez choisir le nombre d'IA");
-		nbIA = sc.nextInt();		
+		nbIA = sc.nextByte();		
 		JoueurPhysique moi = new JoueurPhysique(nomJoueur,nbIA);
 		//System.out.println(moi.getNom());
 		
@@ -36,9 +36,9 @@ public class Partie {
 		modeComptage = s.nextLine();
 		
 		JoueurArtificiel ia[] = new JoueurArtificiel[nbIA];
-		for (int i=0;i<nbIA;i++) {
+		for (byte i=0;i<nbIA;i++) {
 			System.out.println("\nChoisir la difficulté de l'IA"+(i+1)+" (1,2 ou 3)");
-			int diff = sc.nextInt();
+			byte diff = sc.nextByte();
 			JoueurArtificiel IA = new JoueurArtificiel("IA"+(i+1),i,diff);
 			ia[i] = IA;
 		}
@@ -57,7 +57,7 @@ public class Partie {
 	public int getNbIA() {
 		return nbIA;
 	}
-	public void setNbIA(int nbIA) {
+	public void setNbIA(byte nbIA) {
 		this.nbIA = nbIA;
 	}
 	

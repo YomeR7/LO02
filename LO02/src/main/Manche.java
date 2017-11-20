@@ -3,8 +3,7 @@ import java.util.Scanner;
 
 public class Manche {
 
-	private int variante;
-	private int sens = 1,rnd;
+	private byte sens = 1, rnd,variante;
 	private Joueur joueurEnCours;
 	private Scanner sc;
 	
@@ -12,7 +11,7 @@ public class Manche {
 		return variante;
 	}
 	
-	public void setVariante(int variante) {
+	public void setVariante(byte variante) {
 		this.variante = variante;
 	}
 	
@@ -20,7 +19,7 @@ public class Manche {
 		return sens;
 	}
 	
-	public void setSens(int sens) {
+	public void setSens(byte sens) {
 		this.sens = sens;
 	}
 	
@@ -52,9 +51,9 @@ public class Manche {
 		sb.append("1 : Minimal\n");
 		sb.append("2 : Classique\n");
 		System.out.println(sb.toString());
-		this.variante = sc.nextInt();
+		this.variante = sc.nextByte();
 		
-		rnd = (int) (lesJoueurs.length*(Math.random()));
+		rnd = (byte) (lesJoueurs.length*(Math.random()));
 		joueurEnCours = lesJoueurs[rnd];
 				
 		Tas leTas = new Tas(lePaquet);

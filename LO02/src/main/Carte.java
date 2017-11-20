@@ -1,7 +1,7 @@
 package main;
 
 public class Carte {
-	private int points;
+	private byte points;
 	private String couleur,valeur;
 	
 	public Carte(String valeur, String couleur) {

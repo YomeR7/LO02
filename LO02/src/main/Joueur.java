@@ -4,24 +4,24 @@ import java.util.ArrayList;
 
 public class Joueur {
 
-	private int score,id;
+	private byte score,id;
 	protected ArrayList<Carte> sesCartes;
 	private String nom;
 	protected Carte carteChoisi;
 	protected int numCarte;
 	
-	public Joueur(String nom, int id) {
+	public Joueur(String nom, byte id) {
 		super();
 		this.nom = nom;
 		sesCartes = new ArrayList<Carte>();
 		this.id = id;
 	}
 
-	public int getScore() {
+	public byte getScore() {
 		return score;
 	}
 
-	public void setScore(int score) {
+	public void setScore(byte score) {
 		this.score = score;
 	}
 
@@ -77,7 +77,7 @@ public class Joueur {
 		}
 	}
 
-	public int getId() {
+	public byte getId() {
 		// TODO Auto-generated method stub
 		return this.id;
 	}

@@ -2,9 +2,9 @@ package main;
 
 public class JoueurArtificiel extends Joueur {
 	
-	private int difficulte;
+	private byte difficulte;
 	
-	public JoueurArtificiel(String nom,int id,int difficulte) {
+	public JoueurArtificiel(String nom,byte id,byte difficulte) {
 		super(nom,id);
 		this.difficulte = difficulte;
 	}
