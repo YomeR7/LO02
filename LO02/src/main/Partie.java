@@ -13,7 +13,7 @@ public class Partie {
 	
 	private byte nbIA,test,modeComptage;
 	private Scanner sc;
-	
+
 	/**
 	 * Le constructeur partie crée tout le système du jeu: choix du nom du joueur, nombre d'IA, leurs difficultés puis lance les manches du jeu.
 	 */
@@ -30,8 +30,13 @@ public class Partie {
 		JoueurPhysique moi = new JoueurPhysique(nomJoueur,nbIA);
 		//System.out.println(moi.getNom());
 		
-		System.out.println("Veuillez choisir le mode de comptage (positif ou negatif)");
+
+		System.out.println("Veuillez choisir le mode de comptage (1 : positif ou 0 : negatif)");
 		modeComptage = sc.nextByte();
+		while (modeComptage != 1 && modeComptage != 0) {
+			System.out.println("Ce mode de comptage n'existe pas! \nEssaye encore ;)");
+			modeComptage = sc.nextByte();
+		}
 		
 		Joueur[] lesJoueurs = new Joueur[nbIA+1];
 		for (byte i=0;i<nbIA;i++) {
@@ -44,7 +49,7 @@ public class Partie {
 		lesJoueurs[nbIA] = moi;
 				
 		Manche manche1 = new Manche(lesJoueurs, modeComptage);
-		
+
 	}
 
 	

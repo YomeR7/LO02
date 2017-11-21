@@ -6,6 +6,7 @@ public class Manche {
 	private byte sens = 1, rnd,variante;
 	private Joueur joueurEnCours;
 	private Scanner sc;
+	private static byte nbManche=0;
 	
 	public int getVariante() {
 		return variante;
@@ -34,7 +35,9 @@ public class Manche {
 	public Manche(Joueur[] lesJoueurs, byte modeComptage) {
 		super();
 		
-		Paquet lePaquet = new Paquet();
+		nbManche++;
+		
+		Paquet lePaquet = new Paquet(modeComptage);
 				
 		lePaquet.melanger();
 		lePaquet.distribuer(lesJoueurs.length, lesJoueurs);
@@ -60,11 +63,11 @@ public class Manche {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			jouerTour(leTas,lesJoueurs,modeComptage,lePaquet);
+			jouerTour(leTas,lesJoueurs,lePaquet,modeComptage);
 		}
 	}
 
-	private void jouerTour(Tas leTas,Joueur[] lesJoueurs, byte modeComptage, Paquet lePaquet) {
+	private void jouerTour(Tas leTas,Joueur[] lesJoueurs, Paquet lePaquet, byte modeComptage) {
 		// TODO Auto-generated method stub
 		System.out.println("C'est au tour de " + joueurEnCours.getNom() + "\n");
 		if (joueurEnCours instanceof JoueurPhysique) {
@@ -90,6 +93,12 @@ public class Manche {
 				lesJoueurs[i].compterSesPoints();
 			}
 		}
+		
+		if (nbManche!=1) {
+			for (int i = 0; i<lesJoueurs.length; i++) {
+				System.out.println(lesJoueurs[i].getNom() + " a au total " + lesJoueurs[i].getScore() + " points.");
+			}
+			
+		}
 	}
-	
 }

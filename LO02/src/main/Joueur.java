@@ -84,10 +84,12 @@ public class Joueur {
 
 	public void compterSesPoints() {
 		// TODO Auto-generated method stub
+		byte scoreManche = 0;
 		for (int i = 0; i < sesCartes.size(); i++) {
-			score += sesCartes.get(i).getPoint();
+			scoreManche += sesCartes.get(i).getPoint();
 		}
-		System.out.println(this.nom + " a marqué " + this.score + " points.\n" );
+		System.out.println(this.nom + " a marqué " + scoreManche + " points.\n" );
+		score += scoreManche;
 	}
 	
 }
