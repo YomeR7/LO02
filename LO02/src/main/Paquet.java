@@ -11,7 +11,7 @@ public class Paquet {
 	private ArrayList<Carte> cartes; 
 	private static int posPaquet=0;
 
-	public Paquet(String modeComptage) {
+	public Paquet(byte modeComptage) {
 		super();
 		cartes = new ArrayList<Carte>();
 		
@@ -23,8 +23,8 @@ public class Paquet {
 		int k = 0;
 		for (int i=0;i<couleur.length;i++) {
 			for (int j=0;j<valeur.length;j++) {
-				if (modeComptage == "negatif") {
-					cartes.add(k, new Carte(valeur[j],couleur[i],points[j]));
+				if (modeComptage == 0) {
+					cartes.add(k, new Carte(valeur[j],couleur[i],points[j])); // ajout de modeComptage pour affichage
 				} else {
 					cartes.add(k, new Carte(valeur[j],couleur[i]));
 				}

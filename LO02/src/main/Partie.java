@@ -11,7 +11,7 @@ import java.util.Scanner;
 
 public class Partie {
 	
-	private String modeComptage;
+	private byte modeComptage;
 	private int nbIA,test;
 	private Scanner sc,s;
 	
@@ -31,9 +31,14 @@ public class Partie {
 		JoueurPhysique moi = new JoueurPhysique(nomJoueur,nbIA);
 		//System.out.println(moi.getNom());
 		
-		System.out.println("Veuillez choisir le mode de comptage (positif ou negatif)");
+		System.out.println("Veuillez choisir le mode de comptage (1 : positif ou 0 : negatif)");
 		s = new Scanner(System.in);
-		modeComptage = s.nextLine();
+		modeComptage = s.nextByte();
+		while (modeComptage != 1 && modeComptage != 0) {
+			System.out.println("Ce mode de comptage n'existe pas! \nEssaye encore ;)");
+			s = new Scanner(System.in);
+			modeComptage = s.nextByte();
+		}
 		
 		JoueurArtificiel ia[] = new JoueurArtificiel[nbIA];
 		for (int i=0;i<nbIA;i++) {
@@ -48,10 +53,10 @@ public class Partie {
 	}
 
 	
-	public String getModeComptage() {
+	public byte getModeComptage() {
 		return modeComptage;
 	}
-	public void setModeComptage(String modeComptage) {
+	public void setModeComptage(byte modeComptage) {
 		this.modeComptage = modeComptage;
 	}
 	public int getNbIA() {

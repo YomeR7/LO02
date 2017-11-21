@@ -32,7 +32,7 @@ public class Manche {
 		this.joueurEnCours = joueurEnCours;
 	}
 
-	public Manche(int nbIA, Joueur moi, Joueur[] ia, String modeComptage) {
+	public Manche(int nbIA, Joueur moi, Joueur[] ia, byte modeComptage) {
 		super();
 		
 		Paquet lePaquet = new Paquet(modeComptage);
