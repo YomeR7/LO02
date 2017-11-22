@@ -64,6 +64,11 @@ public class Manche {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
+			if (lePaquet.getCartes().size() == 0) {
+				lePaquet.setCartes(leTas.getCartesDessous());
+				System.out.println("Le paquet a été changé et se mélange");
+				lePaquet.melanger();
+			}
 			jouerTour(leTas,lePaquet);
 		}
 	}

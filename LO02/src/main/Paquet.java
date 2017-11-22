@@ -64,6 +64,14 @@ public class Paquet {
 		cartes.remove(0);
 		return cartePioche;
 	}
+
+	public ArrayList<Carte> getCartes() {
+		return cartes;
+	}
+
+	public void setCartes(ArrayList<Carte> cartes) {
+		this.cartes = cartes;
+	}
 }
 
 
