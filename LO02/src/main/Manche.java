@@ -32,15 +32,16 @@ public class Manche {
 		this.joueurEnCours = joueurEnCours;
 	}
 
-	public Manche(Joueur[] lesJoueurs, byte modeComptage) {
+	public Manche() {
 		super();
 		
 		nbManche++;
+		System.out.println("\nMANCHE N°" + nbManche);
 		
-		Paquet lePaquet = new Paquet(modeComptage);
+		Paquet lePaquet = new Paquet();
 				
 		lePaquet.melanger();
-		lePaquet.distribuer(lesJoueurs.length, lesJoueurs);
+		lePaquet.distribuer();
 		
 		StringBuffer sb = new StringBuffer();
 		sc = new Scanner(System.in);
@@ -50,8 +51,8 @@ public class Manche {
 		System.out.println(sb.toString());
 		this.variante = sc.nextByte();
 		
-		rnd = (byte) (lesJoueurs.length*(Math.random()));
-		joueurEnCours = lesJoueurs[rnd];
+		rnd = (byte) (Partie.getInstance().getLesJoueurs().length*(Math.random()));
+		joueurEnCours = Partie.getInstance().getLesJoueurs()[rnd];
 				
 		Tas leTas = new Tas(lePaquet);
 		leTas.afficherCarteVisible();
@@ -63,11 +64,11 @@ public class Manche {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			jouerTour(leTas,lesJoueurs,lePaquet,modeComptage);
+			jouerTour(leTas,lePaquet);
 		}
 	}
 
-	private void jouerTour(Tas leTas,Joueur[] lesJoueurs, Paquet lePaquet, byte modeComptage) {
+	private void jouerTour(Tas leTas, Paquet lePaquet) {
 		// TODO Auto-generated method stub
 		System.out.println("C'est au tour de " + joueurEnCours.getNom() + "\n");
 		if (joueurEnCours instanceof JoueurPhysique) {
@@ -79,24 +80,27 @@ public class Manche {
 		}
 		
 		if (joueurEnCours.getSesCartes().size() != 0) {
-			joueurEnCours = lesJoueurs[(joueurEnCours.getId()+sens)%(lesJoueurs.length)];
+			joueurEnCours = Partie.getInstance().getLesJoueurs()[(joueurEnCours.getId()+sens)%(Partie.getInstance().getLesJoueurs().length)];
 		} else {
-			mancheFinie(modeComptage, lesJoueurs);
+			mancheFinie();
 		}
 	}
 
-	private void mancheFinie(byte modeComptage, Joueur[] lesJoueurs) {
+	private void mancheFinie() {
 		// TODO Auto-generated method stub
-		if (modeComptage == 0) {
+		if (Partie.getInstance().getModeComptage() == 0) {
 			System.out.println(joueurEnCours.getNom() + " a gagné la manche!\n");
-			for (int i = 0; i<lesJoueurs.length; i++) {
-				lesJoueurs[i].compterSesPoints();
+			for (int i = 0; i<Partie.getInstance().getLesJoueurs().length; i++) {
+				Partie.getInstance().getLesJoueurs()[i].compterSesPoints();
 			}
 		}
 		
 		if (nbManche!=1) {
-			for (int i = 0; i<lesJoueurs.length; i++) {
-				System.out.println(lesJoueurs[i].getNom() + " a au total " + lesJoueurs[i].getScore() + " points.");
+			for (int i = 0; i<Partie.getInstance().getLesJoueurs().length; i++) {
+				System.out.println(Partie.getInstance().getLesJoueurs()[i].getNom() + " a au total " + Partie.getInstance().getLesJoueurs()[i].getScore() + " points.\n");
+				if (Partie.getInstance().getMAXScore() < Partie.getInstance().getLesJoueurs()[i].getScore()) {
+					Partie.getInstance().setMAXScore(Partie.getInstance().getLesJoueurs()[i].getScore());
+				}
 			}
 			
 		}

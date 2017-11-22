@@ -11,8 +11,8 @@ public final class Main {
 		
 		System.out.println("JEU DU 8 AMERICAIN\nRéalisé par Florian Esslinger et Guillaume Rousselet\n");
 		
-		Partie maPartie = new Partie();
-		
+		Partie.getInstance();
+		Partie.getInstance().lancerPartie();
 	}	
 		
 }

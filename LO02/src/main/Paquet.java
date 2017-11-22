@@ -10,8 +10,9 @@ public class Paquet {
 	private byte nbCarte = 52;
 	private ArrayList<Carte> cartes; 
 
-	public Paquet(byte modeComptage) {
+	public Paquet() {
 		super();
+
 		cartes = new ArrayList<Carte>();
 		
 		String valeur[] = {"2","3","4","5","6","7","8","9","10","Valet","Dame","Roi","As"};
@@ -22,7 +23,7 @@ public class Paquet {
 		int k = 0;
 		for (int i=0;i<couleur.length;i++) {
 			for (int j=0;j<valeur.length;j++) {
-				if (modeComptage == 0) {
+				if (Partie.getInstance().getModeComptage() == 0) {
 					cartes.add(k, new Carte(valeur[j],couleur[i],points[j])); // ajout de modeComptage pour affichage
 				} else {
 					cartes.add(k, new Carte(valeur[j],couleur[i]));
@@ -36,18 +37,18 @@ public class Paquet {
 		Collections.shuffle(cartes);
 	}
 	
-	public void distribuer(int nbJ, Joueur[] joueurs) {
+	public void distribuer() {
 		int carteParJoueur = 0;
-		if (nbJ >= 4) {
+		if (Partie.getInstance().getLesJoueurs().length >= 4) {
 			carteParJoueur = 6;
-		} else if (nbJ == 3) {
+		} else if (Partie.getInstance().getLesJoueurs().length == 3) {
 			carteParJoueur = 8;
-		} else if (nbJ == 2) {
+		} else if (Partie.getInstance().getLesJoueurs().length == 2) {
 			carteParJoueur = 10;
 		}
-		for (int i=0;i<nbJ;i++) {
+		for (int i=0;i<Partie.getInstance().getLesJoueurs().length;i++) {
 			ArrayList<Carte> cartesDuJoueur = new ArrayList<Carte>(cartes.subList(0, carteParJoueur));
-			joueurs[i].setSesCartes(cartesDuJoueur);
+			Partie.getInstance().getLesJoueurs()[i].setSesCartes(cartesDuJoueur);
 			cartes.removeAll(cartesDuJoueur); 
 		}
 	}

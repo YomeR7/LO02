@@ -1,7 +1,7 @@
 package main;
 
 public class Carte {
-	private byte points;
+	private int points;
 	private String couleur,valeur;
 	
 	
@@ -11,7 +11,7 @@ public class Carte {
 		this.couleur = couleur;
 	}
 	//surcharge quand le mode de comptage est en négatif, + affichage comptage des points
-	public Carte(String valeur, String couleur, byte points) {
+	public Carte(String valeur, String couleur, int points) {
 		super();
 		this.valeur = valeur;
 		this.couleur = couleur;
@@ -39,7 +39,7 @@ public class Carte {
 	public int getPoints() {
 		return points;
 	}
-	public void setPoints(byte points) {
+	public void setPoints(int points) {
 		this.points = points;
 	}
 	@Override
@@ -47,8 +47,4 @@ public class Carte {
 			return valeur + " de " + couleur;	
 	}
 
-	public byte getPoint() {
-		// TODO Auto-generated method stub
-		return this.points;
-	}
 }

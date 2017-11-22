@@ -4,9 +4,10 @@ import java.util.ArrayList;
 
 public class Joueur {
 
-	private byte score,id;
+	private byte id;
 	protected ArrayList<Carte> sesCartes;
 	private String nom;
+	private int score;
 	protected Carte carteChoisi;
 	protected int numCarte;
 	
@@ -17,11 +18,11 @@ public class Joueur {
 		this.id = id;
 	}
 
-	public byte getScore() {
+	public int getScore() {
 		return score;
 	}
 
-	public void setScore(byte score) {
+	public void setScore(int score) {
 		this.score = score;
 	}
 
@@ -58,12 +59,6 @@ public class Joueur {
 	public ArrayList<Carte> getSesCartes() {
 		return sesCartes;
 	}
-
-	/*public void getSesCartes() {
-		for (int i=0;i<sesCartes.size();i++) {
-			System.out.println(sesCartes.get(i));
-		}
-	} */
 	
 	public void setSesCartes(ArrayList<Carte> sesCartes) {
 		this.sesCartes = sesCartes;
@@ -84,9 +79,9 @@ public class Joueur {
 
 	public void compterSesPoints() {
 		// TODO Auto-generated method stub
-		byte scoreManche = 0;
+		int scoreManche = 0;
 		for (int i = 0; i < sesCartes.size(); i++) {
-			scoreManche += sesCartes.get(i).getPoint();
+			scoreManche += sesCartes.get(i).getPoints();
 		}
 		System.out.println(this.nom + " a marqué " + scoreManche + " points.\n" );
 		score += scoreManche;
