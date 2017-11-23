@@ -2,7 +2,7 @@ package main;
 
 import java.util.ArrayList;
 
-public class Joueur {
+public abstract class Joueur {
 
 	private byte id;
 	protected ArrayList<Carte> sesCartes;
@@ -10,7 +10,7 @@ public class Joueur {
 	private int score;
 	protected Carte carteChoisi;
 	protected int numCarte;
-	
+
 	public Joueur(String nom, byte id) {
 		super();
 		this.nom = nom;
@@ -33,39 +33,39 @@ public class Joueur {
 	public void setNom(String nom) {
 		this.nom = nom;
 	}
-	
+
 	public void choisirUneCarte(Tas leTas, Paquet lePaquet) {
-		
+
 	}
-	
+
 	public void poserCarte(Tas leTas, Paquet lePaquet) {
-		
+
 		if (comparerCarte(leTas)) {
 			leTas.addCartesDessous(leTas.getCarteVisible());
 			leTas.setCarteVisible(carteChoisi);
-			sesCartes.remove(numCarte-1);
+			sesCartes.remove(numCarte - 1);
 			if (this instanceof JoueurArtificiel) {
-				System.out.println("L'"+this.getNom()+" joue : " + leTas.getCarteVisible());
+				System.out.println("L'" + this.getNom() + " joue : " + leTas.getCarteVisible());
 			}
 			leTas.afficherCarteVisible();
 		} else if (this instanceof JoueurPhysique) {
 			System.out.println("\nCarte non valide. Choisis en une autre.");
-			choisirUneCarte(leTas,lePaquet);
+			choisirUneCarte(leTas, lePaquet);
 		}
-		
-		
+
 	}
-	
+
 	public ArrayList<Carte> getSesCartes() {
 		return sesCartes;
 	}
-	
+
 	public void setSesCartes(ArrayList<Carte> sesCartes) {
 		this.sesCartes = sesCartes;
 	}
 
 	public boolean comparerCarte(Tas leTas) {
-		if (carteChoisi.getValeur() == leTas.getCarteVisible().getValeur()|| carteChoisi.getCouleur() == leTas.getCarteVisible().getCouleur()) {
+		if (carteChoisi.getValeur() == leTas.getCarteVisible().getValeur()
+				|| carteChoisi.getCouleur() == leTas.getCarteVisible().getCouleur()) {
 			return true;
 		} else {
 			return false;
@@ -83,8 +83,12 @@ public class Joueur {
 		for (int i = 0; i < sesCartes.size(); i++) {
 			scoreManche += sesCartes.get(i).getPoints();
 		}
-		System.out.println(this.nom + " a marqué " + scoreManche + " points.\n" );
+		System.out.println(this.nom + " a marqué " + scoreManche + " points.\n");
 		score += scoreManche;
 	}
-	
+
+	public abstract void trierCartes();
+
+	public abstract void afficherCartes();
+
 }
