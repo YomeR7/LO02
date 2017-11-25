@@ -2,8 +2,6 @@ package main;
 
 import java.util.Scanner;
 
-import javafx.beans.binding.When;
-
 public class Manche {
 
 	private byte sens = 1, rnd, numVariante;
@@ -94,17 +92,20 @@ public class Manche {
 
 	private void jouerTour() {
 		// TODO Auto-generated method stub
-		System.out.println("C'est au tour de " + joueurEnCours.getNom() + "\n");
-		joueurEnCours.trierCartes();
-		joueurEnCours.afficherCartes();
-		joueurEnCours.choisirUneCarte(leTas, lePaquet);
-
-		if (joueurEnCours.getSesCartes().size() == 1) {
-			this.uneCarte();
-		} else if (joueurEnCours.getSesCartes().size() > 1) {
-			this.changerJoueurEnCours();
+		if (leTas.carteVisibleEffetAttaque()) {
+			joueurEnCours.subirEffet();
 		} else {
-			mancheFinie();
+			System.out.println("C'est au tour de " + joueurEnCours.getNom() + "\n");
+			joueurEnCours.trierCartes();
+			joueurEnCours.afficherCartes();
+			joueurEnCours.choisirUneCarte(leTas, lePaquet);
+			if (joueurEnCours.getSesCartes().size() == 1) {
+				this.uneCarte();
+			} else if (joueurEnCours.getSesCartes().size() > 1) {
+				this.changerJoueurEnCours();
+			} else {
+				mancheFinie();
+			}
 		}
 	}
 
@@ -135,6 +136,7 @@ public class Manche {
 		long t1 = System.currentTimeMillis();
 		long delai = 8100, t2;
 		String direCarte = scc.nextLine();
+		scc.close();
 		if (!direCarte.isEmpty()) {
 			t2 = System.currentTimeMillis();
 			delai = t2 - t1;
@@ -176,7 +178,7 @@ public class Manche {
 	}
 
 	public void changerJoueurEnCours() {
-		joueurEnCours = Partie.getInstance().getLesJoueurs().get((joueurEnCours.getId() + sens)
-				% (Partie.getInstance().getLesJoueurs().size()));
+		joueurEnCours = Partie.getInstance().getLesJoueurs()
+				.get((joueurEnCours.getId() + sens) % (Partie.getInstance().getLesJoueurs().size()));
 	}
 }

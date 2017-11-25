@@ -31,4 +31,10 @@ public class Tas {
 		this.carteVisible = carteVisible;
 	}
 	
+	public boolean carteVisibleEffetAttaque() {
+		return Variante.getInstance().getValeurEffetAttaque().containsValue(carteVisible.getValeur());
+	}
+	
 }
+	
+

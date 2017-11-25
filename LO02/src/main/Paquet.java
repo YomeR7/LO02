@@ -1,13 +1,11 @@
 package main;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
-import java.util.List;
 
 public class Paquet {
 
-	private byte nbCarte = 52;
+	//private byte nbCarte = 52;
 	private ArrayList<Carte> cartes;
 
 	public Paquet(Variante VarianteManche) {

@@ -41,6 +41,9 @@ public abstract class Joueur {
 	public void poserCarte(Tas leTas, Paquet lePaquet) {
 
 		if (comparerCarte(leTas)) {
+			if (Variante.getInstance().getValeurEffetDefense().containsValue(carteChoisi.getValeur())) {
+				this.appliquerEffet();
+			}
 			leTas.addCartesDessous(leTas.getCarteVisible());
 			leTas.setCarteVisible(carteChoisi);
 			sesCartes.remove(numCarte - 1);
@@ -65,7 +68,8 @@ public abstract class Joueur {
 
 	public boolean comparerCarte(Tas leTas) {
 		if (carteChoisi.getValeur() == leTas.getCarteVisible().getValeur()
-				|| carteChoisi.getCouleur() == leTas.getCarteVisible().getCouleur()) {
+				|| carteChoisi.getCouleur() == leTas.getCarteVisible().getCouleur() 
+				|| carteChoisi.getValeur() == Variante.getInstance().getValeurEffetDefense().get(new EffetContre())) {
 			return true;
 		} else {
 			return false;
@@ -90,5 +94,15 @@ public abstract class Joueur {
 	public abstract void trierCartes();
 
 	public abstract void afficherCartes();
+	
+	public void appliquerEffet() {
+		
+	}
+
+	public void subirEffet() {
+		// TODO Auto-generated method stub
+		
+	};
+	
 
 }

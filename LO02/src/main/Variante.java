@@ -1,30 +1,40 @@
 package main;
 
-import java.util.LinkedList;
+import java.util.HashMap;
 
-public abstract class Variante {
+public class Variante {
 	
-	protected LinkedList<String> valeurEffet;
+	protected HashMap<Effet, String> valeurEffetDefense,valeurEffetAttaque;
 	protected String nom;
 
-	public Variante() {
-		valeurEffet = new LinkedList<String>();
+	protected Variante() {
+		valeurEffetDefense = new HashMap<Effet, String>();
+		valeurEffetAttaque = new HashMap<Effet, String>();
 	}
 	
-	public abstract void setCarteRejouer();
+	private static Variante INSTANCE = new Variante();
 	
-	public abstract void setCartePasseSonTour();
+	public static Variante getInstance() {
+		return INSTANCE;
+	}
 	
-	public abstract void setCarteChangeDeSens();
-	
-	public abstract void setCarteContre();
-	
-	public abstract void setCartePiocher();
-	
-	public abstract void setCarteTirerCarteDuJoueur();
-	
-	public abstract void setCarteQuatre();
-	
-	
+	public HashMap<Effet, String> getValeurEffetDefense() {
+		return valeurEffetDefense;
+	}
+
+
+	public void setValeurEffetDefense(HashMap<Effet, String> valeurEffetDefense) {
+		this.valeurEffetDefense = valeurEffetDefense;
+	}
+
+
+	public HashMap<Effet, String> getValeurEffetAttaque() {
+		return valeurEffetAttaque;
+	}
+
+
+	public void setValeurEffetAttaque(HashMap<Effet, String> valeurEffetAttaque) {
+		this.valeurEffetAttaque = valeurEffetAttaque;
+	}	
 	
 }
