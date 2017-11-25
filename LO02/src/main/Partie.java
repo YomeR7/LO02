@@ -95,6 +95,23 @@ public class Partie {
 			while (MAXScore <= 100) {
 				new Manche();
 			}
+			int minScore = MAXScore;
+			for (int i = 0 ; i<lesJoueurs.size() ;i++) {
+				if (getLesJoueurs().get(i).getScore() < minScore){
+					minScore = getLesJoueurs().get(i).getScore();
+				}
+				
+			}
+			for (int i = 0 ; i<lesJoueurs.size() ;i++) {
+				if (getLesJoueurs().get(i).getScore() == minScore){
+					System.out.println(getLesJoueurs().get(i).getNom() +"a gagné!");
+				}
+			}
+		}
+		if (modeComptage == 1) {
+			while (MAXScore <= 200) {
+				new Manche();
+			}
 		}
 	}
 
