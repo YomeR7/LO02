@@ -1,15 +1,14 @@
 package main;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.LinkedList;
 
 public abstract class Variante {
 	
-	protected ArrayList<String> valeurEffet;
+	protected LinkedList<String> valeurEffet;
 	protected String nom;
 
 	public Variante() {
-		valeurEffet = new ArrayList<String>();
+		valeurEffet = new LinkedList<String>();
 	}
 	
 	public abstract void setCarteRejouer();

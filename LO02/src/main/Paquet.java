@@ -38,16 +38,16 @@ public class Paquet {
 
 	public void distribuer() {
 		int carteParJoueur = 0;
-		if (Partie.getInstance().getLesJoueurs().length >= 4) {
+		if (Partie.getInstance().getLesJoueurs().size() >= 4) {
 			carteParJoueur = 6;
-		} else if (Partie.getInstance().getLesJoueurs().length == 3) {
+		} else if (Partie.getInstance().getLesJoueurs().size() == 3) {
 			carteParJoueur = 8;
-		} else if (Partie.getInstance().getLesJoueurs().length == 2) {
+		} else if (Partie.getInstance().getLesJoueurs().size() == 2) {
 			carteParJoueur = 10;
 		}
-		for (int i = 0; i < Partie.getInstance().getLesJoueurs().length; i++) {
+		for (int i = 0; i < Partie.getInstance().getLesJoueurs().size(); i++) {
 			ArrayList<Carte> cartesDuJoueur = new ArrayList<Carte>(cartes.subList(0, carteParJoueur));
-			Partie.getInstance().getLesJoueurs()[i].setSesCartes(cartesDuJoueur);
+			Partie.getInstance().getLesJoueurs().get(i).setSesCartes(cartesDuJoueur);
 			cartes.removeAll(cartesDuJoueur);
 		}
 	}

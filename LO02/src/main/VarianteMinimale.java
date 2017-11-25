@@ -1,6 +1,6 @@
 package main;
 
-import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 public class VarianteMinimale extends Variante {
@@ -16,7 +16,7 @@ public class VarianteMinimale extends Variante {
 		return valeurEffet;
 	}
 
-	public void setValeurEffet(ArrayList<String> valeurEffet) {
+	public void setValeurEffet(LinkedList<String> valeurEffet) {
 		this.valeurEffet = valeurEffet;
 	}
 
