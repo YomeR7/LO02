@@ -1,17 +1,18 @@
 package main;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Manche {
 
-	private byte sens = 1, rnd, numVariante;
+	private byte sens = 1, rnd;
 	private Joueur joueurEnCours;
 	private Scanner sc;
 	private static byte nbManche = 0;
 	private Variante varianteManche;
 	private Paquet lePaquet;
 	private Tas leTas;
-	// Ajouter list de variantes
+	private ArrayList<Variante> lesVariantes;
 
 	public int getSens() {
 		return sens;
@@ -29,14 +30,6 @@ public class Manche {
 		this.joueurEnCours = joueurEnCours;
 	}
 
-	public byte getNumVariante() {
-		return numVariante;
-	}
-
-	public void setNumVariante(byte numVariante) {
-		this.numVariante = numVariante;
-	}
-
 	public Variante getVarianteManche() {
 		return varianteManche;
 	}
@@ -46,22 +39,22 @@ public class Manche {
 	}
 
 	public Manche() {
-		super();
 
+		lesVariantes = new ArrayList<Variante>();
+		lesVariantes.add(new VarianteMinimale());
+		lesVariantes.add(new VarianteMonclar());
+		
 		nbManche++;
 		System.out.println("\nMANCHE N°" + nbManche);
 
 		StringBuffer sb = new StringBuffer();
 		sc = new Scanner(System.in);
 		sb.append("\nChoisir une des variantes suivantes:\n");
-		sb.append("1 : Minimal\n");
-		sb.append("2 : Classique\n");
-		System.out.println(sb.toString());
-		this.numVariante = sc.nextByte();
-		if (numVariante == 1) {
-			varianteManche = new VarianteMinimale();
-			;
+		for (int i=0; i < lesVariantes.size(); i++) {
+			sb.append((i+1) + " : " + lesVariantes.get(i).getNom() + "\n");
 		}
+		System.out.println(sb.toString());
+		varianteManche = lesVariantes.get(sc.nextInt()-1);
 
 		lePaquet = new Paquet(varianteManche);
 
@@ -92,16 +85,14 @@ public class Manche {
 
 	private void jouerTour() {
 		// TODO Auto-generated method stub
-		if (leTas.carteVisibleEffetAttaque()) {
-			joueurEnCours.subirEffet();
+		if (leTas.carteVisibleEffetAttaque(varianteManche)) {
+			joueurEnCours.subirEffet(varianteManche,leTas,lePaquet);
 		} else {
 			System.out.println("C'est au tour de " + joueurEnCours.getNom() + "\n");
 			joueurEnCours.trierCartes();
 			joueurEnCours.afficherCartes();
 			joueurEnCours.choisirUneCarte(leTas, lePaquet);
-			System.out.println("valeur carte choisis:" + joueurEnCours.getCarteChoisi().getValeur());
 			if (varianteManche.getValeurEffetDefense().containsKey(joueurEnCours.getCarteChoisi().getValeur())) {
-				System.out.println("ca passe ici");
 				joueurEnCours.appliquerEffet(varianteManche,leTas,lePaquet);
 			}
 			if (joueurEnCours.getSesCartes().size() == 1) {

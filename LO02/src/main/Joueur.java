@@ -98,14 +98,14 @@ public abstract class Joueur {
 	public abstract void afficherCartes();
 	
 	public void appliquerEffet(Variante varianteManche,Tas leTas, Paquet lePaquet) {
-		System.out.println("ca marche?");
 		Effet lEffet = varianteManche.getValeurEffetDefense().get(carteChoisi.getValeur());
 		lEffet.lancer(this,leTas,lePaquet);
 	}
 
-	public void subirEffet() {
-		// TODO Auto-generated method stub
-		
+	public void subirEffet(Variante varianteManche,Tas leTas, Paquet lePaquet) {
+		System.out.println(this.nom + " subit un effet!");
+		Effet lEffet = varianteManche.getValeurEffetAttaque().get(leTas.getCarteVisible().getValeur());
+		lEffet.lancer(this, leTas, lePaquet);
 	};
 	
 

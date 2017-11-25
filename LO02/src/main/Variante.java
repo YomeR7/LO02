@@ -7,15 +7,9 @@ public class Variante {
 	protected HashMap<String, Effet> valeurEffetDefense,valeurEffetAttaque;
 	protected String nom;
 
-	protected Variante() {
+	public Variante() {
 		valeurEffetDefense = new HashMap<String, Effet>();
 		valeurEffetAttaque = new HashMap<String, Effet>();
-	}
-	
-	private static Variante INSTANCE = new Variante();
-	
-	public static Variante getInstance() {
-		return INSTANCE;
 	}
 	
 	public HashMap<String, Effet> getValeurEffetDefense() {
@@ -35,6 +29,14 @@ public class Variante {
 
 	public void setValeurEffetAttaque(HashMap<String, Effet> valeurEffetAttaque) {
 		this.valeurEffetAttaque = valeurEffetAttaque;
+	}
+
+	public String getNom() {
+		return nom;
+	}
+
+	public void setNom(String nom) {
+		this.nom = nom;
 	}	
 	
 }
