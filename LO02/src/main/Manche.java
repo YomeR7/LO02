@@ -99,6 +99,11 @@ public class Manche {
 			joueurEnCours.trierCartes();
 			joueurEnCours.afficherCartes();
 			joueurEnCours.choisirUneCarte(leTas, lePaquet);
+			System.out.println("valeur carte choisis:" + joueurEnCours.getCarteChoisi().getValeur());
+			if (varianteManche.getValeurEffetDefense().containsKey(joueurEnCours.getCarteChoisi().getValeur())) {
+				System.out.println("ca passe ici");
+				joueurEnCours.appliquerEffet(varianteManche,leTas,lePaquet);
+			}
 			if (joueurEnCours.getSesCartes().size() == 1) {
 				this.uneCarte();
 			} else if (joueurEnCours.getSesCartes().size() > 1) {

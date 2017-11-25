@@ -22,7 +22,6 @@ public class JoueurPhysique extends Joueur {
 		Scanner sc = new Scanner(System.in);
 		System.out.println("\nChoisis une de tes cartes (entre 1 et " + sesCartes.size() + ")\n0 : Piocher une carte");
 		numCarte = sc.nextInt();
-		sc.close();
 		if (numCarte != 0 && numCarte <= sesCartes.size()) {
 			carteChoisi = sesCartes.get(numCarte - 1);
 			// System.out.println(carteChoisi);

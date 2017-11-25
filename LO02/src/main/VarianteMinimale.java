@@ -11,12 +11,12 @@ public class VarianteMinimale extends Variante {
 
 	public void setCarteRejouer() {
 		// TODO Auto-generated method stub
-		valeurEffetDefense.put(new EffetRejouer(), "10");
+		valeurEffetDefense.put("10",new EffetRejouer());
 	}
 
 	public void setCarteContre() {
 		// TODO Auto-generated method stub
-		valeurEffetDefense.put(new EffetContre(), "8");
+		valeurEffetDefense.put("8",new EffetContre());
 	}
 
 }

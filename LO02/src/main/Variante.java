@@ -4,12 +4,12 @@ import java.util.HashMap;
 
 public class Variante {
 	
-	protected HashMap<Effet, String> valeurEffetDefense,valeurEffetAttaque;
+	protected HashMap<String, Effet> valeurEffetDefense,valeurEffetAttaque;
 	protected String nom;
 
 	protected Variante() {
-		valeurEffetDefense = new HashMap<Effet, String>();
-		valeurEffetAttaque = new HashMap<Effet, String>();
+		valeurEffetDefense = new HashMap<String, Effet>();
+		valeurEffetAttaque = new HashMap<String, Effet>();
 	}
 	
 	private static Variante INSTANCE = new Variante();
@@ -18,22 +18,22 @@ public class Variante {
 		return INSTANCE;
 	}
 	
-	public HashMap<Effet, String> getValeurEffetDefense() {
+	public HashMap<String, Effet> getValeurEffetDefense() {
 		return valeurEffetDefense;
 	}
 
 
-	public void setValeurEffetDefense(HashMap<Effet, String> valeurEffetDefense) {
+	public void setValeurEffetDefense(HashMap<String, Effet> valeurEffetDefense) {
 		this.valeurEffetDefense = valeurEffetDefense;
 	}
 
 
-	public HashMap<Effet, String> getValeurEffetAttaque() {
+	public HashMap<String, Effet> getValeurEffetAttaque() {
 		return valeurEffetAttaque;
 	}
 
 
-	public void setValeurEffetAttaque(HashMap<Effet, String> valeurEffetAttaque) {
+	public void setValeurEffetAttaque(HashMap<String, Effet> valeurEffetAttaque) {
 		this.valeurEffetAttaque = valeurEffetAttaque;
 	}	
 	
