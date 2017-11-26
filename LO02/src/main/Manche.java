@@ -114,6 +114,7 @@ public class Manche {
 			}
 		}else if (Partie.getInstance().getModeComptage() == 1) {
 			System.out.println(joueurEnCours.getNom() + " a gagné la manche!\n");
+			
 		}
 
 		if (nbManche != 1) {

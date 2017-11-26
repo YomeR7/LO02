@@ -16,6 +16,7 @@ public class Partie {
 	private int MAXScore = 0;
 	private Scanner sc;
 	private ArrayList<Joueur> lesJoueurs;
+	private ArrayList<Difficulte> lesDifficultes;
 
 	/**
 	 * Le constructeur partie crée tout le système du jeu: choix du nom du joueur,
@@ -41,10 +42,11 @@ public class Partie {
 		}
 
 		lesJoueurs = new ArrayList<Joueur>();
+		lesDifficultes = new ArrayList<Difficulte>();
+		lesDifficultes.add(new Facile());
 		for (byte i = 0; i < nbIA; i++) {
-			System.out.println("\nChoisir la difficulté de l'IA" + (i + 1) + " (1,2 ou 3)");
-			byte diff = sc.nextByte();
-			JoueurArtificiel IA = new JoueurArtificiel("IA" + (i + 1), i, diff);
+			System.out.println("\nChoisir la difficulté de l'IA" + (i + 1) + " QUE 1 POUR LE MOMENT!");
+			JoueurArtificiel IA = new JoueurArtificiel("IA" + (i + 1), i, lesDifficultes.get(sc.nextInt()-1));
 			lesJoueurs.add(IA);
 		}
 

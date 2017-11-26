@@ -2,7 +2,7 @@ package main;
 
 import java.util.Scanner;
 
-public class EffetContre extends Effet {
+public class EffetContre implements Effet {
 
 	public void lancer(Joueur leJoueur, Tas leTas, Paquet lePaquet) {
 		String nouvCouleur;
