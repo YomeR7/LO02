@@ -13,6 +13,7 @@ public abstract class Joueur {
 
 	public Joueur(String nom, byte id) {
 		super();
+		this.carteChoisi = new Carte();
 		this.nom = nom;
 		sesCartes = new ArrayList<Carte>();
 		this.id = id;
@@ -106,6 +107,15 @@ public abstract class Joueur {
 		System.out.println(this.nom + " subit un effet!");
 		Effet lEffet = varianteManche.getValeurEffetAttaque().get(leTas.getCarteVisible().getValeur());
 		lEffet.lancer(this, leTas, lePaquet);
+	}
+
+	public boolean uneCarteEstChoisi(Tas leTas) {
+		if (this.carteChoisi.equals(leTas.getCarteVisible())) {
+			return true;
+		} else {
+			return false;
+		}
+		
 	};
 	
 

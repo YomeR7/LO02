@@ -3,6 +3,8 @@ package main;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import jdk.nashorn.internal.runtime.Undefined;
+
 public class Manche {
 
 	private byte sens = 1, rnd;
@@ -92,8 +94,8 @@ public class Manche {
 			joueurEnCours.trierCartes();
 			joueurEnCours.afficherCartes();
 			joueurEnCours.choisirUneCarte(leTas, lePaquet);
-			if (varianteManche.getValeurEffetDefense().containsKey(joueurEnCours.getCarteChoisi().getValeur())) {
-				joueurEnCours.appliquerEffet(varianteManche,leTas,lePaquet);
+			if (joueurEnCours.uneCarteEstChoisi(leTas) && varianteManche.getValeurEffetDefense().containsKey(joueurEnCours.getCarteChoisi().getValeur())) { //retour au if, le while bloquait le jeu au changement de couleur 
+				joueurEnCours.appliquerEffet(varianteManche,leTas,lePaquet);																				// idée : déplacer ce if dans choisirCarte
 			}
 			if (joueurEnCours.getSesCartes().size() == 1) {
 				this.uneCarte();

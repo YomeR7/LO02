@@ -1,18 +1,20 @@
 package main;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 
 public class Tas {
 	private Carte carteVisible;
-	private ArrayList<Carte> cartesDessous;
+	private HashSet<Carte> cartesDessous;
 
 	public Tas(Paquet lePaquet) {
 		carteVisible = lePaquet.piocherUneCarte();
-		cartesDessous = new ArrayList<Carte>();
+		cartesDessous = new HashSet<Carte>();
 	}
 
 	public ArrayList<Carte> getCartesDessous() {
-		return cartesDessous;
+		ArrayList<Carte> cartes = new ArrayList<Carte>(cartesDessous);
+		return cartes;
 	}
 
 	public void addCartesDessous(Carte cartesDessous) {

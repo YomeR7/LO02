@@ -11,7 +11,7 @@ public class Facile implements Difficulte {
 		while (!leJoueur.comparerCarte(leTas)) {
 			if (leJoueur.numCarte < leJoueur.sesCartes.size()) {
 				leJoueur.numCarte++;
-				leJoueur.carteChoisi = leJoueur.sesCartes.get(leJoueur.numCarte - 1);
+				leJoueur.setCarteChoisi(leJoueur.sesCartes.get(leJoueur.numCarte - 1));
 				leJoueur.poserCarte(leTas, lePaquet);
 			} else {
 				leJoueur.sesCartes.add(lePaquet.piocherUneCarte());
