@@ -15,7 +15,6 @@ public class Manche {
 	private Paquet lePaquet;
 	private Tas leTas;
 	private ArrayList<Variante> lesVariantes;
-
 	public int getSens() {
 		return sens;
 	}
@@ -103,8 +102,36 @@ public class Manche {
 				this.changerJoueurEnCours();
 			} else if (Partie.getInstance().getModeComptage() == 0 && joueurEnCours.getSesCartes().size() == 0){
 				mancheFinie();
-			} 
+			} else if (Partie.getInstance().getModeComptage() == 1 && joueurEnCours.getSesCartes().size() == 0) {
+				
+				switch (nombreJoueur) {
+				
+				case nombreJoueur :
+					System.out.println(joueurEnCours.getNom() + " a gagné la manche!\n");
+					joueurEnCours.setScore(50);
+					Partie.getInstance().getLesJoueurs().remove(joueurEnCours);
+				break;
+				
+				case nombreJoueur-1 :
+					System.out.println(joueurEnCours.getNom() + " est deuxième!\n");
+					joueurEnCours.setScore(30);
+					Partie.getInstance().getLesJoueurs().remove(joueurEnCours);
+					break; 
+				
+				case nombreJoueur-2 : 
+					System.out.println(joueurEnCours.getNom() + " est deuxième!\n");
+					joueurEnCours.setScore(30);
+					Partie.getInstance().getLesJoueurs().remove(joueurEnCours);
+					mancheFinie();
+					break; 
+				}
+				
+				
+				
+			}
+			
 		}
+			
 	}
 
 	private void mancheFinie() {
@@ -114,8 +141,7 @@ public class Manche {
 			for (int i = 0; i < Partie.getInstance().getLesJoueurs().size(); i++) {
 				Partie.getInstance().getLesJoueurs().get(i).compterSesPoints();
 			}
-		}else if (Partie.getInstance().getModeComptage() == 1) {
-			System.out.println(joueurEnCours.getNom() + " a gagné la manche!\n");
+		
 			
 		}
 
