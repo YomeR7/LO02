@@ -17,6 +17,10 @@ public class Tas {
 		return cartes;
 	}
 
+	public void setCartesDessous(HashSet<Carte> cartesDessous) {
+		this.cartesDessous = cartesDessous;
+	}
+
 	public void addCartesDessous(Carte cartesDessous) {
 		this.cartesDessous.add(cartesDessous);
 	}
@@ -35,6 +39,11 @@ public class Tas {
 	
 	public boolean carteVisibleEffetAttaque(Variante var) {
 		return var.getValeurEffetAttaque().containsKey(carteVisible.getValeur());
+	}
+
+	public void viderCartesDessous() {
+		// TODO Auto-generated method stub
+		cartesDessous.clear();
 	}
 	
 }

@@ -98,15 +98,15 @@ public abstract class Joueur {
 
 	public abstract void afficherCartes();
 	
-	public void appliquerEffet(Variante varianteManche,Tas leTas, Paquet lePaquet) {
+	public void appliquerEffet(Variante varianteManche,Tas leTas, Paquet lePaquet, Manche laManche) {
 		Effet lEffet = varianteManche.getValeurEffetDefense().get(carteChoisi.getValeur());
-		lEffet.lancer(this,leTas,lePaquet);
+		lEffet.lancer(this,leTas,lePaquet,laManche);
 	}
 
-	public void subirEffet(Variante varianteManche,Tas leTas, Paquet lePaquet) {
+	public void subirEffet(Variante varianteManche,Tas leTas, Paquet lePaquet, Manche laManche) {
 		System.out.println(this.nom + " subit un effet!");
 		Effet lEffet = varianteManche.getValeurEffetAttaque().get(leTas.getCarteVisible().getValeur());
-		lEffet.lancer(this, leTas, lePaquet);
+		lEffet.lancer(this, leTas, lePaquet,laManche);
 	}
 
 	public boolean uneCarteEstChoisi(Tas leTas) {

@@ -1,6 +1,7 @@
 package main;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.Scanner;
 
 import jdk.nashorn.internal.runtime.Undefined;
@@ -15,7 +16,8 @@ public class Manche {
 	private Paquet lePaquet;
 	private Tas leTas;
 	private ArrayList<Variante> lesVariantes;
-	public int getSens() {
+	
+	public byte getSens() {
 		return sens;
 	}
 
@@ -77,8 +79,12 @@ public class Manche {
 			}
 			if (lePaquet.getCartes().size() == 0) {
 				lePaquet.setCartes(leTas.getCartesDessous());
+				leTas.viderCartesDessous();
 				System.out.println("Le paquet a été changé et se mélange");
 				lePaquet.melanger();
+			}
+			if (leTas.carteVisibleEffetAttaque(varianteManche)) {
+				joueurEnCours.subirEffet(varianteManche,leTas,lePaquet,this);
 			}
 			jouerTour();
 		}
@@ -86,52 +92,93 @@ public class Manche {
 
 	private void jouerTour() {
 		// TODO Auto-generated method stub
-		if (leTas.carteVisibleEffetAttaque(varianteManche)) {
-			joueurEnCours.subirEffet(varianteManche,leTas,lePaquet);
-		} else {
-			System.out.println("C'est au tour de " + joueurEnCours.getNom() + "\n");
-			joueurEnCours.trierCartes();
-			joueurEnCours.afficherCartes();
-			joueurEnCours.choisirUneCarte(leTas, lePaquet);
-			if (joueurEnCours.uneCarteEstChoisi(leTas) && varianteManche.getValeurEffetDefense().containsKey(joueurEnCours.getCarteChoisi().getValeur())) { //retour au if, le while bloquait le jeu au changement de couleur 
-				joueurEnCours.appliquerEffet(varianteManche,leTas,lePaquet);																				// idée : déplacer ce if dans choisirCarte
-			}
-			if (joueurEnCours.getSesCartes().size() == 1) {
-				this.uneCarte();
-			} else if (joueurEnCours.getSesCartes().size() > 1) {
-				this.changerJoueurEnCours();
-			} else if (Partie.getInstance().getModeComptage() == 0 && joueurEnCours.getSesCartes().size() == 0){
-				mancheFinie();
-			} else if (Partie.getInstance().getModeComptage() == 1 && joueurEnCours.getSesCartes().size() == 0) {
-				
-				switch (nombreJoueur) {
-				
-				case nombreJoueur :
-					System.out.println(joueurEnCours.getNom() + " a gagné la manche!\n");
-					joueurEnCours.setScore(50);
-					Partie.getInstance().getLesJoueurs().remove(joueurEnCours);
-				break;
-				
-				case nombreJoueur-1 :
-					System.out.println(joueurEnCours.getNom() + " est deuxième!\n");
-					joueurEnCours.setScore(30);
-					Partie.getInstance().getLesJoueurs().remove(joueurEnCours);
-					break; 
-				
-				case nombreJoueur-2 : 
-					System.out.println(joueurEnCours.getNom() + " est deuxième!\n");
-					joueurEnCours.setScore(30);
-					Partie.getInstance().getLesJoueurs().remove(joueurEnCours);
-					mancheFinie();
-					break; 
-				}
-				
-				
-				
-			}
-			
+	
+		System.out.println("C'est au tour de " + joueurEnCours.getNom() + "\n");
+		joueurEnCours.trierCartes();
+		joueurEnCours.afficherCartes();
+		joueurEnCours.choisirUneCarte(leTas, lePaquet);
+		if (joueurEnCours.uneCarteEstChoisi(leTas) && varianteManche.getValeurEffetDefense().containsKey(joueurEnCours.getCarteChoisi().getValeur())) { //retour au if, le while bloquait le jeu au changement de couleur 
+			joueurEnCours.appliquerEffet(varianteManche,leTas,lePaquet,this);																				// idée : déplacer ce if dans choisirCarte
 		}
+		if (joueurEnCours.getSesCartes().size() == 1) {
+			this.uneCarte();
+		} else if (joueurEnCours.getSesCartes().size() > 1) {
+			this.changerJoueurEnCours();
+		} else if (Partie.getInstance().getModeComptage() == 0 && joueurEnCours.getSesCartes().size() == 0){
+			mancheFinie();
+		} else if (Partie.getInstance().getModeComptage() == 1 && joueurEnCours.getSesCartes().size() == 0) {
 			
+			ArrayList<Joueur> joueursTemp = new ArrayList<Joueur>(Partie.getInstance().getLesJoueurs());
+			int nombreJoueur = Partie.getInstance().getNbIA()+1;
+			Joueur jGagnant,joueurSuivant;
+			
+			if (nombreJoueur == Partie.getInstance().getLesJoueurs().size() && nombreJoueur >= 2) {
+				System.out.println(joueurEnCours.getNom() + " a gagné la manche!\n");
+				jGagnant = joueurEnCours;
+				joueurEnCours.setScore(50);
+				joueurSuivant = this.getJoueurSuivant();
+				Partie.getInstance().getLesJoueurs().remove(jGagnant);
+				joueurEnCours = joueurSuivant;
+			} else if (nombreJoueur == Partie.getInstance().getLesJoueurs().size() && nombreJoueur == 2) {
+				System.out.println(joueurEnCours.getNom() + " a gagné la manche!\n");
+				joueurEnCours.setScore(50);
+				joueurSuivant = this.getJoueurSuivant();
+				joueurSuivant.setScore(20);
+				System.out.println(joueurEnCours.getNom() + " a marqué 50 points et " + joueurSuivant.getNom() + " 20 points!\n");
+				mancheFinie();
+			} else if (nombreJoueur-1 == Partie.getInstance().getLesJoueurs().size() && nombreJoueur >= 3) {
+				System.out.println(joueurEnCours.getNom() + " est deuxième!\n");
+				jGagnant = joueurEnCours;
+				joueurEnCours.setScore(20);
+				joueurSuivant = this.getJoueurSuivant();
+				Partie.getInstance().getLesJoueurs().remove(jGagnant);
+				joueurEnCours = joueurSuivant;
+			} else if (nombreJoueur-1 == Partie.getInstance().getLesJoueurs().size() || nombreJoueur == 3) {
+					System.out.println(joueurEnCours.getNom() + " est deuxième!\n");
+					joueurEnCours.setScore(20);
+					joueurSuivant = this.getJoueurSuivant();
+					joueurSuivant.setScore(10);
+					Partie.getInstance().setLesJoueurs(joueursTemp);
+					mancheFinie();
+			} else {
+				System.out.println(joueurEnCours.getNom() + " est troisième!\n");
+				joueurEnCours.setScore(10);
+				Partie.getInstance().setLesJoueurs(joueursTemp);
+				mancheFinie();
+			}	
+			/* switch (nombreJoueur) {
+			
+			case (nombreJoueur) :
+				System.out.println(joueurEnCours.getNom() + " a gagné la manche!\n");
+				jGagnant = joueurEnCours;
+				joueurEnCours.setScore(50);
+				this.changerJoueurEnCours();
+				Partie.getInstance().getLesJoueurs().remove(jGagnant);
+				break;
+			
+			case nombreJoueur-1 :
+				System.out.println(joueurEnCours.getNom() + " est deuxième!\n");
+				jGagnant = joueurEnCours;
+				joueurEnCours.setScore(20);
+				this.changerJoueurEnCours();
+				Partie.getInstance().getLesJoueurs().remove(jGagnant);
+				break; 
+			
+			case nombreJoueur-2 : 
+				System.out.println(joueurEnCours.getNom() + " est troisième!\n");
+				joueurEnCours.setScore(10);
+				mancheFinie();
+				break; 
+			} */	
+		}
+		
+	
+			
+	}
+
+	public Joueur getJoueurSuivant() {
+		return Partie.getInstance().getLesJoueurs()
+				.get((joueurEnCours.getId() + sens) % (Partie.getInstance().getLesJoueurs().size()));
 	}
 
 	private void mancheFinie() {
@@ -144,7 +191,7 @@ public class Manche {
 		
 			
 		}
-
+		
 		if (nbManche != 1) {
 			for (int i = 0; i < Partie.getInstance().getLesJoueurs().size(); i++) {
 				System.out.println(Partie.getInstance().getLesJoueurs().get(i).getNom() + " a au total "
@@ -163,7 +210,6 @@ public class Manche {
 		long t1 = System.currentTimeMillis();
 		long delai = 8100, t2;
 		String direCarte = scc.nextLine();
-		scc.close();
 		if (!direCarte.isEmpty()) {
 			t2 = System.currentTimeMillis();
 			delai = t2 - t1;
@@ -205,7 +251,7 @@ public class Manche {
 	}
 
 	public void changerJoueurEnCours() {
-		joueurEnCours = Partie.getInstance().getLesJoueurs()
+		joueurEnCours =  Partie.getInstance().getLesJoueurs()
 				.get((joueurEnCours.getId() + sens) % (Partie.getInstance().getLesJoueurs().size()));
 	}
 }
