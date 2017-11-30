@@ -32,7 +32,7 @@ public class Partie {
 
 		System.out.println("Veuillez choisir le nombre d'IA");
 		nbIA = sc.nextByte();
-		JoueurPhysique moi = new JoueurPhysique(nomJoueur, nbIA);
+		JoueurPhysique moi = new JoueurPhysique(nomJoueur, (byte) (nbIA+1));
 
 		System.out.println("Veuillez choisir le mode de comptage (1 : positif ou 0 : negatif)");
 		modeComptage = sc.nextByte();
@@ -44,9 +44,10 @@ public class Partie {
 		lesJoueurs = new ArrayList<Joueur>();
 		lesDifficultes = new ArrayList<Difficulte>();
 		lesDifficultes.add(new Facile());
+		lesDifficultes.add(new Aggresif());
 		for (byte i = 0; i < nbIA; i++) {
-			System.out.println("\nChoisir la difficulté de l'IA" + (i + 1) + " QUE 1 POUR LE MOMENT!");
-			JoueurArtificiel IA = new JoueurArtificiel("IA" + (i + 1), i, lesDifficultes.get(sc.nextInt()-1));
+			System.out.println("\nChoisir la difficulté de l'IA" + (i + 1) + "\n0: Facile\n1: Aggressif\n");
+			JoueurArtificiel IA = new JoueurArtificiel("IA" + (i + 1), (byte) (i + 1), lesDifficultes.get(sc.nextInt()));
 			lesJoueurs.add(IA);
 		}
 

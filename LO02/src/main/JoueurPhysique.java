@@ -17,7 +17,7 @@ public class JoueurPhysique extends Joueur {
 		}
 	}
 
-	public void choisirUneCarte(Tas leTas, Paquet lePaquet) {
+	public void choisirUneCarte(Tas leTas, Paquet lePaquet, Manche laManche) {
 		// TODO Auto-generated method stub
 		Scanner sccc = new Scanner(System.in);
 		System.out.println("\nChoisis une de tes cartes (entre 1 et " + sesCartes.size() + ")\n0 : Piocher une carte");
@@ -25,12 +25,12 @@ public class JoueurPhysique extends Joueur {
 		if (numCarte != 0 && numCarte <= sesCartes.size()) {
 			carteChoisi = sesCartes.get(numCarte - 1);
 			// System.out.println(carteChoisi);
-			this.poserCarte(leTas, lePaquet);
+			this.poserCarte(leTas, lePaquet,laManche);
 		} else if (numCarte == 13) {
 			System.out.println(leTas.getCartesDessous());
 		} else if (numCarte > sesCartes.size()) {
 			System.out.println("Tu n'as pas autant de cartes! Choisis une carte entre 1 et " + sesCartes.size());
-			this.choisirUneCarte(leTas, lePaquet);
+			this.choisirUneCarte(leTas, lePaquet, laManche);
 		} else {
 			sesCartes.add(lePaquet.piocherUneCarte());
 			leTas.afficherCarteVisible();

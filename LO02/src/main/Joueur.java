@@ -43,9 +43,9 @@ public abstract class Joueur {
 		this.carteChoisi = carteChoisi;
 	}
 
-	public abstract void choisirUneCarte(Tas leTas, Paquet lePaquet);
+	public abstract void choisirUneCarte(Tas leTas, Paquet lePaquet, Manche laManche);
 	
-	public void poserCarte(Tas leTas, Paquet lePaquet) {
+	public void poserCarte(Tas leTas, Paquet lePaquet, Manche laManche) {
 
 		if (comparerCarte(leTas)) {
 			leTas.addCartesDessous(leTas.getCarteVisible());
@@ -57,7 +57,7 @@ public abstract class Joueur {
 			leTas.afficherCarteVisible();
 		} else if (this instanceof JoueurPhysique) {
 			System.out.println("\nCarte non valide. Choisis en une autre.");
-			choisirUneCarte(leTas, lePaquet);
+			choisirUneCarte(leTas, lePaquet, laManche);
 		}
 	}
 
@@ -116,6 +116,15 @@ public abstract class Joueur {
 			return false;
 		}
 		
+	}
+
+	public boolean possede(String valeur) {
+		// TODO Auto-generated method stub
+		if (sesCartes.contains(new Carte(valeur))) {
+			return true;
+		} else {
+			return false;
+		}
 	};
 	
 

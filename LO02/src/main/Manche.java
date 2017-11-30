@@ -46,6 +46,8 @@ public class Manche {
 		lesVariantes = new ArrayList<Variante>();
 		lesVariantes.add(new VarianteMinimale());
 		lesVariantes.add(new VarianteMonclar());
+		lesVariantes.add(new VarianteCarteMaou());
+		lesVariantes.add(new Variante5());
 		
 		nbManche++;
 		System.out.println("\nMANCHE N°" + nbManche);
@@ -96,7 +98,7 @@ public class Manche {
 		System.out.println("C'est au tour de " + joueurEnCours.getNom() + "\n");
 		joueurEnCours.trierCartes();
 		joueurEnCours.afficherCartes();
-		joueurEnCours.choisirUneCarte(leTas, lePaquet);
+		joueurEnCours.choisirUneCarte(leTas, lePaquet,this);
 		if (joueurEnCours.uneCarteEstChoisi(leTas) && varianteManche.getValeurEffetDefense().containsKey(joueurEnCours.getCarteChoisi().getValeur())) { //retour au if, le while bloquait le jeu au changement de couleur 
 			joueurEnCours.appliquerEffet(varianteManche,leTas,lePaquet,this);																				// idée : déplacer ce if dans choisirCarte
 		}
@@ -251,7 +253,11 @@ public class Manche {
 	}
 
 	public void changerJoueurEnCours() {
-		joueurEnCours =  Partie.getInstance().getLesJoueurs()
+		if (joueurEnCours.getId() == 0 && sens == -1) {
+			joueurEnCours = Partie.getInstance().getLesJoueurs().get(Partie.getInstance().getNbIA());
+		} else {
+			joueurEnCours =  Partie.getInstance().getLesJoueurs()
 				.get((joueurEnCours.getId() + sens) % (Partie.getInstance().getLesJoueurs().size()));
+		}
 	}
 }
