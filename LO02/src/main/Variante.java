@@ -5,7 +5,7 @@ import java.util.HashMap;
 public class Variante {
 	
 	protected HashMap<String, Effet> valeurEffetDefense,valeurEffetAttaque;
-	protected String nom;
+	protected String nom,valeurContre;
 
 	public Variante() {
 		valeurEffetDefense = new HashMap<String, Effet>();
@@ -37,6 +37,14 @@ public class Variante {
 
 	public void setNom(String nom) {
 		this.nom = nom;
+	}
+
+	public String getValeurContre() {
+		return valeurContre;
+	}
+
+	public void setValeurContre(String valeurContre) {
+		this.valeurContre = valeurContre;
 	}	
 	
 }

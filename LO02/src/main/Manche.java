@@ -86,7 +86,7 @@ public class Manche {
 				lePaquet.melanger();
 			}
 			if (leTas.carteVisibleEffetAttaque(varianteManche)) {
-				joueurEnCours.subirEffet(varianteManche,leTas,lePaquet,this);
+				joueurEnCours.subirEffet(leTas,lePaquet,this);
 			}
 			jouerTour();
 		}
@@ -100,7 +100,7 @@ public class Manche {
 		joueurEnCours.afficherCartes();
 		joueurEnCours.choisirUneCarte(leTas, lePaquet,this);
 		if (joueurEnCours.uneCarteEstChoisi(leTas) && varianteManche.getValeurEffetDefense().containsKey(joueurEnCours.getCarteChoisi().getValeur())) { //retour au if, le while bloquait le jeu au changement de couleur 
-			joueurEnCours.appliquerEffet(varianteManche,leTas,lePaquet,this);																				// idée : déplacer ce if dans choisirCarte
+			joueurEnCours.appliquerEffet(leTas,lePaquet,this);																				// idée : déplacer ce if dans choisirCarte
 		}
 		if (joueurEnCours.getSesCartes().size() == 1) {
 			this.uneCarte();

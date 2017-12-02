@@ -1,6 +1,7 @@
 package main;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 
 public abstract class Joueur {
 
@@ -98,15 +99,46 @@ public abstract class Joueur {
 
 	public abstract void afficherCartes();
 	
-	public void appliquerEffet(Variante varianteManche,Tas leTas, Paquet lePaquet, Manche laManche) {
-		Effet lEffet = varianteManche.getValeurEffetDefense().get(carteChoisi.getValeur());
+	public void appliquerEffet(Tas leTas, Paquet lePaquet, Manche laManche) {
+		Effet lEffet = laManche.getVarianteManche().getValeurEffetDefense().get(carteChoisi.getValeur());
 		lEffet.lancer(this,leTas,lePaquet,laManche);
 	}
 
-	public void subirEffet(Variante varianteManche,Tas leTas, Paquet lePaquet, Manche laManche) {
+	public void subirEffet(Tas leTas, Paquet lePaquet, Manche laManche) {
 		System.out.println(this.nom + " subit un effet!");
-		Effet lEffet = varianteManche.getValeurEffetAttaque().get(leTas.getCarteVisible().getValeur());
+			if (laManche.getVarianteManche().getValeurEffetDefense().containsValue(new EffetContre())) {
+				if (this.valeursCartes().contains(laManche.getVarianteManche().getValeurContre())) {
+					System.out.println(this.nom + " contre l'effet avec un " + laManche.getVarianteManche().getValeurContre());
+					this.setCarteChoisi(this.laCarteContre(laManche.getVarianteManche().getValeurContre()));
+					this.poserCarte(leTas, lePaquet, laManche);
+				}
+			}
+		Effet lEffet = laManche.getVarianteManche().getValeurEffetAttaque().get(leTas.getCarteVisible().getValeur());
 		lEffet.lancer(this, leTas, lePaquet,laManche);
+	}
+
+	private Carte laCarteContre(String valeur) {
+		// TODO Auto-generated method stub
+		boolean trouve = false;
+		Carte carteTrouvee = null;
+		int i = 0;
+		while(!trouve && i < sesCartes.size()) {
+			if (sesCartes.get(i).getValeur().equals(valeur)) {
+				carteTrouvee = sesCartes.get(i);
+			} else {
+				i++;
+			}
+		}
+		return carteTrouvee;
+	}
+
+	private HashSet<String> valeursCartes() {
+		// TODO Auto-generated method stub
+		HashSet<String> vals = new HashSet<String>();
+		for (int i = 0; i < sesCartes.size();i++) {
+			vals.add(sesCartes.get(i).getValeur());
+		}
+		return vals;
 	}
 
 	public boolean uneCarteEstChoisi(Tas leTas) {
