@@ -85,7 +85,8 @@ public class Manche {
 				System.out.println("Le paquet a été changé et se mélange");
 				lePaquet.melanger();
 			}
-			if (leTas.carteVisibleEffetAttaque(varianteManche)) {
+			if (leTas.isAvoirEffet()) {
+				leTas.setAvoirEffet(false);
 				joueurEnCours.subirEffet(leTas,lePaquet,this);
 			}
 			jouerTour();
@@ -147,31 +148,7 @@ public class Manche {
 				joueurEnCours.setScore(10);
 				Partie.getInstance().setLesJoueurs(joueursTemp);
 				mancheFinie();
-			}	
-			/* switch (nombreJoueur) {
-			
-			case (nombreJoueur) :
-				System.out.println(joueurEnCours.getNom() + " a gagné la manche!\n");
-				jGagnant = joueurEnCours;
-				joueurEnCours.setScore(50);
-				this.changerJoueurEnCours();
-				Partie.getInstance().getLesJoueurs().remove(jGagnant);
-				break;
-			
-			case nombreJoueur-1 :
-				System.out.println(joueurEnCours.getNom() + " est deuxième!\n");
-				jGagnant = joueurEnCours;
-				joueurEnCours.setScore(20);
-				this.changerJoueurEnCours();
-				Partie.getInstance().getLesJoueurs().remove(jGagnant);
-				break; 
-			
-			case nombreJoueur-2 : 
-				System.out.println(joueurEnCours.getNom() + " est troisième!\n");
-				joueurEnCours.setScore(10);
-				mancheFinie();
-				break; 
-			} */	
+			}
 		}
 		
 	

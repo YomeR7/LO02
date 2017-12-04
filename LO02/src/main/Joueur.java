@@ -51,9 +51,12 @@ public abstract class Joueur {
 		if (comparerCarte(leTas)) {
 			leTas.addCartesDessous(leTas.getCarteVisible());
 			leTas.setCarteVisible(carteChoisi);
-			sesCartes.remove(numCarte - 1);
+			sesCartes.remove(carteChoisi);
 			if (this instanceof JoueurArtificiel) {
 				System.out.println("L'" + this.getNom() + " joue : " + leTas.getCarteVisible());
+			}
+			if (leTas.carteVisibleEffetAttaque(laManche.getVarianteManche())) {
+				leTas.setAvoirEffet(true);
 			}
 			leTas.afficherCarteVisible();
 		} else if (this instanceof JoueurPhysique) {

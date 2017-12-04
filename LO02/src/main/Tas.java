@@ -6,7 +6,8 @@ import java.util.HashSet;
 public class Tas {
 	private Carte carteVisible;
 	private HashSet<Carte> cartesDessous;
-
+	private boolean avoirEffet = false;
+	
 	public Tas(Paquet lePaquet) {
 		carteVisible = lePaquet.piocherUneCarte();
 		cartesDessous = new HashSet<Carte>();
@@ -19,6 +20,14 @@ public class Tas {
 
 	public void setCartesDessous(HashSet<Carte> cartesDessous) {
 		this.cartesDessous = cartesDessous;
+	}
+
+	public boolean isAvoirEffet() {
+		return avoirEffet;
+	}
+
+	public void setAvoirEffet(boolean avoirEffet) {
+		this.avoirEffet = avoirEffet;
 	}
 
 	public void addCartesDessous(Carte cartesDessous) {

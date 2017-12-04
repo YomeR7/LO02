@@ -7,7 +7,7 @@ public class EffetContre implements Effet {
 // il reste toujours a regler l'erreur quand on ne choisi la bonne couleur (choixCouleur > 3 
 	public void lancer(Joueur leJoueur, Tas leTas, Paquet lePaquet, Manche laManche) {
 		String nouvCouleur;
-		ArrayList<String> couleur = new ArrayList();
+		ArrayList<String> couleur = new ArrayList<String>();
 		couleur.add("Carreau");
 		couleur.add("Coeur");
 		couleur.add("Pique");
@@ -35,6 +35,7 @@ public class EffetContre implements Effet {
 		nouvCarteVisible.setCouleur(nouvCouleur);
 		leTas.setCarteVisible(nouvCarteVisible);
 		System.out.println("La nouvelle couleur est " + nouvCouleur + ".");
+		leJoueur.getSesCartes().remove(leJoueur.getCarteChoisi());
 
 	}
 }

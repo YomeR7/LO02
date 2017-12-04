@@ -11,18 +11,25 @@ public class Aggresif implements Difficulte {
 		// TODO Auto-generated method stub
 		HashSet<Carte> cartesPossibles = new HashSet<Carte>();
 		HashSet<Carte> cartesPossiblesEffet = new HashSet<Carte>();
-		Set<String> valeursAttaque = laManche.getVarianteManche().getValeurEffetAttaque().keySet();
+		Set<String> valeursAtt = laManche.getVarianteManche().getValeurEffetAttaque().keySet();
 		Set<String> valeursDef = laManche.getVarianteManche().getValeurEffetDefense().keySet();
-		Set<String> valeursEffet = valeursAttaque;
-		valeursEffet.addAll(valeursDef);
+		
 		for (int i = 0; i < leJoueur.getSesCartes().size(); i++) {
 			leJoueur.setCarteChoisi(leJoueur.getSesCartes().get(i));
 			if (leJoueur.comparerCarte(leTas)) {
-				for (Iterator<String> it = valeursEffet.iterator(); it.hasNext();) {
+				for (Iterator<String> it = valeursAtt.iterator(); it.hasNext();) {
 					String monIT = (String) it.next();
 					if (leJoueur.getCarteChoisi().getValeur().equals(monIT)) {
 						cartesPossiblesEffet.add(leJoueur.getCarteChoisi());
 					}
+					
+				}
+				for (Iterator<String> it = valeursDef.iterator(); it.hasNext();) {
+					String monIT = (String) it.next();
+					if (leJoueur.getCarteChoisi().getValeur().equals(monIT)) {
+						cartesPossiblesEffet.add(leJoueur.getCarteChoisi());
+					}
+					
 				}
 				cartesPossibles.add(leJoueur.getCarteChoisi());
 			}
