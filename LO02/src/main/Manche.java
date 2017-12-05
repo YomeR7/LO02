@@ -100,7 +100,7 @@ public class Manche {
 		joueurEnCours.trierCartes();
 		joueurEnCours.afficherCartes();
 		joueurEnCours.choisirUneCarte(leTas, lePaquet,this);
-		if (joueurEnCours.uneCarteEstChoisi(leTas) && varianteManche.getValeurEffetDefense().containsKey(joueurEnCours.getCarteChoisi().getValeur())) { //retour au if, le while bloquait le jeu au changement de couleur 
+		if (joueurEnCours.uneCarteEstChoisi(leTas) && joueurEnCours.isEffetActif()) { //retour au if, le while bloquait le jeu au changement de couleur 
 			joueurEnCours.appliquerEffet(leTas,lePaquet,this);																				// idée : déplacer ce if dans choisirCarte
 		}
 		if (joueurEnCours.getSesCartes().size() == 1) {

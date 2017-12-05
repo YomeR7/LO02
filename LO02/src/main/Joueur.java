@@ -11,6 +11,7 @@ public abstract class Joueur {
 	private int score;
 	protected Carte carteChoisi;
 	protected int numCarte;
+	private boolean effetActif = false;
 
 	public Joueur(String nom, byte id) {
 		super();
@@ -44,6 +45,14 @@ public abstract class Joueur {
 		this.carteChoisi = carteChoisi;
 	}
 
+	public boolean isEffetActif() {
+		return effetActif;
+	}
+
+	public void setEffetActif(boolean effetActif) {
+		this.effetActif = effetActif;
+	}
+
 	public abstract void choisirUneCarte(Tas leTas, Paquet lePaquet, Manche laManche);
 	
 	public void poserCarte(Tas leTas, Paquet lePaquet, Manche laManche) {
@@ -55,10 +64,14 @@ public abstract class Joueur {
 			if (this instanceof JoueurArtificiel) {
 				System.out.println("L'" + this.getNom() + " joue : " + leTas.getCarteVisible());
 			}
+			if (laManche.getVarianteManche().getValeurEffetDefense().containsKey(carteChoisi.getValeur())) {
+				setEffetActif(true);
+			}
 			if (leTas.carteVisibleEffetAttaque(laManche.getVarianteManche())) {
 				leTas.setAvoirEffet(true);
 			}
 			leTas.afficherCarteVisible();
+			System.out.println(carteChoisi.getValeur());
 		} else if (this instanceof JoueurPhysique) {
 			System.out.println("\nCarte non valide. Choisis en une autre.");
 			choisirUneCarte(leTas, lePaquet, laManche);
@@ -104,6 +117,8 @@ public abstract class Joueur {
 	
 	public void appliquerEffet(Tas leTas, Paquet lePaquet, Manche laManche) {
 		Effet lEffet = laManche.getVarianteManche().getValeurEffetDefense().get(carteChoisi.getValeur());
+		setEffetActif(false);
+		setCarteChoisi(new Carte());
 		lEffet.lancer(this,leTas,lePaquet,laManche);
 	}
 

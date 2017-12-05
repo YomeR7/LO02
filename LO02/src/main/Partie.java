@@ -107,7 +107,7 @@ public class Partie {
 			}
 			for (int i = 0 ; i<lesJoueurs.size() ;i++) {
 				if (getLesJoueurs().get(i).getScore() == minScore){
-					System.out.println(getLesJoueurs().get(i).getNom() +"a gagné!");
+					System.out.println(getLesJoueurs().get(i).getNom() +" a gagné la partie!");
 				}
 			}
 		}
