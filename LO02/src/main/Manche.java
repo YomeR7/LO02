@@ -47,8 +47,8 @@ public class Manche {
 		lesVariantes.add(new VarianteMinimale());
 		lesVariantes.add(new VarianteMonclar());
 		lesVariantes.add(new VarianteCarteMaou());
+		lesVariantes.add(new VarianteManRasta());
 		lesVariantes.add(new Variante5());
-		lesVariantes.add(new VarianteSimple());
 		
 		nbManche++;
 		System.out.println("\nMANCHE N°" + nbManche);
