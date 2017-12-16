@@ -56,7 +56,7 @@ public class EffetPiocher2ouContre implements Effet {
 		} else {
 			System.out.println(leJoueur.getNom() +" ne peut pas contrer donc il pioche...");
 			for (byte i = 0; i < 2*nbAs; i++) {
-				leJoueur.sesCartes.add(lePaquet.piocherUneCarte());
+				leJoueur.getSesCartes().add(lePaquet.piocherUneCarte());
 			}
 		}
 		

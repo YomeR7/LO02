@@ -61,7 +61,7 @@ public class Aggresif implements Difficulte {
 			//System.out.println("la Carte choisi est " + leJoueur.getCarteChoisi());
 			leJoueur.poserCarte(leTas, lePaquet, laManche);
 		} else {
-			leJoueur.sesCartes.add(lePaquet.piocherUneCarte());
+			leJoueur.getSesCartes().add(lePaquet.piocherUneCarte());
 			System.out.println("L'" + leJoueur.getNom() + " pioche une carte!");
 			leTas.afficherCarteVisible();
 		}

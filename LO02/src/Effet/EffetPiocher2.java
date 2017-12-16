@@ -19,8 +19,8 @@ public class EffetPiocher2 implements Effet {
 		}
 		System.out.println(leJoueur.getNom() + " pioche 2 cartes!\n");
 		
-		leJoueur.sesCartes.add(lePaquet.piocherUneCarte());
-		leJoueur.sesCartes.add(lePaquet.piocherUneCarte());
+		leJoueur.getSesCartes().add(lePaquet.piocherUneCarte());
+		leJoueur.getSesCartes().add(lePaquet.piocherUneCarte());
 		laManche.changerJoueurEnCours();
 	}
 

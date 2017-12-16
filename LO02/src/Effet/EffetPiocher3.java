@@ -18,9 +18,9 @@ public class EffetPiocher3 implements Effet {
 		}
 		System.out.println(leJoueur.getNom() + " pioche 3 cartes!\n");
 		
-		leJoueur.sesCartes.add(lePaquet.piocherUneCarte());
-		leJoueur.sesCartes.add(lePaquet.piocherUneCarte());
-		leJoueur.sesCartes.add(lePaquet.piocherUneCarte());
+		leJoueur.getSesCartes().add(lePaquet.piocherUneCarte());
+		leJoueur.getSesCartes().add(lePaquet.piocherUneCarte());
+		leJoueur.getSesCartes().add(lePaquet.piocherUneCarte());
 		laManche.changerJoueurEnCours();
 	}
 

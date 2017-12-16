@@ -61,6 +61,14 @@ public abstract class Joueur {
 		this.effetActif = effetActif;
 	}
 
+	public int getNumCarte() {
+		return numCarte;
+	}
+
+	public void setNumCarte(int numCarte) {
+		this.numCarte = numCarte;
+	}
+
 	public abstract void choisirUneCarte(Tas leTas, Paquet lePaquet, Manche laManche);
 	
 	public void poserCarte(Tas leTas, Paquet lePaquet, Manche laManche) {

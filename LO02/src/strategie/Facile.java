@@ -14,12 +14,12 @@ public class Facile implements Difficulte {
 			leJoueur.poserCarte(leTas, lePaquet,laManche);
 		}
 		while (!leJoueur.comparerCarte(leTas)) {
-			if (leJoueur.numCarte < leJoueur.sesCartes.size()) {
-				leJoueur.numCarte++;
-				leJoueur.setCarteChoisi(leJoueur.sesCartes.get(leJoueur.numCarte - 1));
+			if (leJoueur.getNumCarte() < leJoueur.getSesCartes().size()) {
+				leJoueur.setNumCarte(leJoueur.getNumCarte()+1);
+				leJoueur.setCarteChoisi(leJoueur.getSesCartes().get(leJoueur.getNumCarte() - 1));
 				leJoueur.poserCarte(leTas, lePaquet,laManche);
 			} else {
-				leJoueur.sesCartes.add(lePaquet.piocherUneCarte());
+				leJoueur.getSesCartes().add(lePaquet.piocherUneCarte());
 				System.out.println("L'" + leJoueur.getNom() + " pioche une carte!");
 				leTas.afficherCarteVisible();
 				return;

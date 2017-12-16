@@ -1,7 +1,6 @@
 package main;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.Scanner;
 
 import Jeu.Paquet;
@@ -15,7 +14,6 @@ import Variante.VarianteCarteMaou;
 import Variante.VarianteManRasta;
 import Variante.VarianteMinimale;
 import Variante.VarianteMonclar;
-import jdk.nashorn.internal.runtime.Undefined;
 
 public class Manche {
 
@@ -84,7 +82,7 @@ public class Manche {
 		leTas = new Tas(lePaquet);
 		leTas.afficherCarteVisible();
 
-		while (joueurEnCours.sesCartes.size() != 0) {
+		while (joueurEnCours.getSesCartes().size() != 0) {
 			try {
 				Thread.sleep(1000);
 			} catch (InterruptedException e) {
