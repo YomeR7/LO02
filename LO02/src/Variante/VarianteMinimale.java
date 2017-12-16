@@ -1,4 +1,7 @@
-package main;
+package Variante;
+
+import Effet.EffetContre;
+import Effet.EffetRejouer;
 
 public class VarianteMinimale extends Variante {
 	

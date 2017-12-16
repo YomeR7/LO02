@@ -1,8 +1,13 @@
-package main;
+package Joueurs;
 
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.Scanner;
+
+import Jeu.Carte;
+import Jeu.Paquet;
+import Jeu.Tas;
+import main.Manche;
 
 public class JoueurPhysique extends Joueur {
 

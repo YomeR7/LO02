@@ -1,7 +1,10 @@
-package main;
+package Jeu;
+import Variante.Variante;
 
 import java.util.ArrayList;
 import java.util.Collections;
+
+import main.Partie;
 
 public class Paquet {
 

@@ -1,8 +1,14 @@
-package main;
+package strategie;
 
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Set;
+
+import Jeu.Carte;
+import Jeu.Paquet;
+import Jeu.Tas;
+import Joueurs.Joueur;
+import main.Manche;
 
 public class Aggresif implements Difficulte {
 

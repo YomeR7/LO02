@@ -3,6 +3,13 @@ package main;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import Joueurs.Joueur;
+import Joueurs.JoueurArtificiel;
+import Joueurs.JoueurPhysique;
+import strategie.Aggresif;
+import strategie.Difficulte;
+import strategie.Facile;
+
 /**
  * La classe représente la mise en place d'une partie de 8 américain.
  * 

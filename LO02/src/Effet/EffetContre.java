@@ -1,6 +1,14 @@
-package main;
+package Effet;
 
 import java.util.Scanner;
+
+import Jeu.Carte;
+import Jeu.Paquet;
+import Jeu.Tas;
+import Joueurs.Joueur;
+import Joueurs.JoueurPhysique;
+import main.Manche;
+
 import java.util.ArrayList;
 
 public class EffetContre implements Effet {
@@ -16,12 +24,11 @@ public class EffetContre implements Effet {
 			System.out.println("\nChoisis une nouvelle couleur! Ecris en toute lettre:\n' 0 : Carreau' ou ' 1 : Coeur' ou '2 : Pique' ou ' 3 :Trefle'");
 			Scanner sc = new Scanner(System.in);
 			
-			int choixCouleur = sc.nextInt(); 
-			if (!(choixCouleur ==  0 || choixCouleur ==  1 || choixCouleur ==  2 || choixCouleur ==  3)) {
+			int choixCouleur = sc.nextInt();
+			while (choixCouleur > 3) {
 				System.out.println("Cette Couleur n'existe pas , choisis en une autre");
-				this.lancer(leJoueur, leTas, lePaquet, laManche);
-				
-			}
+				choixCouleur = sc.nextInt();
+			} 
 			nouvCouleur = couleur.get(choixCouleur);
 		} else { 
 			//if (Partie.getInstance())

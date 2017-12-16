@@ -1,4 +1,4 @@
-package main;
+package Jeu;
 
 public class Carte {
 	private int points;

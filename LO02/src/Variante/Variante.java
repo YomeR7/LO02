@@ -1,5 +1,5 @@
-package main;
-
+package Variante;
+import Effet.Effet;
 import java.util.HashMap;
 
 public class Variante {

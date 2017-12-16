@@ -1,4 +1,9 @@
-package main;
+package Effet;
+
+import Jeu.Paquet;
+import Jeu.Tas;
+import Joueurs.Joueur;
+import main.Manche;
 
 public class EffetPasseTour implements Effet {
 

@@ -1,7 +1,8 @@
-package main;
+package Jeu;
 
 import java.util.ArrayList;
 import java.util.HashSet;
+import Variante.Variante;
 
 public class Tas {
 	private Carte carteVisible;

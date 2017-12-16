@@ -1,4 +1,10 @@
-package main;
+package Variante;
+
+import Effet.EffetChangeSens;
+import Effet.EffetPasseTour;
+import Effet.EffetPiocher2;
+import Effet.EffetPiocher2ouContre;
+import Effet.EffetRejouer;
 
 public class VarianteManRasta extends Variante{
 

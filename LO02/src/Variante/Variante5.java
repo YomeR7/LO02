@@ -1,4 +1,10 @@
-package main;
+package Variante;
+
+import Effet.EffetChangeSens;
+import Effet.EffetContre;
+import Effet.EffetPiocher2ouContre;
+import Effet.EffetRejouer;
+import Variante.Variante;
 
 public class Variante5 extends Variante {
 	

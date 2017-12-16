@@ -1,4 +1,10 @@
-package main;
+package Variante;
+
+import Effet.EffetContre;
+import Effet.EffetPasseTour;
+import Effet.EffetPiocher2;
+import Effet.EffetRejouer;
+import Variante.Variante;
 
 public class VarianteCarteMaou extends Variante {
 

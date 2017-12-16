@@ -1,4 +1,11 @@
-package main;
+package Variante;
+
+import Effet.EffetChangeSens;
+import Effet.EffetContre;
+import Effet.EffetPasseTour;
+import Effet.EffetPiocher;
+import Effet.EffetPiocher3;
+import Effet.EffetRejouer;
 
 public class VarianteMonclar extends Variante {
 

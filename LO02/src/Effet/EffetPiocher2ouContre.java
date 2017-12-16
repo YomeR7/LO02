@@ -1,6 +1,13 @@
-package main;
+package Effet;
 
 import java.util.Scanner;
+
+import Jeu.Carte;
+import Jeu.Paquet;
+import Jeu.Tas;
+import Joueurs.Joueur;
+import Joueurs.JoueurPhysique;
+import main.Manche;
 
 public class EffetPiocher2ouContre implements Effet {
 

@@ -4,6 +4,17 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Scanner;
 
+import Jeu.Paquet;
+import Jeu.Tas;
+import Joueurs.Joueur;
+import Joueurs.JoueurArtificiel;
+import Joueurs.JoueurPhysique;
+import Variante.Variante;
+import Variante.Variante5;
+import Variante.VarianteCarteMaou;
+import Variante.VarianteManRasta;
+import Variante.VarianteMinimale;
+import Variante.VarianteMonclar;
 import jdk.nashorn.internal.runtime.Undefined;
 
 public class Manche {

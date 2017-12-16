@@ -1,4 +1,9 @@
-package main;
+package Joueurs;
+
+import Jeu.Paquet;
+import Jeu.Tas;
+import main.Manche;
+import strategie.Difficulte;
 
 public class JoueurArtificiel extends Joueur {
 

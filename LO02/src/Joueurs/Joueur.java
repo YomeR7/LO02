@@ -1,7 +1,15 @@
-package main;
+package Joueurs;
+
 
 import java.util.ArrayList;
 import java.util.HashSet;
+
+import Effet.Effet;
+import Effet.EffetContre;
+import Jeu.Carte;
+import Jeu.Paquet;
+import Jeu.Tas;
+import main.Manche;
 
 public abstract class Joueur {
 

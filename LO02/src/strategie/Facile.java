@@ -1,4 +1,9 @@
-package main;
+package strategie;
+
+import Jeu.Paquet;
+import Jeu.Tas;
+import Joueurs.Joueur;
+import main.Manche;
 
 public class Facile implements Difficulte {
 
