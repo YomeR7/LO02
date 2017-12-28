@@ -30,8 +30,9 @@ public class Partie {
 	 * nombre d'IA, leurs difficultés puis lance les manches du jeu.
 	 */
 
-	private Partie() {
-
+	/*private Partie() {
+		System.out.println("PQ?");
+		
 		sc = new Scanner(System.in);
 
 		System.out.println("Quel est votre nom?");
@@ -59,16 +60,23 @@ public class Partie {
 		}
 
 		lesJoueurs.add(moi);
-
+		
+	} */
+	
+	private Partie() {
+		System.out.println("MDR");
 	}
 	
-	private Partie(byte modeComptage, ArrayList<Joueur> lesJoueurs) {
+	public void updateP(byte modeComptage, ArrayList<Joueur> lesJoueurs) {
+		System.out.println(modeComptage);
 		this.nbIA = (byte) lesJoueurs.size();
 		this.modeComptage = modeComptage;
 		this.lesJoueurs = lesJoueurs;
+		System.out.println("Mode comptage:" + this.modeComptage);
+		System.out.println("nb joueurs batard" +nbIA);
 	}
 
-	private static Partie INSTANCE = new Partie();
+	//private static Partie INSTANCE = new Partie();
 
 	public byte getModeComptage() {
 		return modeComptage;
@@ -87,19 +95,10 @@ public class Partie {
 	}
 
 	public static Partie getInstance() {
-		return INSTANCE;
-	}
-	
-	private static byte nb;	private static byte choixComptage;
-	private static ArrayList<Joueur> joueurs;
-	
-	public static Partie getPartie(byte modeComptage, ArrayList<Joueur> lesJoueurs) {
-		choixComptage = modeComptage;
-		joueurs = lesJoueurs;
 		return PARTIE;
 	}
 	
-	private static Partie PARTIE = new Partie(choixComptage, joueurs);
+	private static Partie PARTIE = new Partie();
 
 	public int getMAXScore() {
 		return MAXScore;
@@ -118,6 +117,7 @@ public class Partie {
 	}
 
 	public void lancerPartie() {
+		System.out.println("WOW");
 		if (modeComptage == 0) {
 			while (MAXScore <= 100) {
 				new Manche();

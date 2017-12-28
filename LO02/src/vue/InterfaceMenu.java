@@ -55,20 +55,7 @@ public class InterfaceMenu {
 		frame.getContentPane().add(lblParFlorianEsslinger);
 		
 		JButton btnNouvellePartie = new JButton("Nouvelle Partie");
-		btnNouvellePartie.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				EventQueue.invokeLater(new Runnable() {
-					public void run() {
-						try {
-							InterfacePartie window = new InterfacePartie();
-							window.getFrame().setVisible(true);
-						} catch (Exception e) {
-							e.printStackTrace();
-						}
-					}
-				});
-			}
-		});
+		
 		btnNouvellePartie.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		btnNouvellePartie.setBounds(172, 105, 175, 33);
 		frame.getContentPane().add(btnNouvellePartie);
@@ -77,6 +64,15 @@ public class InterfaceMenu {
 		btnNewButton.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		btnNewButton.setBounds(172, 176, 175, 33);
 		frame.getContentPane().add(btnNewButton);
+		
+		btnNouvellePartie.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				System.out.println("clic");
+				frame.getContentPane().removeAll();
+				frame.repaint();
+				new InterfacePartie(frame);
+			}
+		});
 	}
 
 }
