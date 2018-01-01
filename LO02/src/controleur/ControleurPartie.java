@@ -1,6 +1,5 @@
 package controleur;
 
-import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
@@ -8,25 +7,30 @@ import java.util.HashMap;
 
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
+import javax.swing.JFrame;
 import javax.swing.JRadioButton;
 import javax.swing.JTextField;
 
 import joueurs.Joueur;
 import joueurs.JoueurArtificiel;
 import joueurs.JoueurPhysique;
+import main.Manche;
 import main.Partie;
 import strategie.Aggresif;
 import strategie.Facile;
-import vue.InterfaceManche;
+import vue.InterfaceVariante;
 
 public class ControleurPartie {
 	
 	public ControleurPartie(HashMap<String, JCheckBox> IAs, HashMap<String, JRadioButton> diffs 
-			,JButton lancer,JRadioButton positif,JRadioButton  negatif, JTextField textField, Partie maPartie) {
+			,JButton lancer,JRadioButton positif,JRadioButton  negatif, JTextField textField, Partie maPartie, JFrame frame) {
+		
+		System.out.println("magimagi");
 		for (int i = 1; i < 7; i++) {
 			int ind = i;
 			IAs.get("IA"+i).addActionListener(new ActionListener() {
 				public final void actionPerformed(ActionEvent e) {
+					System.out.println("PRESS");
 					diffs.get("IA"+ ind +"f").setSelected(IAs.get("IA"+ind).isSelected());
 				}
 			}
@@ -52,6 +56,7 @@ public class ControleurPartie {
 		lancer.addActionListener(new ActionListener() {
 			Partie laPartie = maPartie;
 			public void actionPerformed(ActionEvent e) {
+				System.out.println("BIM");
 				ArrayList<Joueur> joueurs = new ArrayList<Joueur>();
 				byte modeComptage;
 				if (positif.isSelected()) {
@@ -71,16 +76,10 @@ public class ControleurPartie {
 				int i = joueurs.size();
 				joueurs.add(new JoueurPhysique(textField.getText(), (byte) i));
 				laPartie.updateP(modeComptage, joueurs);
-				EventQueue.invokeLater(new Runnable() {
-					public void run() {
-						try {
-							InterfaceManche window = new InterfaceManche();
-							window.getFrame().setVisible(true);
-						} catch (Exception e) {
-							e.printStackTrace();
-						}
-					}
-				});
+				Manche manche = laPartie.nouvelleManche();
+				frame.getContentPane().removeAll();
+				frame.repaint();
+				new InterfaceVariante(frame,manche);
 			}
 		});
 		

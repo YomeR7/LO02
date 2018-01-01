@@ -10,6 +10,16 @@ import jeu.Tas;
 import main.Manche;
 
 public class JoueurPhysique extends Joueur {
+	
+	private boolean attenteVue = true;
+
+	public boolean isAttenteVue() {
+		return attenteVue;
+	}
+
+	public void setAttenteVue(boolean attenteVue) {
+		this.attenteVue = attenteVue;
+	}
 
 	public JoueurPhysique(String nom, byte id) {
 		super(nom, id);
@@ -21,24 +31,44 @@ public class JoueurPhysique extends Joueur {
 			System.out.println(i + 1 + " : " + sesCartes.get(i));
 		}
 	}
+	
+	public void afficherCartesG() {
+	}
 
-	public void choisirUneCarte(Tas leTas, Paquet lePaquet, Manche laManche) {
+	public void choisirUneCarte(Manche laManche) {
+		super.choisirUneCarte(laManche);
+		while (attenteVue) {
+			try {
+				Thread.sleep(1000);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			System.out.println("attenteChoix");
+		}
+		setChanged();
+		notifyObservers();
+		this.setAttenteVue(true);
+	}
+	
+	public void choisirUneCarteC(Manche laManche) {
 		// TODO Auto-generated method stub
+		super.choisirUneCarte(laManche);
 		Scanner sccc = new Scanner(System.in);
 		System.out.println("\nChoisis une de tes cartes (entre 1 et " + sesCartes.size() + ")\n0 : Piocher une carte");
 		numCarte = sccc.nextInt();
 		if (numCarte != 0 && numCarte <= sesCartes.size()) {
 			carteChoisi = sesCartes.get(numCarte - 1);
 			// System.out.println(carteChoisi);
-			this.poserCarte(leTas, lePaquet,laManche);
+			this.poserCarte();
 		} else if (numCarte == 13) {
-			System.out.println(leTas.getCartesDessous());
+			System.out.println(laManche.getLeTas().getCartesDessous());
 		} else if (numCarte > sesCartes.size()) {
 			System.out.println("Tu n'as pas autant de cartes! Choisis une carte entre 1 et " + sesCartes.size());
-			this.choisirUneCarte(leTas, lePaquet, laManche);
+			this.choisirUneCarte(this.laManche);
 		} else {
-			sesCartes.add(lePaquet.piocherUneCarte());
-			leTas.afficherCarteVisible();
+			sesCartes.add(laManche.getLePaquet().piocherUneCarte());
+			laManche.getLeTas().afficherCarteVisible();
 		}
 
 	}
@@ -55,6 +85,12 @@ public class JoueurPhysique extends Joueur {
 				}
 			}
 		});
+	}
+
+	public void finirTour() {
+		// TODO Auto-generated method stub
+		super.finirTour();
+		this.setAttenteVue(false);
 	}
 
 }

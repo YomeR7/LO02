@@ -14,10 +14,11 @@ public class JoueurArtificiel extends Joueur {
 		this.niveau = niveau;
 	}
 
-	public void choisirUneCarte(Tas leTas, Paquet lePaquet, Manche laManche) {
+	public void choisirUneCarte(Manche laManche) {
+		super.choisirUneCarte(laManche);
 		numCarte = 1;
 		carteChoisi = sesCartes.get(numCarte - 1);
-		niveau.appliquer(leTas,lePaquet,this,laManche);
+		niveau.appliquer(this,laManche);
 	}
 
 	@Override
@@ -28,6 +29,12 @@ public class JoueurArtificiel extends Joueur {
 
 	@Override
 	public void afficherCartes() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void afficherCartesG() {
 		// TODO Auto-generated method stub
 		
 	}

@@ -2,10 +2,11 @@ package jeu;
 
 import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.Observable;
 
 import variante.Variante;
 
-public class Tas {
+public class Tas extends Observable{
 	private Carte carteVisible;
 	private HashSet<Carte> cartesDessous;
 	private boolean avoirEffet = false;
@@ -42,6 +43,8 @@ public class Tas {
 
 	public void afficherCarteVisible() {
 		System.out.println("La carte visible est : " + carteVisible + "\n");
+		setChanged();
+		notifyObservers();
 	}
 
 	public void setCarteVisible(Carte carteVisible) {
@@ -55,6 +58,12 @@ public class Tas {
 	public void viderCartesDessous() {
 		// TODO Auto-generated method stub
 		cartesDessous.clear();
+	}
+
+	public void notifier() {
+		// TODO Auto-generated method stub
+		setChanged();
+		notifyObservers();
 	}
 	
 }

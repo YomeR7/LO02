@@ -64,7 +64,6 @@ public class Partie {
 	} */
 	
 	private Partie() {
-		System.out.println("MDR");
 	}
 	
 	public void updateP(byte modeComptage, ArrayList<Joueur> lesJoueurs) {
@@ -75,8 +74,6 @@ public class Partie {
 		System.out.println("Mode comptage:" + this.modeComptage);
 		System.out.println("nb joueurs batard" +nbIA);
 	}
-
-	//private static Partie INSTANCE = new Partie();
 
 	public byte getModeComptage() {
 		return modeComptage;
@@ -114,6 +111,10 @@ public class Partie {
 
 	public void setLesJoueurs(ArrayList<Joueur> lesJoueurs) {
 		this.lesJoueurs = lesJoueurs;
+	}
+	
+	public Manche nouvelleManche(){
+		return new Manche();
 	}
 
 	public void lancerPartie() {

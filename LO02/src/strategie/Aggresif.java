@@ -13,7 +13,7 @@ import main.Manche;
 public class Aggresif implements Difficulte {
 
 	@Override
-	public void appliquer(Tas leTas, Paquet lePaquet, Joueur leJoueur, Manche laManche) {
+	public void appliquer(Joueur leJoueur, Manche laManche) {
 		// TODO Auto-generated method stub
 		HashSet<Carte> cartesPossibles = new HashSet<Carte>();
 		HashSet<Carte> cartesPossiblesEffet = new HashSet<Carte>();
@@ -22,7 +22,7 @@ public class Aggresif implements Difficulte {
 		
 		for (int i = 0; i < leJoueur.getSesCartes().size(); i++) {
 			leJoueur.setCarteChoisi(leJoueur.getSesCartes().get(i));
-			if (leJoueur.comparerCarte(leTas)) {
+			if (leJoueur.comparerCarte()) {
 				for (Iterator<String> it = valeursAtt.iterator(); it.hasNext();) {
 					String monIT = (String) it.next();
 					if (leJoueur.getCarteChoisi().getValeur().equals(monIT)) {
@@ -54,16 +54,16 @@ public class Aggresif implements Difficulte {
 			Carte newCart = (Carte) cartesPossiblesEffet.toArray()[0];
 			leJoueur.setCarteChoisi(newCart);
 			//System.out.println("la Carte choisi est " + leJoueur.getCarteChoisi());
-			leJoueur.poserCarte(leTas, lePaquet, laManche);
+			leJoueur.poserCarte();
 		} else if (!cartesPossibles.isEmpty()) {
 			Carte newCart = (Carte) cartesPossibles.toArray()[0];
 			leJoueur.setCarteChoisi(newCart);
 			//System.out.println("la Carte choisi est " + leJoueur.getCarteChoisi());
-			leJoueur.poserCarte(leTas, lePaquet, laManche);
+			leJoueur.poserCarte();
 		} else {
-			leJoueur.getSesCartes().add(lePaquet.piocherUneCarte());
+			leJoueur.getSesCartes().add(laManche.getLePaquet().piocherUneCarte());
 			System.out.println("L'" + leJoueur.getNom() + " pioche une carte!");
-			leTas.afficherCarteVisible();
+			laManche.getLeTas().afficherCarteVisible();
 		}
 
 	}

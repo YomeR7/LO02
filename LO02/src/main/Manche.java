@@ -1,6 +1,8 @@
 package main;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Observable;
 import java.util.Scanner;
 
 import jeu.Paquet;
@@ -8,7 +10,7 @@ import jeu.Tas;
 import joueurs.*;
 import variante.*;
 
-public class Manche {
+public class Manche extends Observable{
 
 	private byte sens = 1, rnd;
 	private Joueur joueurEnCours;
@@ -17,7 +19,7 @@ public class Manche {
 	private Variante varianteManche;
 	private Paquet lePaquet;
 	private Tas leTas;
-	private ArrayList<Variante> lesVariantes;
+	private HashMap<String, Variante> lesVariantes;
 	
 	public byte getSens() {
 		return sens;
@@ -39,21 +41,58 @@ public class Manche {
 		return varianteManche;
 	}
 
-	public void setVarianteManche(Variante varianteManche) {
-		this.varianteManche = varianteManche;
+	public void setVarianteManche(String nomManche) {
+		varianteManche = lesVariantes.get(nomManche);
+	}
+	
+	public static byte getNbManche() {
+		return nbManche;
+	}
+
+	public static void setNbManche(byte nbManche) {
+		Manche.nbManche = nbManche;
+	}
+
+	public Paquet getLePaquet() {
+		return lePaquet;
+	}
+
+	public void setLePaquet(Paquet lePaquet) {
+		this.lePaquet = lePaquet;
+	}
+
+	public Tas getLeTas() {
+		return leTas;
+	}
+
+	public void setLeTas(Tas leTas) {
+		this.leTas = leTas;
+	}
+
+	public Tas commencerManche() {
+		lePaquet = new Paquet(varianteManche);
+		lePaquet.melanger();
+		lePaquet.distribuer();
+		rnd = (byte) (Partie.getInstance().getLesJoueurs().size() * (Math.random()));
+		joueurEnCours = Partie.getInstance().getLesJoueurs().get(rnd);
+
+		leTas = new Tas(lePaquet);
+		setChanged();
+		notifyObservers();
+		return leTas;
 	}
 
 	public Manche() {
-
-		lesVariantes = new ArrayList<Variante>();
-		lesVariantes.add(new VarianteMinimale());
-		lesVariantes.add(new VarianteMonclar());
-		lesVariantes.add(new VarianteCarteMaou());
-		lesVariantes.add(new VarianteManRasta());
-		lesVariantes.add(new Variante5());
+		
+		lesVariantes = new HashMap<String, Variante>();
+		lesVariantes.put("Variante Minimale",new VarianteMinimale());
+		lesVariantes.put("Variante Monclar", new VarianteMonclar());
+		lesVariantes.put("Variante Maou",new VarianteCarteMaou());
+		lesVariantes.put("Variante Man et Rasta", new VarianteManRasta());
+		lesVariantes.put("Variante 5",new Variante5());
 		
 		nbManche++;
-		System.out.println("\nMANCHE N°" + nbManche);
+		/* System.out.println("\nMANCHE N°" + nbManche);
 
 		StringBuffer sb = new StringBuffer();
 		sc = new Scanner(System.in);
@@ -93,16 +132,31 @@ public class Manche {
 				joueurEnCours.subirEffet(leTas,lePaquet,this);
 			}
 			jouerTour();
-		}
+		} */
 	}
 
-	private void jouerTour() {
+	public void jouerTourG() {
+		joueurEnCours.trierCartes();
+		joueurEnCours.afficherCartesG();
+		joueurEnCours.choisirUneCarte(this);
+		try {
+			Thread.sleep(1000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		this.changerJoueurEnCours();
+		setChanged();
+		notifyObservers();		
+	}
+	
+	public void jouerTour() {
 		// TODO Auto-generated method stub
 	
 		System.out.println("C'est au tour de " + joueurEnCours.getNom() + "\n");
 		joueurEnCours.trierCartes();
 		joueurEnCours.afficherCartes();
-		joueurEnCours.choisirUneCarte(leTas, lePaquet,this);
+		joueurEnCours.choisirUneCarte(this);
 		if (joueurEnCours.uneCarteEstChoisi(leTas) && joueurEnCours.isEffetActif()) { //retour au if, le while bloquait le jeu au changement de couleur 
 			joueurEnCours.appliquerEffet(leTas,lePaquet,this);																				// idée : déplacer ce if dans choisirCarte
 		}
@@ -240,4 +294,5 @@ public class Manche {
 				.get((joueurEnCours.getId() + sens) % (Partie.getInstance().getLesJoueurs().size()));
 		}
 	}
+
 }

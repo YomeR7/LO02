@@ -50,7 +50,7 @@ public class InterfacePartie {
 		IAs = new HashMap<String, JCheckBox>();
 		diffs = new HashMap<String, JRadioButton>();
 		initialize();
-		new ControleurPartie(IAs, diffs,lancer,positif,negatif,textField,Partie.getInstance());
+		new ControleurPartie(IAs, diffs,lancer,positif,negatif,textField,Partie.getInstance(),frame);
 	}
 
 	/**

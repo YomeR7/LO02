@@ -3,6 +3,7 @@ package joueurs;
 
 import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.Observable;
 
 import effet.Effet;
 import effet.EffetContre;
@@ -11,7 +12,7 @@ import jeu.Paquet;
 import jeu.Tas;
 import main.Manche;
 
-public abstract class Joueur {
+public abstract class Joueur extends Observable {
 
 	private byte id;
 	protected ArrayList<Carte> sesCartes;
@@ -20,6 +21,7 @@ public abstract class Joueur {
 	protected Carte carteChoisi;
 	protected int numCarte;
 	private boolean effetActif = false;
+	protected Manche laManche;
 
 	public Joueur(String nom, byte id) {
 		super();
@@ -69,28 +71,30 @@ public abstract class Joueur {
 		this.numCarte = numCarte;
 	}
 
-	public abstract void choisirUneCarte(Tas leTas, Paquet lePaquet, Manche laManche);
+	public void choisirUneCarte(Manche laManche) {
+		this.laManche = laManche;
+	}
 	
-	public void poserCarte(Tas leTas, Paquet lePaquet, Manche laManche) {
+	public void poserCarte() {
 
-		if (comparerCarte(leTas)) {
-			leTas.addCartesDessous(leTas.getCarteVisible());
-			leTas.setCarteVisible(carteChoisi);
+		if (comparerCarte()) {
+			laManche.getLeTas().addCartesDessous(laManche.getLeTas().getCarteVisible());
+			laManche.getLeTas().setCarteVisible(carteChoisi);
 			sesCartes.remove(carteChoisi);
 			if (this instanceof JoueurArtificiel) {
-				System.out.println("L'" + this.getNom() + " joue : " + leTas.getCarteVisible());
+				System.out.println("L'" + this.getNom() + " joue : " + laManche.getLeTas().getCarteVisible());
 			}
 			if (laManche.getVarianteManche().getValeurEffetDefense().containsKey(carteChoisi.getValeur())) {
 				setEffetActif(true);
 			}
-			if (leTas.carteVisibleEffetAttaque(laManche.getVarianteManche())) {
-				leTas.setAvoirEffet(true);
+			if (laManche.getLeTas().carteVisibleEffetAttaque(laManche.getVarianteManche())) {
+				laManche.getLeTas().setAvoirEffet(true);
 			}
-			leTas.afficherCarteVisible();
+			laManche.getLeTas().afficherCarteVisible();
 			System.out.println(carteChoisi.getValeur());
 		} else if (this instanceof JoueurPhysique) {
 			System.out.println("\nCarte non valide. Choisis en une autre.");
-			choisirUneCarte(leTas, lePaquet, laManche);
+			choisirUneCarte(this.laManche);
 		}
 	}
 
@@ -102,9 +106,9 @@ public abstract class Joueur {
 		this.sesCartes = sesCartes;
 	}
 
-	public boolean comparerCarte(Tas leTas) {
-		if (carteChoisi.getValeur() == leTas.getCarteVisible().getValeur()
-				|| carteChoisi.getCouleur() == leTas.getCarteVisible().getCouleur() 
+	public boolean comparerCarte() {
+		if (carteChoisi.getValeur() == laManche.getLeTas().getCarteVisible().getValeur()
+				|| carteChoisi.getCouleur() == laManche.getLeTas().getCarteVisible().getCouleur() 
 				|| carteChoisi.getValeur() == "8") {
 			return true;
 		} else {
@@ -131,6 +135,8 @@ public abstract class Joueur {
 
 	public abstract void afficherCartes();
 	
+	public abstract void afficherCartesG();
+	
 	public void appliquerEffet(Tas leTas, Paquet lePaquet, Manche laManche) {
 		Effet lEffet = laManche.getVarianteManche().getValeurEffetDefense().get(carteChoisi.getValeur());
 		setEffetActif(false);
@@ -144,7 +150,7 @@ public abstract class Joueur {
 				if (this.valeursCartes().contains(laManche.getVarianteManche().getValeurContre())) {
 					System.out.println(this.nom + " contre l'effet avec un " + laManche.getVarianteManche().getValeurContre());
 					this.setCarteChoisi(this.laCarteContre(laManche.getVarianteManche().getValeurContre()));
-					this.poserCarte(leTas, lePaquet, laManche);
+					this.poserCarte();
 				}
 			}
 		Effet lEffet = laManche.getVarianteManche().getValeurEffetAttaque().get(leTas.getCarteVisible().getValeur());
@@ -193,5 +199,9 @@ public abstract class Joueur {
 		}
 	};
 	
+	public void finirTour() {
+		// TODO Auto-generated method stub
+		poserCarte();
+	}
 
 }

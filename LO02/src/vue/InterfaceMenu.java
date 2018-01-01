@@ -27,6 +27,7 @@ public class InterfaceMenu {
 				}
 			}
 		});
+		
 	}
 
 	/**
@@ -67,7 +68,6 @@ public class InterfaceMenu {
 		
 		btnNouvellePartie.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				System.out.println("clic");
 				frame.getContentPane().removeAll();
 				frame.repaint();
 				new InterfacePartie(frame);
