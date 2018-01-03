@@ -25,7 +25,19 @@ public class ControleurPartie {
 	public ControleurPartie(HashMap<String, JCheckBox> IAs, HashMap<String, JRadioButton> diffs 
 			,JButton lancer,JRadioButton positif,JRadioButton  negatif, JTextField textField, Partie maPartie, JFrame frame) {
 		
-		System.out.println("magimagi");
+
+		positif.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				negatif.setSelected(!positif.isSelected());
+			}
+		});
+		
+		negatif.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				positif.setSelected(!negatif.isSelected());
+			}
+		});
+		
 		for (int i = 1; i < 7; i++) {
 			int ind = i;
 			IAs.get("IA"+i).addActionListener(new ActionListener() {

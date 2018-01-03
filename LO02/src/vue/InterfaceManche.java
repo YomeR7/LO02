@@ -14,17 +14,19 @@ import joueurs.*;
 import main.Manche;
 import main.Partie;
 import java.awt.Font;
+import java.awt.image.AffineTransformOp;
 
 public class InterfaceManche implements Observer,Runnable {
 
 	private JFrame frame;
 	private Manche manche;
-	private byte nbManche;
+	private static byte nbManche;
 	private Joueur moi;
 	private Tas leTas;
 	private JButton[] cartesJ;
 	private JLabel carteV,tourDe;
 	private ControleurManche controleur;
+	private JLabel[] ias;
 	/**
 	 * Launch the application.
 	 */
@@ -44,14 +46,9 @@ public class InterfaceManche implements Observer,Runnable {
 		leTas.notifier();
 		moi = Partie.getInstance().getLesJoueurs().get(Partie.getInstance().getLesJoueurs().size()-1);
 		moi.addObserver(this);
-		moi.trierCartes();
-		cartesJ = new JButton[moi.getSesCartes().size()];
-		for (int i = 0; i < moi.getSesCartes().size(); i++) {
-			JButton carte = new JButton(new ImageIcon("cartes/"+moi.getSesCartes().get(i).getValeur().toLowerCase()+"_"+moi.getSesCartes().get(i).getCouleur().toLowerCase()+".png"));
-			carte.setBounds(i+85*i, 400, 85, 125);
-			cartesJ[i] = carte;
-			this.frame.getContentPane().add(cartesJ[i]);
-		}
+		affichageCartes();
+		ias = new JLabel[Partie.getInstance().getLesJoueurs().size()-1];
+		affichageIAs();
 		Thread thread = new Thread(this);
 		thread.start();
 		
@@ -89,6 +86,10 @@ public class InterfaceManche implements Observer,Runnable {
 		} else if (o instanceof Manche) {
 			if (tourDe instanceof JLabel) {
 				this.frame.getContentPane().remove(tourDe);
+				for (int i = 0; i < ias.length; i++) {
+					this.frame.getContentPane().remove(ias[i]);
+				}
+				affichageIAs();
 			}
 			tourDe = new JLabel("Tour de "+ manche.getJoueurEnCours().getNom());
 			tourDe.setFont(new Font("Tahoma", Font.BOLD, 20));
@@ -102,14 +103,7 @@ public class InterfaceManche implements Observer,Runnable {
 			for (int i = 0; i < cartesJ.length; i++) {
 				this.frame.getContentPane().remove(cartesJ[i]);
 			}
-			cartesJ = new JButton[moi.getSesCartes().size()];
-			for (int i = 0; i < moi.getSesCartes().size(); i++) {
-				JButton carte = new JButton(new ImageIcon("cartes/"+moi.getSesCartes().get(i).getValeur().toLowerCase()+"_"+moi.getSesCartes().get(i).getCouleur().toLowerCase()+".png"));
-				carte.setBounds(i+85*i, 400, 85, 125);
-				cartesJ[i] = carte;
-				this.frame.getContentPane().add(cartesJ[i]);
-				this.frame.repaint();
-			}
+			affichageCartes();
 			
 		}
 	}
@@ -121,9 +115,28 @@ public class InterfaceManche implements Observer,Runnable {
 			if (manche.getJoueurEnCours() instanceof JoueurPhysique) {
 				new ControleurManche(cartesJ,(JoueurPhysique) moi,frame,manche);
 			}
-			System.out.println("WOUHOU");
 			manche.jouerTourG();
-			System.out.println("fin tour");
+		}
+	}
+	
+	public void affichageCartes() {
+		moi.trierCartes();
+		cartesJ = new JButton[moi.getSesCartes().size()];
+		for (int i = 0; i < moi.getSesCartes().size(); i++) {
+			JButton carte = new JButton(new ImageIcon("cartes/"+moi.getSesCartes().get(i).getValeur().toLowerCase()+"_"+moi.getSesCartes().get(i).getCouleur().toLowerCase()+".png"));
+			carte.setBounds(i+85*i, 400, 85, 125);
+			cartesJ[i] = carte;
+			this.frame.getContentPane().add(cartesJ[i]);
+		}
+	}
+	
+	public void affichageIAs() {
+		for (int i = 0; i < (Partie.getInstance().getLesJoueurs().size()-1); i++) {
+			JLabel ia = new JLabel(Partie.getInstance().getLesJoueurs().get(i).getNom() + ": " + Partie.getInstance().getLesJoueurs().get(i).getSesCartes().size() + " carte(s)");
+			ia.setFont(new Font("Tahoma", Font.BOLD, 12));
+			ia.setBounds(125*i + i, 10, 125, 25);
+			ias[i] = ia;
+			this.frame.getContentPane().add(ias[i]);
 		}
 	}
 }

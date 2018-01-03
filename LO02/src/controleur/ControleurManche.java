@@ -17,7 +17,7 @@ public class ControleurManche {
 		System.out.println("CREATION");
 		JButton piocher = new JButton("Piocher");
 		piocher.setFont(new Font("Tahoma", Font.BOLD, 20));
-		piocher.setBounds(198, 320, 150, 25);
+		piocher.setBounds(200, 150, 85, 125);
 		piocher.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				System.out.println("PIOCHER");
