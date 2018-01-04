@@ -141,7 +141,7 @@ public abstract class Joueur extends Observable {
 		Effet lEffet = laManche.getVarianteManche().getValeurEffetDefense().get(carteChoisi.getValeur());
 		setEffetActif(false);
 		setCarteChoisi(new Carte());
-		lEffet.lancer(this,leTas,lePaquet,laManche);
+		lEffet.lancer(this,laManche);
 	}
 
 	public void subirEffet(Tas leTas, Paquet lePaquet, Manche laManche) {
@@ -154,7 +154,7 @@ public abstract class Joueur extends Observable {
 				}
 			}
 		Effet lEffet = laManche.getVarianteManche().getValeurEffetAttaque().get(leTas.getCarteVisible().getValeur());
-		lEffet.lancer(this, leTas, lePaquet,laManche);
+		lEffet.lancer(this,laManche);
 	}
 
 	private Carte laCarteContre(String valeur) {

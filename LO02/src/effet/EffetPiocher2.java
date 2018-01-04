@@ -1,7 +1,5 @@
 package effet;
 
-import jeu.Paquet;
-import jeu.Tas;
 import joueurs.Joueur;
 import main.Manche;
 
@@ -9,18 +7,18 @@ import main.Manche;
 public class EffetPiocher2 implements Effet {
 
 	@Override
-	public void lancer(Joueur leJoueur, Tas leTas, Paquet lePaquet, Manche laManche) {
+	public void lancer(Joueur leJoueur, Manche laManche) {
 		// TODO Auto-generated method stub
-		if (lePaquet.getCartes().size() < 2) {
-			lePaquet.setCartes(leTas.getCartesDessous());
-			leTas.viderCartesDessous();
+		if (laManche.getLePaquet().getCartes().size() < 2) {
+			laManche.getLePaquet().setCartes(laManche.getLeTas().getCartesDessous());
+			laManche.getLeTas().viderCartesDessous();
 			System.out.println("Le paquet a été changé et se mélange");
-			lePaquet.melanger();
+			laManche.getLePaquet().melanger();
 		}
 		System.out.println(leJoueur.getNom() + " pioche 2 cartes!\n");
 		
-		leJoueur.getSesCartes().add(lePaquet.piocherUneCarte());
-		leJoueur.getSesCartes().add(lePaquet.piocherUneCarte());
+		leJoueur.getSesCartes().add(laManche.getLePaquet().piocherUneCarte());
+		leJoueur.getSesCartes().add(laManche.getLePaquet().piocherUneCarte());
 		laManche.changerJoueurEnCours();
 	}
 

@@ -3,8 +3,6 @@ package effet;
 import java.util.Scanner;
 
 import jeu.Carte;
-import jeu.Paquet;
-import jeu.Tas;
 import joueurs.Joueur;
 import joueurs.JoueurPhysique;
 import main.Manche;
@@ -13,7 +11,7 @@ import java.util.ArrayList;
 
 public class EffetContre implements Effet {
 // il reste toujours a regler l'erreur quand on ne choisi la bonne couleur (choixCouleur > 3 
-	public void lancer(Joueur leJoueur, Tas leTas, Paquet lePaquet, Manche laManche) {
+	public void lancer(Joueur leJoueur, Manche laManche) {
 		String nouvCouleur;
 		ArrayList<String> couleur = new ArrayList<String>();
 		couleur.add("Carreau");
@@ -38,11 +36,11 @@ public class EffetContre implements Effet {
 		
 				
 			
-		Carte nouvCarteVisible = leTas.getCarteVisible();
+		Carte nouvCarteVisible = laManche.getLeTas().getCarteVisible();
 		System.out.println("CARTE AVANT CHANGEMENT  " + nouvCarteVisible);
-		leTas.addCartesDessous(leTas.getCarteVisible());
+		laManche.getLeTas().addCartesDessous(laManche.getLeTas().getCarteVisible());
 		nouvCarteVisible.setCouleur(nouvCouleur);
-		leTas.setCarteVisible(nouvCarteVisible);
+		laManche.getLeTas().setCarteVisible(nouvCarteVisible);
 		System.out.println("La nouvelle couleur est " + nouvCouleur + ".");
 		leJoueur.getSesCartes().remove(leJoueur.getCarteChoisi());
 
