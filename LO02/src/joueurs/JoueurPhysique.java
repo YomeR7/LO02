@@ -23,7 +23,7 @@ public class JoueurPhysique extends Joueur {
 
 	public JoueurPhysique(String nom, byte id) {
 		super(nom, id);
-		// TODO Auto-generated constructor stub
+		setCarteChoisi(new Carte());
 	}
 
 	public void afficherCartes() {
@@ -37,17 +37,17 @@ public class JoueurPhysique extends Joueur {
 
 	public void choisirUneCarte(Manche laManche) {
 		super.choisirUneCarte(laManche);
+		setChanged();
+		notifyObservers();
 		while (attenteVue) {
 			try {
 				Thread.sleep(1000);
 			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
+				// TODO Auto-generated caxtch block
 				e.printStackTrace();
 			}
 			System.out.println("attenteChoix");
 		}
-		setChanged();
-		notifyObservers();
 		this.setAttenteVue(true);
 	}
 	

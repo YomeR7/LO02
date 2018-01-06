@@ -11,8 +11,28 @@ import java.util.ArrayList;
 
 public class EffetContre implements Effet {
 // il reste toujours a regler l'erreur quand on ne choisi la bonne couleur (choixCouleur > 3 
+	
+	private String nCouleur;
+	private boolean attente;
+	
+	public String getnCouleur() {
+		return nCouleur;
+	}
+
+	public void setnCouleur(String nCouleur) {
+		this.nCouleur = nCouleur;
+	}
+
+	public boolean isAttente() {
+		return attente;
+	}
+
+	public void setAttente(boolean attente) {
+		this.attente = attente;
+	}
+
 	public void lancer(Joueur leJoueur, Manche laManche) {
-		String nouvCouleur;
+		/* String nouvCouleur;
 		ArrayList<String> couleur = new ArrayList<String>();
 		couleur.add("Carreau");
 		couleur.add("Coeur");
@@ -27,21 +47,31 @@ public class EffetContre implements Effet {
 				System.out.println("Cette Couleur n'existe pas , choisis en une autre");
 				choixCouleur = sc.nextInt();
 			} 
-			nouvCouleur = couleur.get(choixCouleur);
+			nouvCouleur = couleur.get(choixCouleur); */
+		if (leJoueur instanceof JoueurPhysique) {
+			setAttente(true);
+			while (attente) {
+				try {
+					Thread.sleep(1000);
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
 		} else { 
 			//if (Partie.getInstance())
 			int rnd = (int) (4 * Math.random());
-			nouvCouleur = couleur.get(rnd);
+			ArrayList<String> couleur = new ArrayList<String>();
+			couleur.add("Carreau");
+			couleur.add("Coeur");
+			couleur.add("Pique");
+			couleur.add("Trefle");
+			nCouleur = couleur.get(rnd);
 		}
-		
-				
-			
-		Carte nouvCarteVisible = laManche.getLeTas().getCarteVisible();
-		System.out.println("CARTE AVANT CHANGEMENT  " + nouvCarteVisible);
+					
 		laManche.getLeTas().addCartesDessous(laManche.getLeTas().getCarteVisible());
-		nouvCarteVisible.setCouleur(nouvCouleur);
-		laManche.getLeTas().setCarteVisible(nouvCarteVisible);
-		System.out.println("La nouvelle couleur est " + nouvCouleur + ".");
+		laManche.getLeTas().setCarteVisible(new Carte("0", nCouleur));
+		System.out.println("La nouvelle couleur est " + nCouleur + ".");
 		leJoueur.getSesCartes().remove(leJoueur.getCarteChoisi());
 
 	}

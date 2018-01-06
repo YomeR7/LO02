@@ -25,7 +25,6 @@ public class InterfacePartie {
 	private HashMap<String,JRadioButton> diffs;
 	private JButton lancer;
 	private JRadioButton positif,negatif;
-	private Partie maPartie;
 	/**
 	 * Launch the application.
 	 *
@@ -50,7 +49,7 @@ public class InterfacePartie {
 		IAs = new HashMap<String, JCheckBox>();
 		diffs = new HashMap<String, JRadioButton>();
 		initialize();
-		new ControleurPartie(IAs, diffs,lancer,positif,negatif,textField,Partie.getInstance(),frame);
+		new ControleurPartie(IAs, diffs,lancer,positif,negatif,textField,frame);
 	}
 
 	/**

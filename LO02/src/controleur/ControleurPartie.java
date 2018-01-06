@@ -23,7 +23,7 @@ import vue.InterfaceVariante;
 public class ControleurPartie {
 	
 	public ControleurPartie(HashMap<String, JCheckBox> IAs, HashMap<String, JRadioButton> diffs 
-			,JButton lancer,JRadioButton positif,JRadioButton  negatif, JTextField textField, Partie maPartie, JFrame frame) {
+			,JButton lancer,JRadioButton positif,JRadioButton  negatif, JTextField textField, JFrame frame) {
 		
 
 		positif.addActionListener(new ActionListener() {
@@ -42,7 +42,6 @@ public class ControleurPartie {
 			int ind = i;
 			IAs.get("IA"+i).addActionListener(new ActionListener() {
 				public final void actionPerformed(ActionEvent e) {
-					System.out.println("PRESS");
 					diffs.get("IA"+ ind +"f").setSelected(IAs.get("IA"+ind).isSelected());
 				}
 			}
@@ -66,9 +65,7 @@ public class ControleurPartie {
 		
 		
 		lancer.addActionListener(new ActionListener() {
-			Partie laPartie = maPartie;
 			public void actionPerformed(ActionEvent e) {
-				System.out.println("BIM");
 				ArrayList<Joueur> joueurs = new ArrayList<Joueur>();
 				byte modeComptage;
 				if (positif.isSelected()) {
@@ -87,8 +84,8 @@ public class ControleurPartie {
 				}
 				int i = joueurs.size();
 				joueurs.add(new JoueurPhysique(textField.getText(), (byte) i));
-				laPartie.updateP(modeComptage, joueurs);
-				Manche manche = laPartie.nouvelleManche();
+				Partie.getInstance().updateP(modeComptage, joueurs);
+				Manche manche = Partie.getInstance().nouvelleManche();
 				frame.getContentPane().removeAll();
 				frame.repaint();
 				new InterfaceVariante(frame,manche);

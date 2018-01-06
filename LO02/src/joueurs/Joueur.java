@@ -22,6 +22,7 @@ public abstract class Joueur extends Observable {
 	protected int numCarte;
 	private boolean effetActif = false;
 	protected Manche laManche;
+	private Effet lEffet;
 
 	public Joueur(String nom, byte id) {
 		super();
@@ -106,6 +107,14 @@ public abstract class Joueur extends Observable {
 		this.sesCartes = sesCartes;
 	}
 
+	public Effet getlEffet() {
+		return lEffet;
+	}
+
+	public void setlEffet(Effet lEffet) {
+		this.lEffet = lEffet;
+	}
+
 	public boolean comparerCarte() {
 		if (carteChoisi.getValeur() == laManche.getLeTas().getCarteVisible().getValeur()
 				|| carteChoisi.getCouleur() == laManche.getLeTas().getCarteVisible().getCouleur() 
@@ -137,10 +146,12 @@ public abstract class Joueur extends Observable {
 	
 	public abstract void afficherCartesG();
 	
-	public void appliquerEffet(Tas leTas, Paquet lePaquet, Manche laManche) {
-		Effet lEffet = laManche.getVarianteManche().getValeurEffetDefense().get(carteChoisi.getValeur());
+	public void appliquerEffet(Manche laManche) {
+		lEffet = laManche.getVarianteManche().getValeurEffetDefense().get(carteChoisi.getValeur());
 		setEffetActif(false);
 		setCarteChoisi(new Carte());
+		System.out.println(lEffet);
+		System.out.println("effet actif??? " + isEffetActif());
 		lEffet.lancer(this,laManche);
 	}
 
@@ -153,7 +164,7 @@ public abstract class Joueur extends Observable {
 					this.poserCarte();
 				}
 			}
-		Effet lEffet = laManche.getVarianteManche().getValeurEffetAttaque().get(leTas.getCarteVisible().getValeur());
+		lEffet = laManche.getVarianteManche().getValeurEffetAttaque().get(leTas.getCarteVisible().getValeur());
 		lEffet.lancer(this,laManche);
 	}
 
@@ -181,8 +192,8 @@ public abstract class Joueur extends Observable {
 		return vals;
 	}
 
-	public boolean uneCarteEstChoisi(Tas leTas) {
-		if (this.carteChoisi.equals(leTas.getCarteVisible())) {
+	public boolean uneCarteEstChoisi() {
+		if (this.carteChoisi.equals(laManche.getLeTas().getCarteVisible())) {
 			return true;
 		} else {
 			return false;

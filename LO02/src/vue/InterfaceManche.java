@@ -8,7 +8,9 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 
+import controleur.ControleurCouleurs;
 import controleur.ControleurManche;
+import jeu.Carte;
 import jeu.Tas;
 import joueurs.*;
 import main.Manche;
@@ -16,21 +18,30 @@ import main.Partie;
 import java.awt.Font;
 import java.awt.image.AffineTransformOp;
 
-public class InterfaceManche implements Observer,Runnable {
+public class InterfaceManche implements Observer {
 
 	private JFrame frame;
 	private Manche manche;
 	private static byte nbManche;
 	private Joueur moi;
 	private Tas leTas;
-	private JButton[] cartesJ;
+	private JButton[] cartesJ,couleurs;
 	private JLabel carteV,tourDe;
 	private ControleurManche controleur;
 	private JLabel[] ias;
+	private Boolean attente = false;
 	/**
 	 * Launch the application.
 	 */
 	
+	public Boolean getAttente() {
+		return attente;
+	}
+
+	public void setAttente(Boolean attente) {
+		this.attente = attente;
+	}
+
 	/**
 	 * Create the application.
 	 */
@@ -38,9 +49,7 @@ public class InterfaceManche implements Observer,Runnable {
 		this.frame = frame;
 		this.manche = manche;
 		this.manche.addObserver(this);
-		System.out.println(manche.getVarianteManche().getNom());
 		initialize();
-		System.out.println("fin ini");
 		leTas = manche.commencerManche();
 		leTas.addObserver(this);
 		leTas.notifier();
@@ -49,7 +58,7 @@ public class InterfaceManche implements Observer,Runnable {
 		affichageCartes();
 		ias = new JLabel[Partie.getInstance().getLesJoueurs().size()-1];
 		affichageIAs();
-		Thread thread = new Thread(this);
+		Thread thread = new Thread(manche);
 		thread.start();
 		
 	}
@@ -58,7 +67,7 @@ public class InterfaceManche implements Observer,Runnable {
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
-		frame.setBounds(100, 100, 700, 600);
+		frame.setBounds(100, 100, 850, 600);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 		
@@ -83,6 +92,11 @@ public class InterfaceManche implements Observer,Runnable {
 			carteV.setBounds(300, 150, 85, 125);
 			this.frame.getContentPane().add(carteV);
 			this.frame.repaint();
+			if (leTas.getCarteVisible().getValeur().equals("8") && manche.getJoueurEnCours() instanceof JoueurPhysique) {
+				setAttente(true);
+				afficherCouleurs();
+				new ControleurCouleurs(manche,(JoueurPhysique) moi, couleurs,frame,this);	
+			}
 		} else if (o instanceof Manche) {
 			if (tourDe instanceof JLabel) {
 				this.frame.getContentPane().remove(tourDe);
@@ -99,24 +113,26 @@ public class InterfaceManche implements Observer,Runnable {
 		}
 		
 		if (o instanceof JoueurPhysique) {
-			System.out.println("ca remplace");
 			for (int i = 0; i < cartesJ.length; i++) {
 				this.frame.getContentPane().remove(cartesJ[i]);
 			}
 			affichageCartes();
-			
+			new ControleurManche(cartesJ,(JoueurPhysique) moi,frame,manche);
 		}
 	}
-
-	@Override
-	public void run() {
-		// TODO Auto-generated method stub
-		while (manche.getJoueurEnCours().getSesCartes().size() != 0) {
-			if (manche.getJoueurEnCours() instanceof JoueurPhysique) {
-				new ControleurManche(cartesJ,(JoueurPhysique) moi,frame,manche);
-			}
-			manche.jouerTourG();
+	
+	public void afficherCouleurs() {
+		couleurs = new JButton[4];
+		couleurs[0] = new JButton("Carreau");
+		couleurs[1] = new JButton("Coeur");
+		couleurs[2] = new JButton("Pique");
+		couleurs[3] = new JButton("Trefle");
+		for (int i = 0; i < 4; i++) {
+			couleurs[i].setFont(new Font("Tahoma", Font.PLAIN, 20));
+			couleurs[i].setBounds(20+150*i, 350, 125, 25);
+			this.frame.getContentPane().add(couleurs[i]);
 		}
+		this.frame.repaint();
 	}
 	
 	public void affichageCartes() {
@@ -124,7 +140,7 @@ public class InterfaceManche implements Observer,Runnable {
 		cartesJ = new JButton[moi.getSesCartes().size()];
 		for (int i = 0; i < moi.getSesCartes().size(); i++) {
 			JButton carte = new JButton(new ImageIcon("cartes/"+moi.getSesCartes().get(i).getValeur().toLowerCase()+"_"+moi.getSesCartes().get(i).getCouleur().toLowerCase()+".png"));
-			carte.setBounds(i+85*i, 400, 85, 125);
+			carte.setBounds(10+85*i, 400, 85, 125);
 			cartesJ[i] = carte;
 			this.frame.getContentPane().add(cartesJ[i]);
 		}

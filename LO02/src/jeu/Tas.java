@@ -49,6 +49,9 @@ public class Tas extends Observable{
 
 	public void setCarteVisible(Carte carteVisible) {
 		this.carteVisible = carteVisible;
+		setChanged();
+		notifyObservers();
+		
 	}
 	
 	public boolean carteVisibleEffetAttaque(Variante var) {

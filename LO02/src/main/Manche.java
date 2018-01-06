@@ -10,7 +10,7 @@ import jeu.Tas;
 import joueurs.*;
 import variante.*;
 
-public class Manche extends Observable{
+public class Manche extends Observable implements Runnable{
 
 	private byte sens = 1, rnd;
 	private Joueur joueurEnCours;
@@ -20,6 +20,7 @@ public class Manche extends Observable{
 	private Paquet lePaquet;
 	private Tas leTas;
 	private HashMap<String, Variante> lesVariantes;
+	private boolean attente = false;
 	
 	public byte getSens() {
 		return sens;
@@ -139,15 +140,15 @@ public class Manche extends Observable{
 		joueurEnCours.trierCartes();
 		joueurEnCours.afficherCartesG();
 		joueurEnCours.choisirUneCarte(this);
-		try {
-			Thread.sleep(1000);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		System.out.println(joueurEnCours.uneCarteEstChoisi()+"  carte select + "+joueurEnCours.isEffetActif());
+		if (joueurEnCours.uneCarteEstChoisi() && joueurEnCours.isEffetActif()) {
+			joueurEnCours.appliquerEffet(this);
 		}
-		this.changerJoueurEnCours();
-		setChanged();
-		notifyObservers();		
+		if (joueurEnCours.getSesCartes().size() > 1) {
+			this.changerJoueurEnCours();
+		} else if (Partie.getInstance().getModeComptage() == 0 && joueurEnCours.getSesCartes().size() == 0){
+			mancheFinie();
+		}
 	}
 	
 	public void jouerTour() {
@@ -157,8 +158,8 @@ public class Manche extends Observable{
 		joueurEnCours.trierCartes();
 		joueurEnCours.afficherCartes();
 		joueurEnCours.choisirUneCarte(this);
-		if (joueurEnCours.uneCarteEstChoisi(leTas) && joueurEnCours.isEffetActif()) { //retour au if, le while bloquait le jeu au changement de couleur 
-			joueurEnCours.appliquerEffet(leTas,lePaquet,this);																				// idée : déplacer ce if dans choisirCarte
+		if (joueurEnCours.uneCarteEstChoisi() && joueurEnCours.isEffetActif()) { //retour au if, le while bloquait le jeu au changement de couleur 
+			joueurEnCours.appliquerEffet(this);																				// idée : déplacer ce if dans choisirCarte
 		}
 		if (joueurEnCours.getSesCartes().size() == 1) {
 			this.uneCarte();
@@ -223,9 +224,7 @@ public class Manche extends Observable{
 			System.out.println(joueurEnCours.getNom() + " a gagné la manche!\n");
 			for (int i = 0; i < Partie.getInstance().getLesJoueurs().size(); i++) {
 				Partie.getInstance().getLesJoueurs().get(i).compterSesPoints();
-			}
-		
-			
+			}			
 		}
 		
 		if (nbManche != 1) {
@@ -286,12 +285,53 @@ public class Manche extends Observable{
 		}
 	}
 
+	public boolean isAttente() {
+		return attente;
+	}
+
+	public void setAttente(boolean attente) {
+		this.attente = attente;
+	}
+
 	public void changerJoueurEnCours() {
+		try {
+			Thread.sleep(1000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		if (joueurEnCours.getId() == 0 && sens == -1) {
-			joueurEnCours = Partie.getInstance().getLesJoueurs().get(Partie.getInstance().getNbIA());
+			joueurEnCours = Partie.getInstance().getLesJoueurs().get(Partie.getInstance().getLesJoueurs().size()-1);
 		} else {
-			joueurEnCours =  Partie.getInstance().getLesJoueurs()
+			joueurEnCours = Partie.getInstance().getLesJoueurs()
 				.get((joueurEnCours.getId() + sens) % (Partie.getInstance().getLesJoueurs().size()));
+		}
+		setChanged();
+		notifyObservers();	
+	}
+	
+	public void run() {
+		// TODO Auto-generated method stub
+		while (this.getJoueurEnCours().getSesCartes().size() != 0) {
+			if (lePaquet.getCartes().size() == 0) {
+				lePaquet.setCartes(leTas.getCartesDessous());
+				leTas.viderCartesDessous();
+				System.out.println("Le paquet a été changé et se mélange");
+				lePaquet.melanger();
+			}
+			if (leTas.isAvoirEffet()) {
+				leTas.setAvoirEffet(false);
+				joueurEnCours.subirEffet(leTas,lePaquet,this);
+			}
+			this.jouerTourG();
+			while(attente){
+				try {
+					wait();
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
 		}
 	}
 

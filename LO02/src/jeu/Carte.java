@@ -19,8 +19,8 @@ public class Carte {
 	
 
 	public Carte() {
-		this.valeur = null;
-		this.couleur = null;
+		this.valeur = "0";
+		this.couleur = "0";
 	}
 	public Carte(String string) {
 		// TODO Auto-generated constructor stub
