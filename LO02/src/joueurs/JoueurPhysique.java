@@ -46,7 +46,6 @@ public class JoueurPhysique extends Joueur {
 				// TODO Auto-generated caxtch block
 				e.printStackTrace();
 			}
-			System.out.println("attenteChoix");
 		}
 		this.setAttenteVue(true);
 	}
@@ -60,7 +59,7 @@ public class JoueurPhysique extends Joueur {
 		if (numCarte != 0 && numCarte <= sesCartes.size()) {
 			carteChoisi = sesCartes.get(numCarte - 1);
 			// System.out.println(carteChoisi);
-			this.poserCarte();
+			this.finirTour();
 		} else if (numCarte == 13) {
 			System.out.println(laManche.getLeTas().getCartesDessous());
 		} else if (numCarte > sesCartes.size()) {

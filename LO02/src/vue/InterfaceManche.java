@@ -118,6 +118,7 @@ public class InterfaceManche implements Observer {
 			}
 			affichageCartes();
 			new ControleurManche(cartesJ,(JoueurPhysique) moi,frame,manche);
+			new VueTexte((JoueurPhysique) moi, manche);			
 		}
 	}
 	

@@ -9,11 +9,21 @@ import main.Manche;
 
 import java.util.ArrayList;
 
-public class EffetContre implements Effet {
+public class EffetContre implements Effet,Runnable {
 // il reste toujours a regler l'erreur quand on ne choisi la bonne couleur (choixCouleur > 3 
 	
 	private String nCouleur;
 	private boolean attente;
+	private ArrayList<String> couleurs;
+	
+	public EffetContre() {
+		super();
+		couleurs = new ArrayList<String>();
+		couleurs.add("Carreau");
+		couleurs.add("Coeur");
+		couleurs.add("Pique");
+		couleurs.add("Trefle");
+	}
 	
 	public String getnCouleur() {
 		return nCouleur;
@@ -32,25 +42,11 @@ public class EffetContre implements Effet {
 	}
 
 	public void lancer(Joueur leJoueur, Manche laManche) {
-		/* String nouvCouleur;
-		ArrayList<String> couleur = new ArrayList<String>();
-		couleur.add("Carreau");
-		couleur.add("Coeur");
-		couleur.add("Pique");
-		couleur.add("Trefle");
-		if (leJoueur instanceof JoueurPhysique) {
-			System.out.println("\nChoisis une nouvelle couleur! Ecris en toute lettre:\n' 0 : Carreau' ou ' 1 : Coeur' ou '2 : Pique' ou ' 3 :Trefle'");
-			Scanner sc = new Scanner(System.in);
-			
-			int choixCouleur = sc.nextInt();
-			while (choixCouleur > 3) {
-				System.out.println("Cette Couleur n'existe pas , choisis en une autre");
-				choixCouleur = sc.nextInt();
-			} 
-			nouvCouleur = couleur.get(choixCouleur); */
+		Thread t = new Thread(this);
+		t.start();
 		if (leJoueur instanceof JoueurPhysique) {
 			setAttente(true);
-			while (attente) {
+						while (attente) {
 				try {
 					Thread.sleep(1000);
 				} catch (InterruptedException e) {
@@ -61,12 +57,7 @@ public class EffetContre implements Effet {
 		} else { 
 			//if (Partie.getInstance())
 			int rnd = (int) (4 * Math.random());
-			ArrayList<String> couleur = new ArrayList<String>();
-			couleur.add("Carreau");
-			couleur.add("Coeur");
-			couleur.add("Pique");
-			couleur.add("Trefle");
-			nCouleur = couleur.get(rnd);
+			nCouleur = couleurs.get(rnd);
 		}
 					
 		laManche.getLeTas().addCartesDessous(laManche.getLeTas().getCarteVisible());
@@ -74,5 +65,19 @@ public class EffetContre implements Effet {
 		System.out.println("La nouvelle couleur est " + nCouleur + ".");
 		leJoueur.getSesCartes().remove(leJoueur.getCarteChoisi());
 
+	}
+
+	@Override
+	public void run() {
+		System.out.println("\nChoisis une nouvelle couleur! Ecris en toute lettre:\n' 0 : Carreau' ou ' 1 : Coeur' ou '2 : Pique' ou ' 3 :Trefle'");
+		Scanner sc = new Scanner(System.in);
+		
+		int choixCouleur = sc.nextInt();
+		while (choixCouleur > 3) {
+			System.out.println("Cette Couleur n'existe pas , choisis en une autre");
+			choixCouleur = sc.nextInt();
+		} 
+		nCouleur = couleurs.get(choixCouleur);
+		setAttente(false);
 	}
 }
