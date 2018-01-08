@@ -13,7 +13,7 @@ import main.Manche;
 
 public class ControleurManche {
 
-	public ControleurManche(JButton[] cartesJ,JoueurPhysique moi, JFrame frame,Manche laManche) {
+	public ControleurManche(JButton[] cartesJ, JoueurPhysique moi, JFrame frame, Manche laManche) {
 		System.out.println("CREATION");
 		JButton piocher = new JButton("Piocher");
 		piocher.setFont(new Font("Tahoma", Font.BOLD, 20));
@@ -38,11 +38,10 @@ public class ControleurManche {
 						frame.getContentPane().remove(cartesJ[ind]);
 						frame.repaint();
 					}
-					
-					
+
 				}
-			}
-			); 
-		};
+			});
+		}
+		;
 	}
 }

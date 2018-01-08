@@ -10,7 +10,7 @@ import jeu.Tas;
 import joueurs.*;
 import variante.*;
 
-public class Manche extends Observable implements Runnable{
+public class Manche extends Observable implements Runnable {
 
 	private byte sens = 1, rnd;
 	private Joueur joueurEnCours;
@@ -21,7 +21,7 @@ public class Manche extends Observable implements Runnable{
 	private Tas leTas;
 	private HashMap<String, Variante> lesVariantes;
 	private boolean attente = false;
-	
+
 	public byte getSens() {
 		return sens;
 	}
@@ -45,7 +45,7 @@ public class Manche extends Observable implements Runnable{
 	public void setVarianteManche(String nomManche) {
 		varianteManche = lesVariantes.get(nomManche);
 	}
-	
+
 	public static byte getNbManche() {
 		return nbManche;
 	}
@@ -84,133 +84,77 @@ public class Manche extends Observable implements Runnable{
 	}
 
 	public Manche() {
-		
+
 		lesVariantes = new HashMap<String, Variante>();
-		lesVariantes.put("Variante Minimale",new VarianteMinimale());
+		lesVariantes.put("Variante Minimale", new VarianteMinimale());
 		lesVariantes.put("Variante Monclar", new VarianteMonclar());
-		lesVariantes.put("Variante Maou",new VarianteCarteMaou());
+		lesVariantes.put("Variante Maou", new VarianteCarteMaou());
 		lesVariantes.put("Variante Man et Rasta", new VarianteManRasta());
-		lesVariantes.put("Variante 5",new Variante5());
-		
+		lesVariantes.put("Variante 5", new Variante5());
+
 		nbManche++;
-		/* System.out.println("\nMANCHE N°" + nbManche);
-
-		StringBuffer sb = new StringBuffer();
-		sc = new Scanner(System.in);
-		sb.append("\nChoisir une des variantes suivantes:\n");
-		for (int i=0; i < lesVariantes.size(); i++) {
-			sb.append((i+1) + " : " + lesVariantes.get(i).getNom() + "\n");
-		}
-		System.out.println(sb.toString());
-		varianteManche = lesVariantes.get(sc.nextInt()-1);
-
-		lePaquet = new Paquet(varianteManche);
-
-		lePaquet.melanger();
-		lePaquet.distribuer();
-
-		rnd = (byte) (Partie.getInstance().getLesJoueurs().size() * (Math.random()));
-		joueurEnCours = Partie.getInstance().getLesJoueurs().get(rnd);
-
-		leTas = new Tas(lePaquet);
-		leTas.afficherCarteVisible();
-
-		while (joueurEnCours.getSesCartes().size() != 0) {
-			try {
-				Thread.sleep(1000);
-			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			if (lePaquet.getCartes().size() == 0) {
-				lePaquet.setCartes(leTas.getCartesDessous());
-				leTas.viderCartesDessous();
-				System.out.println("Le paquet a été changé et se mélange");
-				lePaquet.melanger();
-			}
-			if (leTas.isAvoirEffet()) {
-				leTas.setAvoirEffet(false);
-				joueurEnCours.subirEffet(leTas,lePaquet,this);
-			}
-			jouerTour();
-		} */
+		/*
+		 * System.out.println("\nMANCHE N°" + nbManche);
+		 * 
+		 * StringBuffer sb = new StringBuffer(); sc = new Scanner(System.in);
+		 * sb.append("\nChoisir une des variantes suivantes:\n"); for (int i=0; i <
+		 * lesVariantes.size(); i++) { sb.append((i+1) + " : " +
+		 * lesVariantes.get(i).getNom() + "\n"); } System.out.println(sb.toString());
+		 * varianteManche = lesVariantes.get(sc.nextInt()-1);
+		 * 
+		 * lePaquet = new Paquet(varianteManche);
+		 * 
+		 * lePaquet.melanger(); lePaquet.distribuer();
+		 * 
+		 * rnd = (byte) (Partie.getInstance().getLesJoueurs().size() * (Math.random()));
+		 * joueurEnCours = Partie.getInstance().getLesJoueurs().get(rnd);
+		 * 
+		 * leTas = new Tas(lePaquet); leTas.afficherCarteVisible();
+		 * 
+		 * while (joueurEnCours.getSesCartes().size() != 0) { try { Thread.sleep(1000);
+		 * } catch (InterruptedException e) { // TODO Auto-generated catch block
+		 * e.printStackTrace(); } if (lePaquet.getCartes().size() == 0) {
+		 * lePaquet.setCartes(leTas.getCartesDessous()); leTas.viderCartesDessous();
+		 * System.out.println("Le paquet a été changé et se mélange");
+		 * lePaquet.melanger(); } if (leTas.isAvoirEffet()) {
+		 * leTas.setAvoirEffet(false); joueurEnCours.subirEffet(leTas,lePaquet,this); }
+		 * jouerTour(); }
+		 */
 	}
 
 	public void jouerTourG() {
 		joueurEnCours.trierCartes();
 		joueurEnCours.afficherCartesG();
 		joueurEnCours.choisirUneCarte(this);
-		System.out.println(joueurEnCours.uneCarteEstChoisi()+"  carte select + "+joueurEnCours.isEffetActif());
+		System.out.println(joueurEnCours.uneCarteEstChoisi() + "  carte select + " + joueurEnCours.isEffetActif());
 		if (joueurEnCours.uneCarteEstChoisi() && joueurEnCours.isEffetActif()) {
 			joueurEnCours.appliquerEffet(this);
 		}
 		if (joueurEnCours.getSesCartes().size() > 1) {
 			this.changerJoueurEnCours();
-		} else if (Partie.getInstance().getModeComptage() == 0 && joueurEnCours.getSesCartes().size() == 0){
+		} else if (joueurEnCours.getSesCartes().size() == 0) {
 			mancheFinie();
 		}
 	}
-	
+
 	public void jouerTour() {
 		// TODO Auto-generated method stub
-	
+
 		System.out.println("C'est au tour de " + joueurEnCours.getNom() + "\n");
 		joueurEnCours.trierCartes();
 		joueurEnCours.afficherCartes();
 		joueurEnCours.choisirUneCarte(this);
-		if (joueurEnCours.uneCarteEstChoisi() && joueurEnCours.isEffetActif()) { //retour au if, le while bloquait le jeu au changement de couleur 
-			joueurEnCours.appliquerEffet(this);																				// idée : déplacer ce if dans choisirCarte
+		if (joueurEnCours.uneCarteEstChoisi() && joueurEnCours.isEffetActif()) { // retour au if, le while bloquait le
+																					// jeu au changement de couleur
+			joueurEnCours.appliquerEffet(this); // idée : déplacer ce if dans choisirCarte
 		}
 		if (joueurEnCours.getSesCartes().size() == 1) {
 			this.uneCarte();
 		} else if (joueurEnCours.getSesCartes().size() > 1) {
 			this.changerJoueurEnCours();
-		} else if (Partie.getInstance().getModeComptage() == 0 && joueurEnCours.getSesCartes().size() == 0){
+		} else if (joueurEnCours.getSesCartes().size() == 0) {
 			mancheFinie();
-		} else if (Partie.getInstance().getModeComptage() == 1 && joueurEnCours.getSesCartes().size() == 0) {
-			
-			ArrayList<Joueur> joueursTemp = new ArrayList<Joueur>(Partie.getInstance().getLesJoueurs());
-			int nombreJoueur = Partie.getInstance().getNbIA()+1;
-			Joueur jGagnant,joueurSuivant;
-			
-			if (nombreJoueur == Partie.getInstance().getLesJoueurs().size() && nombreJoueur >= 2) {
-				System.out.println(joueurEnCours.getNom() + " a gagné la manche!\n");
-				jGagnant = joueurEnCours;
-				joueurEnCours.setScore(50);
-				joueurSuivant = this.getJoueurSuivant();
-				Partie.getInstance().getLesJoueurs().remove(jGagnant);
-				joueurEnCours = joueurSuivant;
-			} else if (nombreJoueur == Partie.getInstance().getLesJoueurs().size() && nombreJoueur == 2) {
-				System.out.println(joueurEnCours.getNom() + " a gagné la manche!\n");
-				joueurEnCours.setScore(50);
-				joueurSuivant = this.getJoueurSuivant();
-				joueurSuivant.setScore(20);
-				System.out.println(joueurEnCours.getNom() + " a marqué 50 points et " + joueurSuivant.getNom() + " 20 points!\n");
-				mancheFinie();
-			} else if (nombreJoueur-1 == Partie.getInstance().getLesJoueurs().size() && nombreJoueur >= 3) {
-				System.out.println(joueurEnCours.getNom() + " est deuxième!\n");
-				jGagnant = joueurEnCours;
-				joueurEnCours.setScore(20);
-				joueurSuivant = this.getJoueurSuivant();
-				Partie.getInstance().getLesJoueurs().remove(jGagnant);
-				joueurEnCours = joueurSuivant;
-			} else if (nombreJoueur-1 == Partie.getInstance().getLesJoueurs().size() || nombreJoueur == 3) {
-					System.out.println(joueurEnCours.getNom() + " est deuxième!\n");
-					joueurEnCours.setScore(20);
-					joueurSuivant = this.getJoueurSuivant();
-					joueurSuivant.setScore(10);
-					Partie.getInstance().setLesJoueurs(joueursTemp);
-					mancheFinie();
-			} else {
-				System.out.println(joueurEnCours.getNom() + " est troisième!\n");
-				joueurEnCours.setScore(10);
-				Partie.getInstance().setLesJoueurs(joueursTemp);
-				mancheFinie();
-			}
 		}
-		
-	
-			
 	}
 
 	public Joueur getJoueurSuivant() {
@@ -220,13 +164,12 @@ public class Manche extends Observable implements Runnable{
 
 	private void mancheFinie() {
 		// TODO Auto-generated method stub
-		if (Partie.getInstance().getModeComptage() == 0) {
-			System.out.println(joueurEnCours.getNom() + " a gagné la manche!\n");
-			for (int i = 0; i < Partie.getInstance().getLesJoueurs().size(); i++) {
-				Partie.getInstance().getLesJoueurs().get(i).compterSesPoints();
-			}			
+		System.out.println(joueurEnCours.getNom() + " a gagné la manche!\n");
+		for (int i = 0; i < Partie.getInstance().getLesJoueurs().size(); i++) {
+			Partie.getInstance().getLesJoueurs().get(i).compterSesPoints();
+			
 		}
-		
+
 		if (nbManche != 1) {
 			for (int i = 0; i < Partie.getInstance().getLesJoueurs().size(); i++) {
 				System.out.println(Partie.getInstance().getLesJoueurs().get(i).getNom() + " a au total "
@@ -301,15 +244,15 @@ public class Manche extends Observable implements Runnable{
 			e.printStackTrace();
 		}
 		if (joueurEnCours.getId() == 0 && sens == -1) {
-			joueurEnCours = Partie.getInstance().getLesJoueurs().get(Partie.getInstance().getLesJoueurs().size()-1);
+			joueurEnCours = Partie.getInstance().getLesJoueurs().get(Partie.getInstance().getLesJoueurs().size() - 1);
 		} else {
 			joueurEnCours = Partie.getInstance().getLesJoueurs()
-				.get((joueurEnCours.getId() + sens) % (Partie.getInstance().getLesJoueurs().size()));
+					.get((joueurEnCours.getId() + sens) % (Partie.getInstance().getLesJoueurs().size()));
 		}
 		setChanged();
-		notifyObservers();	
+		notifyObservers();
 	}
-	
+
 	public void run() {
 		// TODO Auto-generated method stub
 		while (this.getJoueurEnCours().getSesCartes().size() != 0) {
@@ -321,10 +264,10 @@ public class Manche extends Observable implements Runnable{
 			}
 			if (leTas.isAvoirEffet()) {
 				leTas.setAvoirEffet(false);
-				joueurEnCours.subirEffet(leTas,lePaquet,this);
+				joueurEnCours.subirEffet(leTas, lePaquet, this);
 			}
 			this.jouerTourG();
-			while(attente){
+			while (attente) {
 				try {
 					wait();
 				} catch (InterruptedException e) {

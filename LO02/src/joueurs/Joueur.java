@@ -1,9 +1,9 @@
 package joueurs;
 
-
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Observable;
+import java.util.Observer;
 
 import effet.Effet;
 import effet.EffetContre;
@@ -12,7 +12,7 @@ import jeu.Paquet;
 import jeu.Tas;
 import main.Manche;
 
-public abstract class Joueur extends Observable {
+public abstract class Joueur extends Observable implements Observer {
 
 	private byte id;
 	protected ArrayList<Carte> sesCartes;
@@ -215,4 +215,11 @@ public abstract class Joueur extends Observable {
 		poserCarte();
 	}
 
+	public void update(Observable o, Object arg) {
+		if (o instanceof Effet) {
+			System.out.println(arg);
+			setChanged();
+			notifyObservers(arg);
+		}
+	}
 }

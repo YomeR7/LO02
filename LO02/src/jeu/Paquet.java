@@ -1,4 +1,5 @@
 package jeu;
+
 import java.util.ArrayList;
 import java.util.Collections;
 
@@ -7,7 +8,7 @@ import variante.Variante;
 
 public class Paquet {
 
-	//private byte nbCarte = 52;
+	// private byte nbCarte = 52;
 	private ArrayList<Carte> cartes;
 
 	public Paquet(Variante VarianteManche) {
@@ -22,11 +23,7 @@ public class Paquet {
 		int k = 0;
 		for (int i = 0; i < couleur.length; i++) {
 			for (int j = 0; j < valeur.length; j++) {
-				if (Partie.getInstance().getModeComptage() == 0) {
-					cartes.add(k, new Carte(valeur[j], couleur[i], points[j])); // ajout de modeComptage pour affichage
-				} else {
-					cartes.add(k, new Carte(valeur[j], couleur[i]));
-				}
+				cartes.add(k, new Carte(valeur[j], couleur[i], points[j])); // ajout de modeComptage pour affichage
 				k++;
 			}
 		}

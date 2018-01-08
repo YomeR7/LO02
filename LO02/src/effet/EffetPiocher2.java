@@ -1,14 +1,19 @@
 package effet;
 
+import java.util.Observable;
+
 import joueurs.Joueur;
 import main.Manche;
 
 
-public class EffetPiocher2 implements Effet {
+public class EffetPiocher2 extends Observable implements Effet {
 
 	@Override
 	public void lancer(Joueur leJoueur, Manche laManche) {
 		// TODO Auto-generated method stub
+		this.addObserver(leJoueur);
+		setChanged();
+		notifyObservers(leJoueur.getNom() + " pioche 2 cartes!");
 		if (laManche.getLePaquet().getCartes().size() < 2) {
 			laManche.getLePaquet().setCartes(laManche.getLeTas().getCartesDessous());
 			laManche.getLeTas().viderCartesDessous();

@@ -54,7 +54,9 @@ public class InterfaceManche implements Observer {
 		leTas.addObserver(this);
 		leTas.notifier();
 		moi = Partie.getInstance().getLesJoueurs().get(Partie.getInstance().getLesJoueurs().size()-1);
-		moi.addObserver(this);
+		for (int i = 0; i<Partie.getInstance().getLesJoueurs().size(); i++) {
+			Partie.getInstance().getLesJoueurs().get(i).addObserver(this);
+		}
 		affichageCartes();
 		ias = new JLabel[Partie.getInstance().getLesJoueurs().size()-1];
 		affichageIAs();
@@ -84,6 +86,23 @@ public class InterfaceManche implements Observer {
 	@Override
 	public void update(Observable o, Object arg) {
 		// TODO Auto-generated method stub
+		if (o instanceof Joueur) {
+			if (arg instanceof String) {
+				System.out.println(arg + " c'est ça l'arg connard");
+				JLabel effet = new JLabel((String) arg);
+				effet.setBounds(250,50,250,25);
+				effet.setFont(new Font("Tahoma", Font.PLAIN, 20));
+				this.frame.getContentPane().add(effet);
+				try {
+					Thread.sleep(1500);
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				this.frame.getContentPane().remove(effet);
+			}
+		}
+		
 		if (o instanceof Tas) {
 			if (carteV instanceof JLabel) {
 				this.frame.getContentPane().remove(carteV);
@@ -110,9 +129,7 @@ public class InterfaceManche implements Observer {
 			tourDe.setBounds(198, 280, 168, 25);
 			this.frame.getContentPane().add(tourDe);
 			this.frame.repaint();
-		}
-		
-		if (o instanceof JoueurPhysique) {
+		} else if (o instanceof JoueurPhysique) {
 			for (int i = 0; i < cartesJ.length; i++) {
 				this.frame.getContentPane().remove(cartesJ[i]);
 			}

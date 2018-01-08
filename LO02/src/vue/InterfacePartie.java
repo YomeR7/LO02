@@ -24,7 +24,6 @@ public class InterfacePartie {
 	private HashMap<String, JCheckBox> IAs;
 	private HashMap<String,JRadioButton> diffs;
 	private JButton lancer;
-	private JRadioButton positif,negatif;
 	/**
 	 * Launch the application.
 	 *
@@ -49,7 +48,7 @@ public class InterfacePartie {
 		IAs = new HashMap<String, JCheckBox>();
 		diffs = new HashMap<String, JRadioButton>();
 		initialize();
-		new ControleurPartie(IAs, diffs,lancer,positif,negatif,textField,frame);
+		new ControleurPartie(IAs, diffs,lancer,textField,frame);
 	}
 
 	/**
@@ -61,7 +60,7 @@ public class InterfacePartie {
 		frame.getContentPane().setLayout(null);
 		
 		JLabel lblB = new JLabel("8 AMERICAIN : Configuration Partie");
-		lblB.setBounds(182, 11, 177, 14);
+		lblB.setBounds(160, 11, 250, 14);
 		frame.getContentPane().add(lblB);
 		
 		JCheckBox IA1 = new JCheckBox("IA1");
@@ -160,34 +159,20 @@ public class InterfacePartie {
 		lblNewLabel.setBounds(56, 85, 46, 14);
 		frame.getContentPane().add(lblNewLabel);
 		
-		JLabel lblDiificult = new JLabel("Diificult\u00E9");
-		lblDiificult.setBounds(228, 85, 46, 14);
+		JLabel lblDiificult = new JLabel("Difficult\u00E9 :");
+		lblDiificult.setBounds(228, 85, 75, 14);
 		frame.getContentPane().add(lblDiificult);
 		
 		lancer = new JButton("Lancer Partie");
 		lancer.setBounds(221, 296, 110, 23);
 		frame.getContentPane().add(lancer);
 		
-		JLabel lblModeComptage = new JLabel("Mode comptage :");
-		lblModeComptage.setBounds(107, 270, 97, 14);
-		frame.getContentPane().add(lblModeComptage);
-		
-		negatif = new JRadioButton("N\u00E9gatif");
-		negatif.setSelected(true);
-		negatif.setBounds(200, 266, 109, 23);
-		frame.getContentPane().add(negatif);
-		
-		positif = new JRadioButton("Positif");
-		
-		positif.setBounds(311, 266, 109, 23);
-		frame.getContentPane().add(positif);
-		
 		JLabel lblVotreNom = new JLabel("Votre nom: ");
-		lblVotreNom.setBounds(56, 57, 60, 14);
+		lblVotreNom.setBounds(56, 57, 100, 14);
 		frame.getContentPane().add(lblVotreNom);
 		
 		textField = new JTextField();
-		textField.setBounds(118, 54, 86, 20);
+		textField.setBounds(125, 54, 86, 20);
 		frame.getContentPane().add(textField);
 		textField.setColumns(10);
 	}

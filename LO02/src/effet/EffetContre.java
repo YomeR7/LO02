@@ -8,8 +8,9 @@ import joueurs.JoueurPhysique;
 import main.Manche;
 
 import java.util.ArrayList;
+import java.util.Observable;
 
-public class EffetContre implements Effet,Runnable {
+public class EffetContre extends Observable implements Effet,Runnable {
 // il reste toujours a regler l'erreur quand on ne choisi la bonne couleur (choixCouleur > 3 
 	
 	private String nCouleur;
@@ -42,6 +43,9 @@ public class EffetContre implements Effet,Runnable {
 	}
 
 	public void lancer(Joueur leJoueur, Manche laManche) {
+		this.addObserver(leJoueur);
+		setChanged();
+		notifyObservers("Changement de couleurs!");
 		Thread t = new Thread(this);
 		t.start();
 		if (leJoueur instanceof JoueurPhysique) {
