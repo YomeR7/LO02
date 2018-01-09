@@ -178,8 +178,9 @@ public class Manche extends Observable implements Runnable {
 					Partie.getInstance().setMAXScore(Partie.getInstance().getLesJoueurs().get(i).getScore());
 				}
 			}
-
 		}
+		setChanged();
+		notifyObservers("fin");
 	}
 
 	public void uneCarte() {

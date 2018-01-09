@@ -66,10 +66,9 @@ public class ControleurPartie {
 				int i = joueurs.size();
 				joueurs.add(new JoueurPhysique(textField.getText(), (byte) i));
 				Partie.getInstance().updateP(joueurs);
-				Manche manche = Partie.getInstance().nouvelleManche();
 				frame.getContentPane().removeAll();
 				frame.repaint();
-				new InterfaceVariante(frame,manche);
+				new InterfaceVariante(frame,Partie.getInstance().lancerPartie());
 			}
 		});
 		

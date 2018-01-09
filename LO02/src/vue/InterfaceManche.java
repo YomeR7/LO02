@@ -15,6 +15,8 @@ import jeu.Tas;
 import joueurs.*;
 import main.Manche;
 import main.Partie;
+
+import java.awt.Color;
 import java.awt.Font;
 import java.awt.image.AffineTransformOp;
 
@@ -22,14 +24,14 @@ public class InterfaceManche implements Observer {
 
 	private JFrame frame;
 	private Manche manche;
-	private static byte nbManche;
 	private Joueur moi;
 	private Tas leTas;
 	private JButton[] cartesJ,couleurs;
-	private JLabel carteV,tourDe;
+	private JLabel carteV,tourDe,choisir;
 	private ControleurManche controleur;
 	private JLabel[] ias;
 	private Boolean attente = false;
+	private JButton piocher;
 	/**
 	 * Launch the application.
 	 */
@@ -72,15 +74,22 @@ public class InterfaceManche implements Observer {
 		frame.setBounds(100, 100, 850, 600);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
+		frame.setContentPane(new JLabel(new ImageIcon("cartes/tapis.png")));
 		
 		JLabel lblMancheN = new JLabel("MANCHE n\u00B0"+ Manche.getNbManche());
+		lblMancheN.setForeground(Color.WHITE);
 		lblMancheN.setFont(new Font("Tahoma", Font.BOLD, 20));
-		lblMancheN.setBounds(198, 110, 168, 25);
+		lblMancheN.setBounds(300, 110, 168, 25);
 		frame.getContentPane().add(lblMancheN);
 		
 		JLabel dosCarte = new JLabel(new ImageIcon("cartes/dos_carte.png"));
-		dosCarte.setBounds(200, 150, 85, 125);
+		dosCarte.setBounds(300, 150, 85, 125);
 		frame.getContentPane().add(dosCarte);
+		
+		piocher = new JButton(new ImageIcon("cartes/piocher.png"));
+		piocher.setBounds(300, 150, 85, 125);
+		piocher.setVisible(false);
+		frame.getContentPane().add(piocher);
 	}
 
 	@Override
@@ -88,9 +97,9 @@ public class InterfaceManche implements Observer {
 		// TODO Auto-generated method stub
 		if (o instanceof Joueur) {
 			if (arg instanceof String) {
-				System.out.println(arg + " c'est ça l'arg connard");
 				JLabel effet = new JLabel((String) arg);
-				effet.setBounds(250,50,250,25);
+				effet.setForeground(Color.WHITE);
+				effet.setBounds(300,50,250,25);
 				effet.setFont(new Font("Tahoma", Font.PLAIN, 20));
 				this.frame.getContentPane().add(effet);
 				try {
@@ -107,34 +116,49 @@ public class InterfaceManche implements Observer {
 			if (carteV instanceof JLabel) {
 				this.frame.getContentPane().remove(carteV);
 			}
+			if (couleurs instanceof JButton[]) {
+				this.frame.getContentPane().remove(choisir);
+				for (int i=0; i<4;i++) {
+					this.frame.getContentPane().remove(couleurs[i]);
+				}
+			}
+			piocher.setVisible(false);
 			carteV = new JLabel(new ImageIcon("cartes/" + leTas.getCarteVisible().getValeur().toLowerCase()+"_"+ leTas.getCarteVisible().getCouleur().toLowerCase()+".png"));
-			carteV.setBounds(300, 150, 85, 125);
+			carteV.setBounds(400, 150, 85, 125);
 			this.frame.getContentPane().add(carteV);
 			this.frame.repaint();
 			if (leTas.getCarteVisible().getValeur().equals("8") && manche.getJoueurEnCours() instanceof JoueurPhysique) {
 				setAttente(true);
 				afficherCouleurs();
-				new ControleurCouleurs(manche,(JoueurPhysique) moi, couleurs,frame,this);	
+				new ControleurCouleurs(manche,(JoueurPhysique) moi, couleurs,frame,this);
 			}
-		} else if (o instanceof Manche) {
+		}
+		
+		if (o instanceof Manche) {
 			if (tourDe instanceof JLabel) {
 				this.frame.getContentPane().remove(tourDe);
 				for (int i = 0; i < ias.length; i++) {
 					this.frame.getContentPane().remove(ias[i]);
 				}
 				affichageIAs();
+			if (arg.equals("fin")) {
+				new InterfaceVariante(frame, Partie.getInstance().lancerPartie());
+			}
 			}
 			tourDe = new JLabel("Tour de "+ manche.getJoueurEnCours().getNom());
+			tourDe.setForeground(Color.WHITE);
 			tourDe.setFont(new Font("Tahoma", Font.BOLD, 20));
-			tourDe.setBounds(198, 280, 168, 25);
+			tourDe.setBounds(300, 280, 168, 25);
 			this.frame.getContentPane().add(tourDe);
 			this.frame.repaint();
-		} else if (o instanceof JoueurPhysique) {
+		}
+		
+		if (o instanceof JoueurPhysique) {
 			for (int i = 0; i < cartesJ.length; i++) {
 				this.frame.getContentPane().remove(cartesJ[i]);
 			}
 			affichageCartes();
-			new ControleurManche(cartesJ,(JoueurPhysique) moi,frame,manche);
+			new ControleurManche(cartesJ,(JoueurPhysique) moi,frame,manche,piocher);
 			new VueTexte((JoueurPhysique) moi, manche);			
 		}
 	}
@@ -147,9 +171,14 @@ public class InterfaceManche implements Observer {
 		couleurs[3] = new JButton("Trefle");
 		for (int i = 0; i < 4; i++) {
 			couleurs[i].setFont(new Font("Tahoma", Font.PLAIN, 20));
-			couleurs[i].setBounds(20+150*i, 350, 125, 25);
+			couleurs[i].setBounds(120+150*i, 350, 125, 25);
 			this.frame.getContentPane().add(couleurs[i]);
 		}
+		choisir = new JLabel("Choisir la nouvelle couleur");
+		choisir.setForeground(Color.WHITE);
+		choisir.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		choisir.setBounds(225, 325, 300, 25);
+		this.frame.getContentPane().add(choisir);
 		this.frame.repaint();
 	}
 	
@@ -162,13 +191,17 @@ public class InterfaceManche implements Observer {
 			cartesJ[i] = carte;
 			this.frame.getContentPane().add(cartesJ[i]);
 		}
+		piocher.setVisible(true);
+		frame.repaint();
+		
 	}
 	
 	public void affichageIAs() {
 		for (int i = 0; i < (Partie.getInstance().getLesJoueurs().size()-1); i++) {
 			JLabel ia = new JLabel(Partie.getInstance().getLesJoueurs().get(i).getNom() + ": " + Partie.getInstance().getLesJoueurs().get(i).getSesCartes().size() + " carte(s)");
+			ia.setForeground(Color.WHITE);
 			ia.setFont(new Font("Tahoma", Font.BOLD, 12));
-			ia.setBounds(125*i + i, 10, 125, 25);
+			ia.setBounds(250+125*i + i, 10, 125, 25);
 			ias[i] = ia;
 			this.frame.getContentPane().add(ias[i]);
 		}

@@ -101,9 +101,9 @@ public class Partie {
 		return new Manche();
 	}
 
-	public void lancerPartie() {
-		while (MAXScore <= 100) {
-			new Manche();
+	public Manche lancerPartie() {
+		if (MAXScore <= 100) {
+			return new Manche();
 		}
 		int minScore = MAXScore;
 		for (int i = 0; i < lesJoueurs.size(); i++) {
@@ -117,6 +117,7 @@ public class Partie {
 				System.out.println(getLesJoueurs().get(i).getNom() + " a gagné la partie!");
 			}
 		}
+		return null;
 	}
 
 }

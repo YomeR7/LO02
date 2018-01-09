@@ -217,7 +217,6 @@ public abstract class Joueur extends Observable implements Observer {
 
 	public void update(Observable o, Object arg) {
 		if (o instanceof Effet) {
-			System.out.println(arg);
 			setChanged();
 			notifyObservers(arg);
 		}

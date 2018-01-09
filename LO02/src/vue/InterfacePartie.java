@@ -164,7 +164,7 @@ public class InterfacePartie {
 		frame.getContentPane().add(lblDiificult);
 		
 		lancer = new JButton("Lancer Partie");
-		lancer.setBounds(221, 296, 110, 23);
+		lancer.setBounds(221, 296, 125, 23);
 		frame.getContentPane().add(lancer);
 		
 		JLabel lblVotreNom = new JLabel("Votre nom: ");
