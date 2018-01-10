@@ -30,6 +30,7 @@ public class JoueurPhysique extends Joueur {
 		for (int i = 0; i < sesCartes.size(); i++) {
 			System.out.println(i + 1 + " : " + sesCartes.get(i));
 		}
+		choisirUneCarteC(laManche);
 	}
 	
 	public void afficherCartesG() {

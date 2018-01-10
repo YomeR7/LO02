@@ -55,15 +55,9 @@ public class InterfaceMenu {
 		lblParFlorianEsslinger.setBounds(131, 290, 265, 29);
 		frame.getContentPane().add(lblParFlorianEsslinger);
 		
-		JButton btnNewButton = new JButton("Charger Partie");
-		btnNewButton.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		btnNewButton.setBounds(172, 176, 175, 33);
-		frame.getContentPane().add(btnNewButton);
-		
 		JButton btnNouvellePartie = new JButton("Nouvelle Partie");
-		
 		btnNouvellePartie.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		btnNouvellePartie.setBounds(172, 105, 175, 33);
+		btnNouvellePartie.setBounds(172, 150, 175, 33);
 		frame.getContentPane().add(btnNouvellePartie);
 		
 		btnNouvellePartie.addActionListener(new ActionListener() {

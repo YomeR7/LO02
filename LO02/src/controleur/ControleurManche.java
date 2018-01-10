@@ -13,14 +13,6 @@ import main.Manche;
 public class ControleurManche {
 
 	public ControleurManche(JButton[] cartesJ, JoueurPhysique moi, JFrame frame, Manche laManche,JButton piocher) {
-		piocher.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				System.out.println("PIOCHER");
-				moi.getSesCartes().add(laManche.getLePaquet().piocherUneCarte());
-				moi.setAttenteVue(false);
-				frame.repaint();
-			}
-		});
 		for (int i = 0; i < cartesJ.length; i++) {
 			int ind = i;
 			cartesJ[ind].addActionListener(new ActionListener() {

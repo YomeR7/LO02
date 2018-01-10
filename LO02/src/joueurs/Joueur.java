@@ -221,4 +221,11 @@ public abstract class Joueur extends Observable implements Observer {
 			notifyObservers(arg);
 		}
 	}
+	
+	public void piocher() {
+		sesCartes.add(laManche.getLePaquet().piocherUneCarte());
+		setChanged();
+		String msg = nom + " pioche!";
+		notifyObservers(msg);
+	}
 }

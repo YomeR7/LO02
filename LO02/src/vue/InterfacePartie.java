@@ -177,8 +177,4 @@ public class InterfacePartie {
 		textField.setColumns(10);
 	}
 
-	public JFrame getFrame() {
-		// TODO Auto-generated method stub
-		return frame;
-	}
 }
