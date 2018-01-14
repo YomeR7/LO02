@@ -10,66 +10,152 @@ import jeu.Tas;
 import joueurs.*;
 import variante.*;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class Manche.
+ */
 public class Manche extends Observable implements Runnable {
 
+	/** The rnd. */
 	private byte sens = 1, rnd;
+	
+	/** The joueur en cours. */
 	private Joueur joueurEnCours;
+	
+	/** The sc. */
 	private Scanner sc;
+	
+	/** The nb manche. */
 	private static byte nbManche = 0;
+	
+	/** The variante manche. */
 	private Variante varianteManche;
+	
+	/** The le paquet. */
 	private Paquet lePaquet;
+	
+	/** The le tas. */
 	private Tas leTas;
+	
+	/** The les variantes. */
 	private HashMap<String, Variante> lesVariantes;
+	
+	/** The attente. */
 	private boolean attente = false;
 
+	/**
+	 * Gets the sens.
+	 *
+	 * @return the sens
+	 */
 	public byte getSens() {
 		return sens;
 	}
 
+	/**
+	 * Sets the sens.
+	 *
+	 * @param sens the new sens
+	 */
 	public void setSens(byte sens) {
 		this.sens = sens;
 	}
 
+	/**
+	 * Gets the joueur en cours.
+	 *
+	 * @return the joueur en cours
+	 */
 	public Joueur getJoueurEnCours() {
 		return joueurEnCours;
 	}
 
+	/**
+	 * Sets the joueur en cours.
+	 *
+	 * @param joueurEnCours the new joueur en cours
+	 */
 	public void setJoueurEnCours(Joueur joueurEnCours) {
 		this.joueurEnCours = joueurEnCours;
 	}
 
+	/**
+	 * Gets the variante manche.
+	 *
+	 * @return the variante manche
+	 */
 	public Variante getVarianteManche() {
 		return varianteManche;
 	}
 
+	/**
+	 * Sets the variante manche.
+	 *
+	 * @param nomManche the new variante manche
+	 */
 	public void setVarianteManche(String nomManche) {
 		varianteManche = lesVariantes.get(nomManche);
 	}
 
+	/**
+	 * Gets the nb manche.
+	 *
+	 * @return the nb manche
+	 */
 	public static byte getNbManche() {
 		return nbManche;
 	}
 
+	/**
+	 * Sets the nb manche.
+	 *
+	 * @param nbManche the new nb manche
+	 */
 	public static void setNbManche(byte nbManche) {
 		Manche.nbManche = nbManche;
 	}
 
+	/**
+	 * Gets the le paquet.
+	 *
+	 * @return the le paquet
+	 */
 	public Paquet getLePaquet() {
 		return lePaquet;
 	}
 
+	/**
+	 * Sets the le paquet.
+	 *
+	 * @param lePaquet the new le paquet
+	 */
 	public void setLePaquet(Paquet lePaquet) {
 		this.lePaquet = lePaquet;
 	}
 
+	/**
+	 * Gets the le tas.
+	 *
+	 * @return the le tas
+	 */
 	public Tas getLeTas() {
 		return leTas;
 	}
 
+	/**
+	 * Sets the le tas.
+	 *
+	 * @param leTas the new le tas
+	 */
 	public void setLeTas(Tas leTas) {
 		this.leTas = leTas;
 	}
 
+	/**
+	 * Commencer manche.
+	 *
+	 * @return the tas
+	 */
 	public Tas commencerManche() {
 		lePaquet = new Paquet(varianteManche);
 		lePaquet.melanger();
@@ -78,6 +164,9 @@ public class Manche extends Observable implements Runnable {
 		return leTas;
 	}
 
+	/**
+	 * Instantiates a new manche.
+	 */
 	public Manche() {
 
 		lesVariantes = new HashMap<String, Variante>();
@@ -90,6 +179,9 @@ public class Manche extends Observable implements Runnable {
 		nbManche++;
 	}
 
+	/**
+	 * Jouer tour G.
+	 */
 	public void jouerTourG() {
 		joueurEnCours.trierCartes();
 		joueurEnCours.afficherCartesG();
@@ -105,6 +197,9 @@ public class Manche extends Observable implements Runnable {
 		}
 	}
 
+	/**
+	 * Jouer tour.
+	 */
 	public void jouerTour() {
 		// TODO Auto-generated method stub
 
@@ -125,11 +220,19 @@ public class Manche extends Observable implements Runnable {
 		}
 	}
 
+	/**
+	 * Gets the joueur suivant.
+	 *
+	 * @return the joueur suivant
+	 */
 	public Joueur getJoueurSuivant() {
 		return Partie.getInstance().getLesJoueurs()
 				.get((joueurEnCours.getId() + sens) % (Partie.getInstance().getLesJoueurs().size()));
 	}
 
+	/**
+	 * Manche finie.
+	 */
 	private void mancheFinie() {
 		// TODO Auto-generated method stub
 		System.out.println(joueurEnCours.getNom() + " a gagné la manche!\n");
@@ -151,6 +254,9 @@ public class Manche extends Observable implements Runnable {
 		notifyObservers("fin");
 	}
 
+	/**
+	 * Une carte.
+	 */
 	public void uneCarte() {
 		Scanner scc = new Scanner(System.in);
 		System.out.println(joueurEnCours.getNom() + " n'a plus qu'une carte!\nDis 'carte' ou 'contre carte'. ");
@@ -197,14 +303,27 @@ public class Manche extends Observable implements Runnable {
 		}
 	}
 
+	/**
+	 * Checks if is attente.
+	 *
+	 * @return true, if is attente
+	 */
 	public boolean isAttente() {
 		return attente;
 	}
 
+	/**
+	 * Sets the attente.
+	 *
+	 * @param attente the new attente
+	 */
 	public void setAttente(boolean attente) {
 		this.attente = attente;
 	}
 
+	/**
+	 * Changer joueur en cours.
+	 */
 	public void changerJoueurEnCours() {
 		try {
 			Thread.sleep(1000);
@@ -222,6 +341,9 @@ public class Manche extends Observable implements Runnable {
 		notifyObservers();
 	}
 
+	/* (non-Javadoc)
+	 * @see java.lang.Runnable#run()
+	 */
 	public void run() {
 		// TODO Auto-generated method stub
 		rnd = (byte) (Partie.getInstance().getLesJoueurs().size() * (Math.random()));

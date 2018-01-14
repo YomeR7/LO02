@@ -6,11 +6,21 @@ import java.util.Collections;
 import main.Partie;
 import variante.Variante;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class Paquet.
+ */
 public class Paquet {
 
+	/** The cartes. */
 	// private byte nbCarte = 52;
 	private ArrayList<Carte> cartes;
 
+	/**
+	 * Instantiates a new paquet.
+	 *
+	 * @param VarianteManche the variante manche
+	 */
 	public Paquet(Variante VarianteManche) {
 		super();
 
@@ -29,10 +39,16 @@ public class Paquet {
 		}
 	}
 
+	/**
+	 * Melanger.
+	 */
 	public void melanger() {
 		Collections.shuffle(cartes);
 	}
 
+	/**
+	 * Distribuer.
+	 */
 	public void distribuer() {
 		int carteParJoueur = 0;
 		if (Partie.getInstance().getLesJoueurs().size() >= 4) {
@@ -49,22 +65,40 @@ public class Paquet {
 		}
 	}
 
+	/**
+	 * Afficher cartes.
+	 */
 	public void afficherCartes() {
 		for (int i = 0; i < cartes.size(); i++) {
 			System.out.println(cartes.get(i));
 		}
 	}
 
+	/**
+	 * Piocher une carte.
+	 *
+	 * @return the carte
+	 */
 	public Carte piocherUneCarte() {
 		Carte cartePioche = cartes.get(0);
 		cartes.remove(0);
 		return cartePioche;
 	}
 
+	/**
+	 * Gets the cartes.
+	 *
+	 * @return the cartes
+	 */
 	public ArrayList<Carte> getCartes() {
 		return cartes;
 	}
 
+	/**
+	 * Sets the cartes.
+	 *
+	 * @param cartes the new cartes
+	 */
 	public void setCartes(ArrayList<Carte> cartes) {
 		this.cartes = cartes;
 	}

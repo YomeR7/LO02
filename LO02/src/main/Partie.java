@@ -10,6 +10,7 @@ import strategie.Aggresif;
 import strategie.Difficulte;
 import strategie.Facile;
 
+// TODO: Auto-generated Javadoc
 /**
  * La classe représente la mise en place d'une partie de 8 américain.
  * 
@@ -19,10 +20,19 @@ import strategie.Facile;
 
 public class Partie {
 
+	/** The nb IA. */
 	private byte nbIA;
+	
+	/** The MAX score. */
 	private int MAXScore = 0;
+	
+	/** The sc. */
 	private Scanner sc;
+	
+	/** The les joueurs. */
 	private ArrayList<Joueur> lesJoueurs;
+	
+	/** The les difficultes. */
 	private ArrayList<Difficulte> lesDifficultes;
 
 	/**
@@ -62,45 +72,96 @@ public class Partie {
 	private Partie() {
 	}
 
+	/**
+	 * Update P.
+	 *
+	 * @param lesJoueurs the les joueurs
+	 */
 	public void updateP(ArrayList<Joueur> lesJoueurs) {
 		this.nbIA = (byte) lesJoueurs.size();
 		this.lesJoueurs = lesJoueurs;
 	}
 
+	/**
+	 * Gets the nb IA.
+	 *
+	 * @return the nb IA
+	 */
 	public int getNbIA() {
 		return nbIA;
 	}
 
+	/**
+	 * Sets the nb IA.
+	 *
+	 * @param nbIA the new nb IA
+	 */
 	public void setNbIA(byte nbIA) {
 		this.nbIA = nbIA;
 	}
 
+	/**
+	 * Gets the single instance of Partie.
+	 *
+	 * @return single instance of Partie
+	 */
 	public static Partie getInstance() {
 		return PARTIE;
 	}
 
+	/** The partie. */
 	private static Partie PARTIE = new Partie();
 
+	/**
+	 * Gets the MAX score.
+	 *
+	 * @return the MAX score
+	 */
 	public int getMAXScore() {
 		return MAXScore;
 	}
 
+	/**
+	 * Sets the MAX score.
+	 *
+	 * @param mAXScore the new MAX score
+	 */
 	public void setMAXScore(int mAXScore) {
 		MAXScore = mAXScore;
 	}
 
+	/**
+	 * Gets the les joueurs.
+	 *
+	 * @return the les joueurs
+	 */
 	public ArrayList<Joueur> getLesJoueurs() {
 		return lesJoueurs;
 	}
 
+	/**
+	 * Sets the les joueurs.
+	 *
+	 * @param lesJoueurs the new les joueurs
+	 */
 	public void setLesJoueurs(ArrayList<Joueur> lesJoueurs) {
 		this.lesJoueurs = lesJoueurs;
 	}
 
+	/**
+	 * Nouvelle manche.
+	 *
+	 * @return the manche
+	 */
 	public Manche nouvelleManche() {
 		return new Manche();
 	}
 
+	/**
+	 * Lancer partie.
+	 *
+	 * @return the manche
+	 */
 	public Manche lancerPartie() {
 		if (MAXScore <= 100) {
 			return new Manche();

@@ -5,8 +5,15 @@ import java.util.Observable;
 import joueurs.Joueur;
 import main.Manche;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class EffetPiocher3.
+ */
 public class EffetPiocher3 extends Observable implements Effet {
 
+	/* (non-Javadoc)
+	 * @see effet.Effet#lancer(joueurs.Joueur, main.Manche)
+	 */
 	@Override
 	public void lancer(Joueur leJoueur, Manche laManche) {
 		// TODO Auto-generated method stub

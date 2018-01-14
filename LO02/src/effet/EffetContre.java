@@ -10,13 +10,25 @@ import main.Manche;
 import java.util.ArrayList;
 import java.util.Observable;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class EffetContre.
+ */
 public class EffetContre extends Observable implements Effet,Runnable {
 // il reste toujours a regler l'erreur quand on ne choisi la bonne couleur (choixCouleur > 3 
 	
-	private String nCouleur;
+	/** The n couleur. */
+private String nCouleur;
+	
+	/** The attente. */
 	private boolean attente;
+	
+	/** The couleurs. */
 	private ArrayList<String> couleurs;
 	
+	/**
+	 * Instantiates a new effet contre.
+	 */
 	public EffetContre() {
 		super();
 		couleurs = new ArrayList<String>();
@@ -26,22 +38,45 @@ public class EffetContre extends Observable implements Effet,Runnable {
 		couleurs.add("Trefle");
 	}
 	
+	/**
+	 * Gets the n couleur.
+	 *
+	 * @return the n couleur
+	 */
 	public String getnCouleur() {
 		return nCouleur;
 	}
 
+	/**
+	 * Sets the n couleur.
+	 *
+	 * @param nCouleur the new n couleur
+	 */
 	public void setnCouleur(String nCouleur) {
 		this.nCouleur = nCouleur;
 	}
 
+	/**
+	 * Checks if is attente.
+	 *
+	 * @return true, if is attente
+	 */
 	public boolean isAttente() {
 		return attente;
 	}
 
+	/**
+	 * Sets the attente.
+	 *
+	 * @param attente the new attente
+	 */
 	public void setAttente(boolean attente) {
 		this.attente = attente;
 	}
 
+	/* (non-Javadoc)
+	 * @see effet.Effet#lancer(joueurs.Joueur, main.Manche)
+	 */
 	public void lancer(Joueur leJoueur, Manche laManche) {
 		this.addObserver(leJoueur);
 		setChanged();
@@ -71,6 +106,9 @@ public class EffetContre extends Observable implements Effet,Runnable {
 
 	}
 
+	/* (non-Javadoc)
+	 * @see java.lang.Runnable#run()
+	 */
 	@Override
 	public void run() {
 		System.out.println("\nChoisis une nouvelle couleur! Ecris en toute lettre:\n' 0 : Carreau' ou ' 1 : Coeur' ou '2 : Pique' ou ' 3 :Trefle'");

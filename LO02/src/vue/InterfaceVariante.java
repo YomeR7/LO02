@@ -21,21 +21,31 @@ import java.awt.event.ActionEvent;
 import javax.swing.Action;
 import java.awt.event.ActionListener;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class InterfaceVariante.
+ */
 public class InterfaceVariante {
 
+	/** The frame. */
 	private JFrame frame;
+	
+	/** The list. */
 	private JList<Object> list;
+	
+	/** The btn choisir variante. */
 	private JButton btnChoisirVariante;
+	
+	/** The manche. */
 	private Manche manche;
 
 	/**
-	 * Launch the application.
-	 */
-
-
-	/**
 	 * Create the application.
+	 *
+	 * @param aFrame the a frame
+	 * @param manche the manche
 	 */
+
 	public InterfaceVariante(JFrame aFrame,Manche manche) {
 		this.manche = manche;
 		this.frame = aFrame;
@@ -89,6 +99,11 @@ public class InterfaceVariante {
 		frame.getContentPane().add(btnChoisirVariante);
 	}
 
+	/**
+	 * Gets the frame.
+	 *
+	 * @return the frame
+	 */
 	public JFrame getFrame() {
 		// TODO Auto-generated method stub
 		return frame;

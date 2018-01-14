@@ -7,9 +7,18 @@ import joueurs.Joueur;
 import joueurs.JoueurPhysique;
 import main.Manche;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class EffetPiocher2ouContre.
+ */
 public class EffetPiocher2ouContre implements Effet {
 
+	/** The nb as. */
 	private static byte nbAs = 1;
+	
+	/* (non-Javadoc)
+	 * @see effet.Effet#lancer(joueurs.Joueur, main.Manche)
+	 */
 	@Override
 	public void lancer(Joueur leJoueur, Manche laManche) {
 		// TODO Auto-generated method stub

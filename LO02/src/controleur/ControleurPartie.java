@@ -1,3 +1,6 @@
+/*
+ * 
+ */
 package controleur;
 
 import java.awt.event.ActionEvent;
@@ -20,8 +23,21 @@ import strategie.Aggresif;
 import strategie.Facile;
 import vue.InterfaceVariante;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class ControleurPartie.
+ */
 public class ControleurPartie {
 	
+	/**
+	 * Instantiates a new controleur partie.
+	 *
+	 * @param IAs the i as
+	 * @param diffs the diffs
+	 * @param lancer the lancer
+	 * @param textField the text field
+	 * @param frame the frame
+	 */
 	public ControleurPartie(HashMap<String, JCheckBox> IAs, HashMap<String, JRadioButton> diffs 
 			,JButton lancer, JTextField textField, JFrame frame) {
 		

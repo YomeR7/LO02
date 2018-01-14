@@ -6,8 +6,15 @@ import effet.EffetPiocher2;
 import effet.EffetRejouer;
 import variante.Variante;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class VarianteCarteMaou.
+ */
 public class VarianteCarteMaou extends Variante {
 
+	/**
+	 * Instantiates a new variante carte maou.
+	 */
 	public VarianteCarteMaou() {
 		super();
 		this.nom = "Carte et Maou";

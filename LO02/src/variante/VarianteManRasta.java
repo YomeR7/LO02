@@ -6,8 +6,15 @@ import effet.EffetPiocher2;
 import effet.EffetPiocher2ouContre;
 import effet.EffetRejouer;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class VarianteManRasta.
+ */
 public class VarianteManRasta extends Variante{
 
+	/**
+	 * Instantiates a new variante man rasta.
+	 */
 	public VarianteManRasta() {
 		super();
 		this.nom = "Man et Resta simplifié";

@@ -17,31 +17,47 @@ import java.awt.event.ActionListener;
 import java.util.HashMap;
 import java.awt.event.ActionEvent;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class InterfacePartie.
+ */
 public class InterfacePartie {
 
+	/** The frame. */
 	private JFrame frame;
+	
+	/** The text field. */
 	private JTextField textField;
+	
+	/** The I as. */
 	private HashMap<String, JCheckBox> IAs;
+	
+	/** The diffs. */
 	private HashMap<String,JRadioButton> diffs;
+	
+	/** The lancer. */
 	private JButton lancer;
+	
 	/**
 	 * Launch the application.
-	 *
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					InterfacePartie window = new InterfacePartie();
-					window.frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
-
-	/**
+	 * 
+	 * 	public static void main(String[] args) {
+	 * 		EventQueue.invokeLater(new Runnable() {
+	 * 			public void run() {
+	 * 				try {
+	 * 					InterfacePartie window = new InterfacePartie();
+	 * 					window.frame.setVisible(true);
+	 * 				} catch (Exception e) {
+	 * 					e.printStackTrace();
+	 * 				}
+	 * 			}
+	 * 		});
+	 * 	}
+	 * 
+	 * 	/**
 	 * Create the application.
+	 *
+	 * @param aFrame the a frame
 	 */
 	public InterfacePartie(JFrame aFrame) {
 		this.frame = aFrame;

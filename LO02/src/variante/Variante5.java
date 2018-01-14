@@ -6,8 +6,15 @@ import effet.EffetPiocher2ouContre;
 import effet.EffetRejouer;
 import variante.Variante;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class Variante5.
+ */
 public class Variante5 extends Variante {
 	
+	/**
+	 * Instantiates a new variante 5.
+	 */
 	public Variante5() {
 		super();
 		this.nom = "5";

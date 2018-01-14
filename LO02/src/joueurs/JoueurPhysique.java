@@ -9,23 +9,47 @@ import jeu.Paquet;
 import jeu.Tas;
 import main.Manche;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class JoueurPhysique.
+ */
 public class JoueurPhysique extends Joueur {
 	
+	/** The attente vue. */
 	private boolean attenteVue = true;
 
+	/**
+	 * Checks if is attente vue.
+	 *
+	 * @return true, if is attente vue
+	 */
 	public boolean isAttenteVue() {
 		return attenteVue;
 	}
 
+	/**
+	 * Sets the attente vue.
+	 *
+	 * @param attenteVue the new attente vue
+	 */
 	public void setAttenteVue(boolean attenteVue) {
 		this.attenteVue = attenteVue;
 	}
 
+	/**
+	 * Instantiates a new joueur physique.
+	 *
+	 * @param nom the nom
+	 * @param id the id
+	 */
 	public JoueurPhysique(String nom, byte id) {
 		super(nom, id);
 		setCarteChoisi(new Carte());
 	}
 
+	/* (non-Javadoc)
+	 * @see joueurs.Joueur#afficherCartes()
+	 */
 	public void afficherCartes() {
 		for (int i = 0; i < sesCartes.size(); i++) {
 			System.out.println(i + 1 + " : " + sesCartes.get(i));
@@ -33,9 +57,15 @@ public class JoueurPhysique extends Joueur {
 		choisirUneCarteC(laManche);
 	}
 	
+	/* (non-Javadoc)
+	 * @see joueurs.Joueur#afficherCartesG()
+	 */
 	public void afficherCartesG() {
 	}
 
+	/* (non-Javadoc)
+	 * @see joueurs.Joueur#choisirUneCarte(main.Manche)
+	 */
 	public void choisirUneCarte(Manche laManche) {
 		super.choisirUneCarte(laManche);
 		setChanged();
@@ -51,6 +81,11 @@ public class JoueurPhysique extends Joueur {
 		this.setAttenteVue(true);
 	}
 	
+	/**
+	 * Choisir une carte C.
+	 *
+	 * @param laManche the la manche
+	 */
 	public void choisirUneCarteC(Manche laManche) {
 		// TODO Auto-generated method stub
 		super.choisirUneCarte(laManche);
@@ -73,6 +108,9 @@ public class JoueurPhysique extends Joueur {
 
 	}
 
+	/* (non-Javadoc)
+	 * @see joueurs.Joueur#trierCartes()
+	 */
 	public void trierCartes() {
 		Collections.sort(sesCartes, new Comparator<Carte>() {
 			@Override
@@ -87,6 +125,9 @@ public class JoueurPhysique extends Joueur {
 		});
 	}
 
+	/* (non-Javadoc)
+	 * @see joueurs.Joueur#finirTour()
+	 */
 	public void finirTour() {
 		// TODO Auto-generated method stub
 		super.finirTour();

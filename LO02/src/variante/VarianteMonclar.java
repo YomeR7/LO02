@@ -7,8 +7,15 @@ import effet.EffetPiocher;
 import effet.EffetPiocher3;
 import effet.EffetRejouer;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class VarianteMonclar.
+ */
 public class VarianteMonclar extends Variante {
 
+	/**
+	 * Instantiates a new variante monclar.
+	 */
 	public VarianteMonclar() {
 		super();
 		this.nom = "Monclar";

@@ -20,32 +20,66 @@ import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class InterfaceManche.
+ */
 public class InterfaceManche implements Observer {
 
+	/** The frame. */
 	private JFrame frame;
+	
+	/** The manche. */
 	private Manche manche;
+	
+	/** The moi. */
 	private Joueur moi;
+	
+	/** The le tas. */
 	private Tas leTas;
+	
+	/** The couleurs. */
 	private JButton[] cartesJ,couleurs;
+	
+	/** The choisir. */
 	private JLabel carteV,tourDe,choisir;
+	
+	/** The controleur. */
 	private ControleurManche controleur;
+	
+	/** The ias. */
 	private JLabel[] ias;
+	
+	/** The attente. */
 	private Boolean attente = false;
+	
+	/** The piocher. */
 	private JButton piocher;
+	
 	/**
 	 * Launch the application.
+	 *
+	 * @return the attente
 	 */
 	
 	public Boolean getAttente() {
 		return attente;
 	}
 
+	/**
+	 * Sets the attente.
+	 *
+	 * @param attente the new attente
+	 */
 	public void setAttente(Boolean attente) {
 		this.attente = attente;
 	}
 
 	/**
 	 * Create the application.
+	 *
+	 * @param frame the frame
+	 * @param manche the manche
 	 */
 	public InterfaceManche(JFrame frame, Manche manche) {
 		
@@ -101,6 +135,9 @@ public class InterfaceManche implements Observer {
 		frame.getContentPane().add(piocher);
 	}
 
+	/* (non-Javadoc)
+	 * @see java.util.Observer#update(java.util.Observable, java.lang.Object)
+	 */
 	@Override
 	public void update(Observable o, Object arg) {
 		// TODO Auto-generated method stub
@@ -176,6 +213,9 @@ public class InterfaceManche implements Observer {
 		}
 	}
 	
+	/**
+	 * Afficher couleurs.
+	 */
 	public void afficherCouleurs() {
 		couleurs = new JButton[4];
 		couleurs[0] = new JButton("Carreau");
@@ -195,6 +235,9 @@ public class InterfaceManche implements Observer {
 		this.frame.repaint();
 	}
 	
+	/**
+	 * Affichage cartes.
+	 */
 	public void affichageCartes() {
 		moi.trierCartes();
 		if (cartesJ instanceof JButton[]) {
@@ -214,6 +257,9 @@ public class InterfaceManche implements Observer {
 		
 	}
 	
+	/**
+	 * Affichage I as.
+	 */
 	public void affichageIAs() {
 		for (int i = 0; i < (Partie.getInstance().getLesJoueurs().size()-1); i++) {
 			JLabel ia = new JLabel(Partie.getInstance().getLesJoueurs().get(i).getNom() + ": " + Partie.getInstance().getLesJoueurs().get(i).getSesCartes().size() + " carte(s)");

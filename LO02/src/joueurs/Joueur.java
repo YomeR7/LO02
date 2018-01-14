@@ -12,18 +12,45 @@ import jeu.Paquet;
 import jeu.Tas;
 import main.Manche;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class Joueur.
+ */
 public abstract class Joueur extends Observable implements Observer {
 
+	/** The id. */
 	private byte id;
+	
+	/** The ses cartes. */
 	protected ArrayList<Carte> sesCartes;
+	
+	/** The nom. */
 	private String nom;
+	
+	/** The score. */
 	private int score;
+	
+	/** The carte choisi. */
 	protected Carte carteChoisi;
+	
+	/** The num carte. */
 	protected int numCarte;
+	
+	/** The effet actif. */
 	private boolean effetActif = false;
+	
+	/** The la manche. */
 	protected Manche laManche;
+	
+	/** The l effet. */
 	private Effet lEffet;
 
+	/**
+	 * Instantiates a new joueur.
+	 *
+	 * @param nom the nom
+	 * @param id the id
+	 */
 	public Joueur(String nom, byte id) {
 		super();
 		this.carteChoisi = new Carte();
@@ -32,50 +59,108 @@ public abstract class Joueur extends Observable implements Observer {
 		this.id = id;
 	}
 
+	/**
+	 * Gets the score.
+	 *
+	 * @return the score
+	 */
 	public int getScore() {
 		return score;
 	}
 
+	/**
+	 * Sets the score.
+	 *
+	 * @param score the new score
+	 */
 	public void setScore(int score) {
 		this.score = score;
 	}
 
+	/**
+	 * Gets the nom.
+	 *
+	 * @return the nom
+	 */
 	public String getNom() {
 		return nom;
 	}
 
+	/**
+	 * Sets the nom.
+	 *
+	 * @param nom the new nom
+	 */
 	public void setNom(String nom) {
 		this.nom = nom;
 	}
 
+	/**
+	 * Gets the carte choisi.
+	 *
+	 * @return the carte choisi
+	 */
 	public Carte getCarteChoisi() {
 		return carteChoisi;
 	}
 
+	/**
+	 * Sets the carte choisi.
+	 *
+	 * @param carteChoisi the new carte choisi
+	 */
 	public void setCarteChoisi(Carte carteChoisi) {
 		this.carteChoisi = carteChoisi;
 	}
 
+	/**
+	 * Checks if is effet actif.
+	 *
+	 * @return true, if is effet actif
+	 */
 	public boolean isEffetActif() {
 		return effetActif;
 	}
 
+	/**
+	 * Sets the effet actif.
+	 *
+	 * @param effetActif the new effet actif
+	 */
 	public void setEffetActif(boolean effetActif) {
 		this.effetActif = effetActif;
 	}
 
+	/**
+	 * Gets the num carte.
+	 *
+	 * @return the num carte
+	 */
 	public int getNumCarte() {
 		return numCarte;
 	}
 
+	/**
+	 * Sets the num carte.
+	 *
+	 * @param numCarte the new num carte
+	 */
 	public void setNumCarte(int numCarte) {
 		this.numCarte = numCarte;
 	}
 
+	/**
+	 * Choisir une carte.
+	 *
+	 * @param laManche the la manche
+	 */
 	public void choisirUneCarte(Manche laManche) {
 		this.laManche = laManche;
 	}
 	
+	/**
+	 * Poser carte.
+	 */
 	public void poserCarte() {
 
 		if (comparerCarte()) {
@@ -99,22 +184,47 @@ public abstract class Joueur extends Observable implements Observer {
 		}
 	}
 
+	/**
+	 * Gets the ses cartes.
+	 *
+	 * @return the ses cartes
+	 */
 	public ArrayList<Carte> getSesCartes() {
 		return sesCartes;
 	}
 
+	/**
+	 * Sets the ses cartes.
+	 *
+	 * @param sesCartes the new ses cartes
+	 */
 	public void setSesCartes(ArrayList<Carte> sesCartes) {
 		this.sesCartes = sesCartes;
 	}
 
+	/**
+	 * Gets the l effet.
+	 *
+	 * @return the l effet
+	 */
 	public Effet getlEffet() {
 		return lEffet;
 	}
 
+	/**
+	 * Sets the l effet.
+	 *
+	 * @param lEffet the new l effet
+	 */
 	public void setlEffet(Effet lEffet) {
 		this.lEffet = lEffet;
 	}
 
+	/**
+	 * Comparer carte.
+	 *
+	 * @return true, if successful
+	 */
 	public boolean comparerCarte() {
 		if (carteChoisi.getValeur() == laManche.getLeTas().getCarteVisible().getValeur()
 				|| carteChoisi.getCouleur() == laManche.getLeTas().getCarteVisible().getCouleur() 
@@ -125,11 +235,19 @@ public abstract class Joueur extends Observable implements Observer {
 		}
 	}
 
+	/**
+	 * Gets the id.
+	 *
+	 * @return the id
+	 */
 	public byte getId() {
 		// TODO Auto-generated method stub
 		return this.id;
 	}
 
+	/**
+	 * Compter ses points.
+	 */
 	public void compterSesPoints() {
 		// TODO Auto-generated method stub
 		int scoreManche = 0;
@@ -140,12 +258,26 @@ public abstract class Joueur extends Observable implements Observer {
 		score += scoreManche;
 	}
 
+	/**
+	 * Trier cartes.
+	 */
 	public abstract void trierCartes();
 
+	/**
+	 * Afficher cartes.
+	 */
 	public abstract void afficherCartes();
 	
+	/**
+	 * Afficher cartes G.
+	 */
 	public abstract void afficherCartesG();
 	
+	/**
+	 * Appliquer effet.
+	 *
+	 * @param laManche the la manche
+	 */
 	public void appliquerEffet(Manche laManche) {
 		lEffet = laManche.getVarianteManche().getValeurEffetDefense().get(carteChoisi.getValeur());
 		setEffetActif(false);
@@ -155,6 +287,13 @@ public abstract class Joueur extends Observable implements Observer {
 		lEffet.lancer(this,laManche);
 	}
 
+	/**
+	 * Subir effet.
+	 *
+	 * @param leTas the le tas
+	 * @param lePaquet the le paquet
+	 * @param laManche the la manche
+	 */
 	public void subirEffet(Tas leTas, Paquet lePaquet, Manche laManche) {
 		System.out.println(this.nom + " subit un effet!");
 			if (laManche.getVarianteManche().getValeurEffetDefense().containsValue(new EffetContre())) {
@@ -168,6 +307,12 @@ public abstract class Joueur extends Observable implements Observer {
 		lEffet.lancer(this,laManche);
 	}
 
+	/**
+	 * La carte contre.
+	 *
+	 * @param valeur the valeur
+	 * @return the carte
+	 */
 	private Carte laCarteContre(String valeur) {
 		// TODO Auto-generated method stub
 		boolean trouve = false;
@@ -183,6 +328,11 @@ public abstract class Joueur extends Observable implements Observer {
 		return carteTrouvee;
 	}
 
+	/**
+	 * Valeurs cartes.
+	 *
+	 * @return the hash set
+	 */
 	private HashSet<String> valeursCartes() {
 		// TODO Auto-generated method stub
 		HashSet<String> vals = new HashSet<String>();
@@ -192,6 +342,11 @@ public abstract class Joueur extends Observable implements Observer {
 		return vals;
 	}
 
+	/**
+	 * Une carte est choisi.
+	 *
+	 * @return true, if successful
+	 */
 	public boolean uneCarteEstChoisi() {
 		if (this.carteChoisi.equals(laManche.getLeTas().getCarteVisible())) {
 			return true;
@@ -201,6 +356,12 @@ public abstract class Joueur extends Observable implements Observer {
 		
 	}
 
+	/**
+	 * Possede.
+	 *
+	 * @param valeur the valeur
+	 * @return true, if successful
+	 */
 	public boolean possede(String valeur) {
 		// TODO Auto-generated method stub
 		if (sesCartes.contains(new Carte(valeur))) {
@@ -210,11 +371,17 @@ public abstract class Joueur extends Observable implements Observer {
 		}
 	};
 	
+	/**
+	 * Finir tour.
+	 */
 	public void finirTour() {
 		// TODO Auto-generated method stub
 		poserCarte();
 	}
 
+	/* (non-Javadoc)
+	 * @see java.util.Observer#update(java.util.Observable, java.lang.Object)
+	 */
 	public void update(Observable o, Object arg) {
 		if (o instanceof Effet) {
 			setChanged();
@@ -222,6 +389,9 @@ public abstract class Joueur extends Observable implements Observer {
 		}
 	}
 	
+	/**
+	 * Piocher.
+	 */
 	public void piocher() {
 		sesCartes.add(laManche.getLePaquet().piocherUneCarte());
 		setChanged();
