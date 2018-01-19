@@ -271,11 +271,6 @@ public abstract class Joueur extends Observable implements Observer {
 	 * Trier cartes.
 	 */
 	public abstract void trierCartes();
-
-	/**
-	 * Afficher cartes.
-	 */
-	public abstract void afficherCartes();
 	
 	/**
 	 * Appliquer effet.
