@@ -160,6 +160,11 @@ public abstract class Joueur extends Observable implements Observer {
 	
 	/**
 	 * Poser carte.
+	 * 
+	 * Cette methode permet de poser une carte en fonction de la methode comparerCarte 
+	 * Elle se relance tant que la carte choisi est invalide
+	 * Elle active aussi les effet en fonction de leur type (Defense ou Attaque) 
+	 * 
 	 */
 	public void poserCarte() {
 
@@ -224,6 +229,9 @@ public abstract class Joueur extends Observable implements Observer {
 	 * Comparer carte.
 	 *
 	 * @return true, if successful
+	 * Cette methode retourne true si la carte à poser choisie est un 8, ou est
+	 * de la meme couleur, de la valeur que la carte visible du tas
+	 *
 	 */
 	public boolean comparerCarte() {
 		if (carteChoisi.getValeur() == laManche.getLeTas().getCarteVisible().getValeur()
@@ -247,6 +255,7 @@ public abstract class Joueur extends Observable implements Observer {
 
 	/**
 	 * Compter ses points.
+	 * Cette methode compte les points du Joueur en question pour le mode de comptage négatif
 	 */
 	public void compterSesPoints() {
 		// TODO Auto-generated method stub
@@ -277,6 +286,8 @@ public abstract class Joueur extends Observable implements Observer {
 	 * Appliquer effet.
 	 *
 	 * @param laManche the la manche
+	 * Cette methode permet d'appliquer l'effet Defensif associé a la carte posée
+	 * 
 	 */
 	public void appliquerEffet(Manche laManche) {
 		lEffet = laManche.getVarianteManche().getValeurEffetDefense().get(carteChoisi.getValeur());
@@ -293,6 +304,8 @@ public abstract class Joueur extends Observable implements Observer {
 	 * @param leTas the le tas
 	 * @param lePaquet the le paquet
 	 * @param laManche the la manche
+	 * Cette methode permet d'appliquer l'effet d'attaque associé a la carte posée
+	 * 
 	 */
 	public void subirEffet(Tas leTas, Paquet lePaquet, Manche laManche) {
 		System.out.println(this.nom + " subit un effet!");

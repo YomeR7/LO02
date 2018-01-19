@@ -15,7 +15,6 @@ import java.util.Observable;
  * The Class EffetContre.
  */
 public class EffetContre extends Observable implements Effet,Runnable {
-// il reste toujours a regler l'erreur quand on ne choisi la bonne couleur (choixCouleur > 3 
 	
 	/** The n couleur. */
 private String nCouleur;

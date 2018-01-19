@@ -20,6 +20,8 @@ public class JoueurArtificiel extends Joueur {
 	 * @param nom the nom
 	 * @param id the id
 	 * @param niveau the niveau
+	 * Cette methode crée un joueur IA en lui associant un nom et un niveau de Difficulté 
+	 *
 	 */
 	public JoueurArtificiel(String nom, byte id, Difficulte niveau) {
 		super(nom, id);

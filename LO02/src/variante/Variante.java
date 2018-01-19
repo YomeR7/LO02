@@ -6,6 +6,8 @@ import effet.Effet;
 // TODO: Auto-generated Javadoc
 /**
  * The Class Variante.
+ * Cette classe et ses classes filles va gérer les differentes variante du jeu 
+ * Chaque variante differe par les effet associé au cartes 
  */
 public class Variante {
 	
@@ -17,6 +19,8 @@ public class Variante {
 
 	/**
 	 * Instantiates a new variante.
+	 * Constructeur, permet de lier une carte a un effet 
+	 * Ce constructeur est redefini dans toute les classes héritant de Variante
 	 */
 	public Variante() {
 		valeurEffetDefense = new HashMap<String, Effet>();

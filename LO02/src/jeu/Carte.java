@@ -31,7 +31,7 @@ public class Carte {
 	 * @param couleur the couleur
 	 * @param points the points
 	 */
-	//surcharge quand le mode de comptage est en négatif, + affichage comptage des points
+	
 	public Carte(String valeur, String couleur, int points) {
 		this.valeur = valeur;
 		this.couleur = couleur;
