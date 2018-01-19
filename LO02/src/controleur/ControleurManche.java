@@ -27,7 +27,6 @@ public class ControleurManche {
 	 * @param piocher bouton pour piocher
 	 */
 	public ControleurManche(JButton[] cartesJ, JoueurPhysique moi, JFrame frame, Manche laManche,JButton piocher) {
-		System.out.println("IHIIHI");
 		for (int i = 0; i < cartesJ.length; i++) {
 			int ind = i;
 			cartesJ[ind].addActionListener(new ActionListener() {

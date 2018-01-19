@@ -144,10 +144,7 @@ public class InterfaceManche implements Observer {
 	@Override
 	public void update(Observable o, Object arg) {
 		// TODO Auto-generated method stub
-		System.out.println("COME ON");
-		System.out.println(o);
 		if (o instanceof JoueurPhysique) {
-			System.out.println("T ES LA?");
 			controleur = new ControleurManche(cartesJ,(JoueurPhysique) moi,frame,manche,piocher);
 			if (!attente) {
 				new VueTexte((JoueurPhysique) moi);	

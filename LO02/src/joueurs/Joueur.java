@@ -289,8 +289,6 @@ public abstract class Joueur extends Observable implements Observer {
 		lEffet = laManche.getVarianteManche().getValeurEffetDefense().get(carteChoisi.getValeur());
 		setEffetActif(false);
 		setCarteChoisi(new Carte());
-		System.out.println(lEffet);
-		System.out.println("effet actif??? " + isEffetActif());
 		lEffet.lancer(this,laManche);
 	}
 
@@ -409,4 +407,6 @@ public abstract class Joueur extends Observable implements Observer {
 		String msg = nom + " pioche!";
 		notifyObservers(msg);
 	}
+
+	public abstract void afficherCartesG();
 }

@@ -120,18 +120,18 @@ public class Manche extends Observable implements Runnable {
 	}
 
 	/**
-	 * Jouer tour Graphique et en console.
+	 * Jouer tour Graphique et console
 	 */
 	public void jouerTourG() {
 		joueurEnCours.trierCartes();
-		joueurEnCours.afficherCartes();
+		joueurEnCours.afficherCartesG();
 		joueurEnCours.choisirUneCarte(this);
 		if (joueurEnCours.uneCarteEstChoisi() && joueurEnCours.isEffetActif()) {
 			joueurEnCours.appliquerEffet(this);
 		}
-		if (joueurEnCours.getSesCartes().size() > 1) {
+		if (joueurEnCours.getSesCartes().size() > 0) {
 			this.changerJoueurEnCours();
-		} else if (joueurEnCours.getSesCartes().size() == 0) {
+		} else {
 			mancheFinie();
 		}
 	}

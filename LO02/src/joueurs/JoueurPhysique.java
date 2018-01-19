@@ -43,7 +43,7 @@ public class JoueurPhysique extends Joueur {
 		super(nom, id);
 		setCarteChoisi(new Carte());
 	}
-	
+	public void affichercartesG() {}
 	/**
 	 * La méthode afficherCartes permet d'afficher dans console ces cartes puis choisir une carte.
 	 */
@@ -125,6 +125,12 @@ public class JoueurPhysique extends Joueur {
 		// TODO Auto-generated method stub
 		super.finirTour();
 		this.setAttenteVue(false);
+	}
+
+	@Override
+	public void afficherCartesG() {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

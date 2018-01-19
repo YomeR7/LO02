@@ -51,4 +51,10 @@ public class JoueurArtificiel extends Joueur {
 		
 	}
 
+	@Override
+	public void afficherCartesG() {
+		// TODO Auto-generated method stub
+		
+	}
+
 }
