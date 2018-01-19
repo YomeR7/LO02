@@ -12,44 +12,43 @@ import jeu.Paquet;
 import jeu.Tas;
 import main.Manche;
 
-// TODO: Auto-generated Javadoc
 /**
- * The Class Joueur.
+ * La classe Joueur.
  */
 public abstract class Joueur extends Observable implements Observer {
 
-	/** The id. */
+	/** ID du joueur. */
 	private byte id;
 	
-	/** The ses cartes. */
+	/** Ses cartes. */
 	protected ArrayList<Carte> sesCartes;
 	
-	/** The nom. */
+	/** Son nom. */
 	private String nom;
 	
-	/** The score. */
+	/** son score. */
 	private int score;
 	
-	/** The carte choisi. */
+	/** sa carte choisi. */
 	protected Carte carteChoisi;
 	
-	/** The num carte. */
+	/** Le numéro de carte. */
 	protected int numCarte;
 	
-	/** The effet actif. */
+	/** Effet actif. */
 	private boolean effetActif = false;
 	
-	/** The la manche. */
+	/** La manche. */
 	protected Manche laManche;
 	
-	/** The l effet. */
+	/** L'effet. */
 	private Effet lEffet;
 
 	/**
-	 * Instantiates a new joueur.
+	 * Constructeur du joueur
 	 *
-	 * @param nom the nom
-	 * @param id the id
+	 * @param nom son nom
+	 * @param id son ID
 	 */
 	public Joueur(String nom, byte id) {
 		super();
@@ -60,54 +59,54 @@ public abstract class Joueur extends Observable implements Observer {
 	}
 
 	/**
-	 * Gets the score.
+	 * Getter score.
 	 *
-	 * @return the score
+	 * @return le score
 	 */
 	public int getScore() {
 		return score;
 	}
 
 	/**
-	 * Sets the score.
+	 * Setter score.
 	 *
-	 * @param score the new score
+	 * @param score nouveau score
 	 */
 	public void setScore(int score) {
 		this.score = score;
 	}
 
 	/**
-	 * Gets the nom.
+	 * Getter nom.
 	 *
-	 * @return the nom
+	 * @return le nom
 	 */
 	public String getNom() {
 		return nom;
 	}
 
 	/**
-	 * Sets the nom.
+	 * Setter nom.
 	 *
-	 * @param nom the new nom
+	 * @param nom nouveau nom
 	 */
 	public void setNom(String nom) {
 		this.nom = nom;
 	}
 
 	/**
-	 * Gets the carte choisi.
+	 * Getter carte choisi.
 	 *
-	 * @return the carte choisi
+	 * @return la carte choisi
 	 */
 	public Carte getCarteChoisi() {
 		return carteChoisi;
 	}
 
 	/**
-	 * Sets the carte choisi.
+	 * Setter carte choisi.
 	 *
-	 * @param carteChoisi the new carte choisi
+	 * @param carteChoisi nouvelle carte choisi
 	 */
 	public void setCarteChoisi(Carte carteChoisi) {
 		this.carteChoisi = carteChoisi;
@@ -132,18 +131,18 @@ public abstract class Joueur extends Observable implements Observer {
 	}
 
 	/**
-	 * Gets the num carte.
+	 * Getter numero carte.
 	 *
-	 * @return the num carte
+	 * @return le num carte
 	 */
 	public int getNumCarte() {
 		return numCarte;
 	}
 
 	/**
-	 * Sets the num carte.
+	 * Setter numéro carte.
 	 *
-	 * @param numCarte the new num carte
+	 * @param numCarte nouveau numéro carte
 	 */
 	public void setNumCarte(int numCarte) {
 		this.numCarte = numCarte;
@@ -151,8 +150,9 @@ public abstract class Joueur extends Observable implements Observer {
 
 	/**
 	 * Choisir une carte.
+	 * Sera compléter par joueur physique et artificiel.
 	 *
-	 * @param laManche the la manche
+	 * @param laManche la manche
 	 */
 	public void choisirUneCarte(Manche laManche) {
 		this.laManche = laManche;
@@ -190,36 +190,36 @@ public abstract class Joueur extends Observable implements Observer {
 	}
 
 	/**
-	 * Gets the ses cartes.
+	 * Getter ses cartes.
 	 *
-	 * @return the ses cartes
+	 * @return ses cartes
 	 */
 	public ArrayList<Carte> getSesCartes() {
 		return sesCartes;
 	}
 
 	/**
-	 * Sets the ses cartes.
+	 * Setterses cartes.
 	 *
-	 * @param sesCartes the new ses cartes
+	 * @param sesCartes nouvelles cartes
 	 */
 	public void setSesCartes(ArrayList<Carte> sesCartes) {
 		this.sesCartes = sesCartes;
 	}
 
 	/**
-	 * Gets the l effet.
+	 * Getter l effet.
 	 *
-	 * @return the l effet
+	 * @return l effet
 	 */
 	public Effet getlEffet() {
 		return lEffet;
 	}
 
 	/**
-	 * Sets the l effet.
+	 * Setter l effet.
 	 *
-	 * @param lEffet the new l effet
+	 * @param lEffet nouveau effet
 	 */
 	public void setlEffet(Effet lEffet) {
 		this.lEffet = lEffet;
@@ -255,7 +255,7 @@ public abstract class Joueur extends Observable implements Observer {
 
 	/**
 	 * Compter ses points.
-	 * Cette methode compte les points du Joueur en question pour le mode de comptage négatif
+	 * Cette methode compte les points du Joueur à la fin de la manche.
 	 */
 	public void compterSesPoints() {
 		// TODO Auto-generated method stub
@@ -278,15 +278,11 @@ public abstract class Joueur extends Observable implements Observer {
 	public abstract void afficherCartes();
 	
 	/**
-	 * Afficher cartes G.
-	 */
-	public abstract void afficherCartesG();
-	
-	/**
 	 * Appliquer effet.
-	 *
-	 * @param laManche the la manche
 	 * Cette methode permet d'appliquer l'effet Defensif associé a la carte posée
+	 *
+	 * @param laManche la manche
+	 * 
 	 * 
 	 */
 	public void appliquerEffet(Manche laManche) {
@@ -300,11 +296,12 @@ public abstract class Joueur extends Observable implements Observer {
 
 	/**
 	 * Subir effet.
-	 *
-	 * @param leTas the le tas
-	 * @param lePaquet the le paquet
-	 * @param laManche the la manche
 	 * Cette methode permet d'appliquer l'effet d'attaque associé a la carte posée
+	 *
+	 * @param leTas le tas
+	 * @param lePaquet le paquet
+	 * @param laManche la manche
+	 * 
 	 * 
 	 */
 	public void subirEffet(Tas leTas, Paquet lePaquet, Manche laManche) {
@@ -322,9 +319,10 @@ public abstract class Joueur extends Observable implements Observer {
 
 	/**
 	 * La carte contre.
+	 * La méthode permet de contrer une carte à effet.
 	 *
-	 * @param valeur the valeur
-	 * @return the carte
+	 * @param valeur la valeur
+	 * @return la carte
 	 */
 	private Carte laCarteContre(String valeur) {
 		// TODO Auto-generated method stub
@@ -344,7 +342,7 @@ public abstract class Joueur extends Observable implements Observer {
 	/**
 	 * Valeurs cartes.
 	 *
-	 * @return the hash set
+	 * @return les valeurs des cartes du joueur.
 	 */
 	private HashSet<String> valeursCartes() {
 		// TODO Auto-generated method stub
@@ -370,7 +368,7 @@ public abstract class Joueur extends Observable implements Observer {
 	}
 
 	/**
-	 * Possede.
+	 * Possede. Vérifie si le joueur possède une valeur spécifique
 	 *
 	 * @param valeur the valeur
 	 * @return true, if successful

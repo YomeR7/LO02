@@ -99,7 +99,7 @@ private String nCouleur;
 		}
 					
 		laManche.getLeTas().addCartesDessous(laManche.getLeTas().getCarteVisible());
-		laManche.getLeTas().setCarteVisible(new Carte("0", nCouleur));
+		laManche.getLeTas().setCarteVisible(new Carte("0", nCouleur,0));
 		System.out.println("La nouvelle couleur est " + nCouleur + ".");
 		leJoueur.getSesCartes().remove(leJoueur.getCarteChoisi());
 

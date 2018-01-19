@@ -1,26 +1,24 @@
 package joueurs;
 
-import jeu.Paquet;
-import jeu.Tas;
 import main.Manche;
 import strategie.Difficulte;
 
-// TODO: Auto-generated Javadoc
 /**
- * The Class JoueurArtificiel.
+ * La classe JoueurArtificiel.
  */
 public class JoueurArtificiel extends Joueur {
 
-	/** The niveau. */
+	/** Le niveau de difficulté. */
 	private Difficulte niveau;
 
 	/**
-	 * Instantiates a new joueur artificiel.
-	 *
-	 * @param nom the nom
-	 * @param id the id
-	 * @param niveau the niveau
+	 * Constructeur du joueur artificiel.
 	 * Cette methode crée un joueur IA en lui associant un nom et un niveau de Difficulté 
+	 *
+	 * @param nom le nom
+	 * @param id id
+	 * @param niveau sa difficulté
+	 * 
 	 *
 	 */
 	public JoueurArtificiel(String nom, byte id, Difficulte niveau) {
@@ -28,8 +26,11 @@ public class JoueurArtificiel extends Joueur {
 		this.niveau = niveau;
 	}
 
-	/* (non-Javadoc)
-	 * @see joueurs.Joueur#choisirUneCarte(main.Manche)
+	/**
+	 * Choisir une carte.
+	 * Permet d'appliquer la difficulté: niveau.appliquer grâce au pattern stratégie.
+	 *
+	 * @param laManche la manche
 	 */
 	public void choisirUneCarte(Manche laManche) {
 		super.choisirUneCarte(laManche);
@@ -38,29 +39,14 @@ public class JoueurArtificiel extends Joueur {
 		niveau.appliquer(this,laManche);
 	}
 
-	/* (non-Javadoc)
-	 * @see joueurs.Joueur#trierCartes()
-	 */
 	@Override
 	public void trierCartes() {
 		// TODO Auto-generated method stub
 		
 	}
 
-	/* (non-Javadoc)
-	 * @see joueurs.Joueur#afficherCartes()
-	 */
 	@Override
 	public void afficherCartes() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	/* (non-Javadoc)
-	 * @see joueurs.Joueur#afficherCartesG()
-	 */
-	@Override
-	public void afficherCartesG() {
 		// TODO Auto-generated method stub
 		
 	}

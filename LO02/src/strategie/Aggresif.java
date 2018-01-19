@@ -5,14 +5,11 @@ import java.util.Iterator;
 import java.util.Set;
 
 import jeu.Carte;
-import jeu.Paquet;
-import jeu.Tas;
 import joueurs.Joueur;
 import main.Manche;
 
-// TODO: Auto-generated Javadoc
 /**
- * The Class Aggresif.
+ * La Classe Aggresif.
  */
 public class Aggresif implements Difficulte {
 
@@ -47,25 +44,14 @@ public class Aggresif implements Difficulte {
 				cartesPossibles.add(leJoueur.getCarteChoisi());
 			}
 		}
-		/*System.out.println("Liste carte possibles");
-		for (Iterator<Carte> it = cartesPossibles.iterator(); it.hasNext();) {
-			System.out.println((Carte) it.next());
-		}
-		
-		System.out.println("Liste carte possibles effet");
-		for (Iterator<Carte> it = cartesPossiblesEffet.iterator(); it.hasNext();) {
-			System.out.println((Carte) it.next());
-		} */
 		
 		if (!cartesPossiblesEffet.isEmpty()) {
 			Carte newCart = (Carte) cartesPossiblesEffet.toArray()[0];
 			leJoueur.setCarteChoisi(newCart);
-			//System.out.println("la Carte choisi est " + leJoueur.getCarteChoisi());
 			leJoueur.poserCarte();
 		} else if (!cartesPossibles.isEmpty()) {
 			Carte newCart = (Carte) cartesPossibles.toArray()[0];
 			leJoueur.setCarteChoisi(newCart);
-			//System.out.println("la Carte choisi est " + leJoueur.getCarteChoisi());
 			leJoueur.poserCarte();
 		} else {
 			leJoueur.getSesCartes().add(laManche.getLePaquet().piocherUneCarte());

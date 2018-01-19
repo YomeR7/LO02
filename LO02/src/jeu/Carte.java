@@ -1,35 +1,23 @@
 package jeu;
 
-// TODO: Auto-generated Javadoc
 /**
- * The Class Carte.
+ * La classe Carte.
  */
 public class Carte {
 	
-	/** The points. */
+	/** Les points attaché à une carte. */
 	private int points;
 	
-	/** The valeur. */
+	/** La valeur et couleur de la carte. */
 	private String couleur,valeur;
 	
 	
 	/**
-	 * Instantiates a new carte.
+	 * Constructeur de carte.
 	 *
-	 * @param valeur the valeur
-	 * @param couleur the couleur
-	 */
-	public Carte(String valeur, String couleur) {
-		this.valeur = valeur;
-		this.couleur = couleur;
-	}
-	
-	/**
-	 * Instantiates a new carte.
-	 *
-	 * @param valeur the valeur
-	 * @param couleur the couleur
-	 * @param points the points
+	 * @param valeur la valeur
+	 * @param couleur la couleur
+	 * @param points les points
 	 */
 	
 	public Carte(String valeur, String couleur, int points) {
@@ -41,7 +29,7 @@ public class Carte {
 	
 
 	/**
-	 * Instantiates a new carte.
+	 * Constructeur d'une carte vide.
 	 */
 	public Carte() {
 		this.valeur = "0";
@@ -49,9 +37,9 @@ public class Carte {
 	}
 	
 	/**
-	 * Instantiates a new carte.
+	 * Constructeur d'une carte seulement par rapport à sa valeur.
 	 *
-	 * @param string the string
+	 * @param string une valeur
 	 */
 	public Carte(String string) {
 		// TODO Auto-generated constructor stub
@@ -59,54 +47,54 @@ public class Carte {
 	}
 	
 	/**
-	 * Gets the valeur.
+	 * Getter de valeur.
 	 *
-	 * @return the valeur
+	 * @return la valeur
 	 */
 	public String getValeur() {
 		return valeur;
 	}
 	
 	/**
-	 * Sets the valeur.
+	 * Setter valeur.
 	 *
-	 * @param valeur the new valeur
+	 * @param valeur une valeur
 	 */
 	public void setValeur(String valeur) {
 		this.valeur = valeur;
 	}
 	
 	/**
-	 * Gets the couleur.
+	 * Getter couleur.
 	 *
-	 * @return the couleur
+	 * @return la couleur
 	 */
 	public String getCouleur() {
 		return couleur;
 	}
 	
 	/**
-	 * Sets the couleur.
+	 * Setter couleur.
 	 *
-	 * @param couleur the new couleur
+	 * @param couleur la couleur
 	 */
 	public void setCouleur(String couleur) {
 		this.couleur = couleur;
 	}	
 	
 	/**
-	 * Gets the points.
+	 * Getter points.
 	 *
-	 * @return the points
+	 * @return les points
 	 */
 	public int getPoints() {
 		return points;
 	}
 	
 	/**
-	 * Sets the points.
+	 * Setter points.
 	 *
-	 * @param points the new points
+	 * @param points nouveaux points
 	 */
 	public void setPoints(int points) {
 		this.points = points;

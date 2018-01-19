@@ -17,26 +17,24 @@ import javax.swing.JTextField;
 import joueurs.Joueur;
 import joueurs.JoueurArtificiel;
 import joueurs.JoueurPhysique;
-import main.Manche;
 import main.Partie;
 import strategie.Aggresif;
 import strategie.Facile;
 import vue.InterfaceVariante;
 
-// TODO: Auto-generated Javadoc
 /**
- * The Class ControleurPartie.
+ * La classe ControleurPartie (MVC).
  */
 public class ControleurPartie {
 	
 	/**
-	 * Instantiates a new controleur partie.
+	 * Constructeur du controleur partie.
 	 *
-	 * @param IAs the i as
-	 * @param diffs the diffs
-	 * @param lancer the lancer
-	 * @param textField the text field
-	 * @param frame the frame
+	 * @param IAs Les checkbox des IAs
+	 * @param diffs Les RadioButton des difficultés
+	 * @param lancer Bouton pour lancer la partie
+	 * @param textField Texte pour choisir son nom
+	 * @param frame La fenetre
 	 */
 	public ControleurPartie(HashMap<String, JCheckBox> IAs, HashMap<String, JRadioButton> diffs 
 			,JButton lancer, JTextField textField, JFrame frame) {

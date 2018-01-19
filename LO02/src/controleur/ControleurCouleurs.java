@@ -14,20 +14,20 @@ import joueurs.Joueur;
 import main.Manche;
 import vue.InterfaceManche;
 
-// TODO: Auto-generated Javadoc
 /**
- * The Class ControleurCouleurs.
+ * La Classe ControleurCouleurs (MVC).
  */
 public class ControleurCouleurs {
 
 	/**
-	 * Instantiates a new controleur couleurs.
-	 *
-	 * @param manche the manche
-	 * @param moi the moi
-	 * @param couleurs the couleurs
-	 * @param frame the frame
-	 * @param inter the inter
+	 * Constructeur du controleur couleurs.
+	 * Permet d'attacher une action à chaque boutons couleur.
+	 * 
+	 * @param manche la manche
+	 * @param moi moi
+	 * @param couleurs boutons couleurs
+	 * @param frame la frame
+	 * @param inter l'interface de la manche
 	 */
 	public ControleurCouleurs(Manche manche, Joueur moi, JButton[] couleurs,JFrame frame,InterfaceManche inter) {
 		for (int i = 0;i<4;i++) {

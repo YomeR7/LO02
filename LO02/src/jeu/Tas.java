@@ -6,25 +6,24 @@ import java.util.Observable;
 
 import variante.Variante;
 
-// TODO: Auto-generated Javadoc
 /**
- * The Class Tas.
+ * La classe Tas.
  */
 public class Tas extends Observable{
 	
-	/** The carte visible. */
+	/** la carte visible. */
 	private Carte carteVisible;
 	
-	/** The cartes dessous. */
+	/** les cartes du dessous. */
 	private HashSet<Carte> cartesDessous;
 	
-	/** The avoir effet. */
+	/** boolean pour voir si le tas a un effet. */
 	private boolean avoirEffet = false;
 	
 	/**
-	 * Instantiates a new tas.
+	 * Constructeur du tas.
 	 *
-	 * @param lePaquet the le paquet
+	 * @param lePaquet le paquet.
 	 */
 	public Tas(Paquet lePaquet) {
 		carteVisible = lePaquet.piocherUneCarte();
@@ -32,9 +31,9 @@ public class Tas extends Observable{
 	}
 
 	/**
-	 * Gets the cartes dessous.
+	 * Getter des cartes du dessous.
 	 *
-	 * @return the cartes dessous
+	 * @return les cartes du dessous
 	 */
 	public ArrayList<Carte> getCartesDessous() {
 		ArrayList<Carte> cartes = new ArrayList<Carte>(cartesDessous);
@@ -42,45 +41,45 @@ public class Tas extends Observable{
 	}
 
 	/**
-	 * Sets the cartes dessous.
+	 * Setter des cartes du dessous.
 	 *
-	 * @param cartesDessous the new cartes dessous
+	 * @param cartesDessous nouvelles cartes du dessous
 	 */
 	public void setCartesDessous(HashSet<Carte> cartesDessous) {
 		this.cartesDessous = cartesDessous;
 	}
 
 	/**
-	 * Checks if is avoir effet.
+	 * Check s'il y a un effet.
 	 *
-	 * @return true, if is avoir effet
+	 * @return vrai, s'il y a un effet.
 	 */
 	public boolean isAvoirEffet() {
 		return avoirEffet;
 	}
 
 	/**
-	 * Sets the avoir effet.
+	 * Setter avoir effet.
 	 *
-	 * @param avoirEffet the new avoir effet
+	 * @param avoirEffet vrai ou faux
 	 */
 	public void setAvoirEffet(boolean avoirEffet) {
 		this.avoirEffet = avoirEffet;
 	}
 
 	/**
-	 * Adds the cartes dessous.
+	 * Ajouter une carte au dessous.
 	 *
-	 * @param cartesDessous the cartes dessous
+	 * @param cartesDessous une carte (l'ancienne carte visible généralement)
 	 */
 	public void addCartesDessous(Carte cartesDessous) {
 		this.cartesDessous.add(cartesDessous);
 	}
 
 	/**
-	 * Gets the carte visible.
+	 * Getter carte visible.
 	 *
-	 * @return the carte visible
+	 * @return la carte visible
 	 */
 	public Carte getCarteVisible() {
 		return carteVisible;
@@ -88,6 +87,7 @@ public class Tas extends Observable{
 
 	/**
 	 * Afficher carte visible.
+	 * notify en même temps les observers.
 	 */
 	public void afficherCarteVisible() {
 		System.out.println("La carte visible est : " + carteVisible + "\n");
@@ -96,9 +96,10 @@ public class Tas extends Observable{
 	}
 
 	/**
-	 * Sets the carte visible.
+	 * Setter carte visible.
+	 * Notify les observers.
 	 *
-	 * @param carteVisible the new carte visible
+	 * @param carteVisible nouvelle carte visible
 	 */
 	public void setCarteVisible(Carte carteVisible) {
 		this.carteVisible = carteVisible;
@@ -108,10 +109,10 @@ public class Tas extends Observable{
 	}
 	
 	/**
-	 * Carte visible effet attaque.
+	 * Vérifie si la carte visible est un effet d'attaque.
 	 *
-	 * @param var the var
-	 * @return true, if successful
+	 * @param var la variante en cours
+	 * @return true, si effet d'attaque
 	 */
 	public boolean carteVisibleEffetAttaque(Variante var) {
 		return var.getValeurEffetAttaque().containsKey(carteVisible.getValeur());

@@ -13,8 +13,8 @@ import effet.EffetRejouer;
  */
 public class VarianteMonclar extends Variante {
 
-	/**
-	 * Instantiates a new variante monclar.
+	/* (non-Javadoc)
+	 * @see variante.Variante#Variante()
 	 */
 	public VarianteMonclar() {
 		super();

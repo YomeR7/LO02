@@ -1,6 +1,6 @@
 /**
- *  Package des effets
- *  Design pattern stratégie
+ *  Package des effets.
+ *  Design pattern stratégie.
  * 
  * @author Florian
  *

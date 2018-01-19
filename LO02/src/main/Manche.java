@@ -1,6 +1,5 @@
 package main;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Observable;
 import java.util.Scanner;
@@ -16,156 +15,84 @@ import variante.*;
  */
 public class Manche extends Observable implements Runnable {
 
-	/** The rnd. */
+	/** Random et sens et byte car le codage int est inutile. */
 	private byte sens = 1, rnd;
 	
-	/** The joueur en cours. */
+	/** joueur en cours. */
 	private Joueur joueurEnCours;
 	
-	/** The sc. */
+	/** scanner */
 	private Scanner sc;
 	
-	/** The nb manche. */
+	/** nb manche. */
 	private static byte nbManche = 0;
 	
-	/** The variante manche. */
+	/** variante manche. */
 	private Variante varianteManche;
 	
-	/** The le paquet. */
+	/** le paquet. */
 	private Paquet lePaquet;
 	
-	/** The le tas. */
+	/** le tas. */
 	private Tas leTas;
 	
-	/** The les variantes. */
+	/** HashMap des variantes permettant de lié une valeur avec un classe de variante. */
 	private HashMap<String, Variante> lesVariantes;
 	
 	/** The attente. */
 	private boolean attente = false;
 
-	/**
-	 * Gets the sens.
-	 *
-	 * @return the sens
-	 */
+	
 	public byte getSens() {
 		return sens;
 	}
-
-	/**
-	 * Sets the sens.
-	 *
-	 * @param sens the new sens
-	 */
+	
 	public void setSens(byte sens) {
 		this.sens = sens;
 	}
-
-	/**
-	 * Gets the joueur en cours.
-	 *
-	 * @return the joueur en cours
-	 */
+	
 	public Joueur getJoueurEnCours() {
 		return joueurEnCours;
 	}
-
-	/**
-	 * Sets the joueur en cours.
-	 *
-	 * @param joueurEnCours the new joueur en cours
-	 */
+	
 	public void setJoueurEnCours(Joueur joueurEnCours) {
 		this.joueurEnCours = joueurEnCours;
 	}
-
-	/**
-	 * Gets the variante manche.
-	 *
-	 * @return the variante manche
-	 */
+	
 	public Variante getVarianteManche() {
 		return varianteManche;
 	}
-
-	/**
-	 * Sets the variante manche.
-	 *
-	 * @param nomManche the new variante manche
-	 */
+	
 	public void setVarianteManche(String nomManche) {
 		varianteManche = lesVariantes.get(nomManche);
 	}
-
-	/**
-	 * Gets the nb manche.
-	 *
-	 * @return the nb manche
-	 */
+	
 	public static byte getNbManche() {
 		return nbManche;
 	}
-
-	/**
-	 * Sets the nb manche.
-	 *
-	 * @param nbManche the new nb manche
-	 */
+	
 	public static void setNbManche(byte nbManche) {
 		Manche.nbManche = nbManche;
 	}
-
-	/**
-	 * Gets the le paquet.
-	 *
-	 * @return the le paquet
-	 */
+	
 	public Paquet getLePaquet() {
 		return lePaquet;
 	}
-
-	/**
-	 * Sets the le paquet.
-	 *
-	 * @param lePaquet the new le paquet
-	 */
+	
 	public void setLePaquet(Paquet lePaquet) {
 		this.lePaquet = lePaquet;
 	}
-
-	/**
-	 * Gets the le tas.
-	 *
-	 * @return the le tas
-	 */
+	
 	public Tas getLeTas() {
 		return leTas;
-	}
-
-	/**
-	 * Sets the le tas.
-	 *
-	 * @param leTas the new le tas
-	 */
+	} 
+	
 	public void setLeTas(Tas leTas) {
 		this.leTas = leTas;
 	}
 
 	/**
-	 * Commencer manche.
-	 *
-	 * @return the tas
-	 */
-	public Tas commencerManche() {
-		lePaquet = new Paquet(varianteManche);
-		lePaquet.melanger();
-		lePaquet.distribuer();
-		leTas = new Tas(lePaquet);
-		return leTas;
-	}
-
-	/**
-	 * Instantiates a new manche.
+	 * Constructeur de la manche. Permet de mettre en place les variables.
 	 */
 	public Manche() {
 
@@ -180,40 +107,29 @@ public class Manche extends Observable implements Runnable {
 	}
 
 	/**
-	 * Jouer tour G.
+	 * Commencer manche permet de récupérer le tas.
+	 *
+	 * @return le tas
+	 */
+	public Tas commencerManche() {
+		lePaquet = new Paquet(varianteManche);
+		lePaquet.melanger();
+		lePaquet.distribuer();
+		leTas = new Tas(lePaquet);
+		return leTas;
+	}
+
+	/**
+	 * Jouer tour Graphique et en console.
 	 */
 	public void jouerTourG() {
 		joueurEnCours.trierCartes();
-		joueurEnCours.afficherCartesG();
+		joueurEnCours.afficherCartes();
 		joueurEnCours.choisirUneCarte(this);
-		System.out.println(joueurEnCours.uneCarteEstChoisi() + "  carte select + " + joueurEnCours.isEffetActif());
 		if (joueurEnCours.uneCarteEstChoisi() && joueurEnCours.isEffetActif()) {
 			joueurEnCours.appliquerEffet(this);
 		}
 		if (joueurEnCours.getSesCartes().size() > 1) {
-			this.changerJoueurEnCours();
-		} else if (joueurEnCours.getSesCartes().size() == 0) {
-			mancheFinie();
-		}
-	}
-
-	/**
-	 * Jouer tour.
-	 */
-	public void jouerTour() {
-		// TODO Auto-generated method stub
-
-		System.out.println("C'est au tour de " + joueurEnCours.getNom() + "\n");
-		joueurEnCours.trierCartes();
-		joueurEnCours.afficherCartes();
-		joueurEnCours.choisirUneCarte(this);
-		while (joueurEnCours.uneCarteEstChoisi() && joueurEnCours.isEffetActif()) { // retour au if, le while bloquait le
-																					// jeu au changement de couleur
-			joueurEnCours.appliquerEffet(this); // idée : déplacer ce if dans choisirCarte
-		}
-		if (joueurEnCours.getSesCartes().size() == 1) {
-			this.uneCarte();
-		} else if (joueurEnCours.getSesCartes().size() > 1) {
 			this.changerJoueurEnCours();
 		} else if (joueurEnCours.getSesCartes().size() == 0) {
 			mancheFinie();
@@ -231,7 +147,7 @@ public class Manche extends Observable implements Runnable {
 	}
 
 	/**
-	 * Manche finie.
+	 * Manche finie permet de terminer un manche. Les joueurs comptes leurs points
 	 */
 	private void mancheFinie() {
 		// TODO Auto-generated method stub
@@ -255,7 +171,7 @@ public class Manche extends Observable implements Runnable {
 	}
 
 	/**
-	 * Une carte.
+	 * Méthode permettant de dire carte et contre carte. Etait seulement utilisable lors du livrable 2.
 	 */
 	public void uneCarte() {
 		Scanner scc = new Scanner(System.in);
@@ -322,7 +238,7 @@ public class Manche extends Observable implements Runnable {
 	}
 
 	/**
-	 * Changer joueur en cours.
+	 * Changer joueur en cours en fonction du sens.
 	 */
 	public void changerJoueurEnCours() {
 		try {
@@ -341,8 +257,8 @@ public class Manche extends Observable implements Runnable {
 		notifyObservers();
 	}
 
-	/* (non-Javadoc)
-	 * @see java.lang.Runnable#run()
+	/*
+	 * Methode run lié au thread de la manche. Elle permet d'enchainer les tours de jeu jusqu'à la fin de la manche.
 	 */
 	public void run() {
 		// TODO Auto-generated method stub

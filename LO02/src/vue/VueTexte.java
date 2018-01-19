@@ -2,21 +2,20 @@ package vue;
 
 import joueurs.JoueurPhysique;
 
-// TODO: Auto-generated Javadoc
 /**
- * The Class VueTexte.
+ * The Class VueTexte. Elle permet l'affiche en console
  */
 public class VueTexte implements Runnable{
 	
-	/** The moi. */
+	/** Moi: le joueur physique. */
 	private JoueurPhysique moi;
 
 	/**
-	 * Instantiates a new vue texte.
+	 * Constructeur de la classe que lance un thread.
 	 *
-	 * @param joueur the joueur
+	 * @param joueur le joueur
 	 */
-	VueTexte(JoueurPhysique joueur) {
+	public VueTexte(JoueurPhysique joueur) {
 		this.moi = joueur;
 		Thread t = new Thread(this);
 		t.start();
@@ -24,6 +23,9 @@ public class VueTexte implements Runnable{
 	
 	/* (non-Javadoc)
 	 * @see java.lang.Runnable#run()
+	 */
+	/**
+	 * Le lancement du thread permet d'afficher en parallèle les cartes dans la console.
 	 */
 	public void run() {
 		System.out.println("Choisis une carte à jouer.\n");

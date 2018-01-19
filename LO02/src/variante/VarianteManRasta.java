@@ -12,8 +12,8 @@ import effet.EffetRejouer;
  */
 public class VarianteManRasta extends Variante{
 
-	/**
-	 * Instantiates a new variante man rasta.
+	/* (non-Javadoc)
+	 * @see variante.Variante#Variante()
 	 */
 	public VarianteManRasta() {
 		super();

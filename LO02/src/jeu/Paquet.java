@@ -6,20 +6,18 @@ import java.util.Collections;
 import main.Partie;
 import variante.Variante;
 
-// TODO: Auto-generated Javadoc
 /**
- * The Class Paquet.
+ * La classe Paquet.
  */
 public class Paquet {
 
-	/** The cartes. */
-	// private byte nbCarte = 52;
+	/** Les cartes. */
 	private ArrayList<Carte> cartes;
 
 	/**
-	 * Instantiates a new paquet.
+	 * Constructeur du paquet.
 	 *
-	 * @param VarianteManche the variante manche
+	 * @param VarianteManche la variante manche
 	 */
 	public Paquet(Variante VarianteManche) {
 		super();
@@ -33,21 +31,21 @@ public class Paquet {
 		int k = 0;
 		for (int i = 0; i < couleur.length; i++) {
 			for (int j = 0; j < valeur.length; j++) {
-				cartes.add(k, new Carte(valeur[j], couleur[i], points[j])); // ajout de modeComptage pour affichage
+				cartes.add(k, new Carte(valeur[j], couleur[i], points[j]));
 				k++;
 			}
 		}
 	}
 
 	/**
-	 * Melanger.
+	 * Melanger le paquet.
 	 */
 	public void melanger() {
 		Collections.shuffle(cartes);
 	}
 
 	/**
-	 * Distribuer.
+	 * Distribuer le paquet.
 	 */
 	public void distribuer() {
 		int carteParJoueur = 0;
@@ -66,7 +64,7 @@ public class Paquet {
 	}
 
 	/**
-	 * Afficher cartes.
+	 * Afficher cartes les cartes (uniquement pour joueur physique).
 	 */
 	public void afficherCartes() {
 		for (int i = 0; i < cartes.size(); i++) {
@@ -77,7 +75,7 @@ public class Paquet {
 	/**
 	 * Piocher une carte.
 	 *
-	 * @return the carte
+	 * @return une carte
 	 */
 	public Carte piocherUneCarte() {
 		Carte cartePioche = cartes.get(0);
@@ -86,18 +84,18 @@ public class Paquet {
 	}
 
 	/**
-	 * Gets the cartes.
+	 * Getter les cartes.
 	 *
-	 * @return the cartes
+	 * @return les cartes
 	 */
 	public ArrayList<Carte> getCartes() {
 		return cartes;
 	}
 
 	/**
-	 * Sets the cartes.
+	 * Setter les cartes.
 	 *
-	 * @param cartes the new cartes
+	 * @param cartes nouvelles cartes
 	 */
 	public void setCartes(ArrayList<Carte> cartes) {
 		this.cartes = cartes;

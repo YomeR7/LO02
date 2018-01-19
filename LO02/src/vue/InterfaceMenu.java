@@ -9,19 +9,18 @@ import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
-// TODO: Auto-generated Javadoc
 /**
- * The Class InterfaceMenu.
+ * La classe InterfaceMenu Vue du MVC.
  */
 public class InterfaceMenu {
 
-	/** The frame. */
+	/** la fenetre. */
 	private JFrame frame;
 
 	/**
-	 * Launch the application.
+	 * Lance le jeu.
 	 *
-	 * @param args the arguments
+	 * @param args les arguments
 	 */
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
@@ -38,16 +37,9 @@ public class InterfaceMenu {
 	}
 
 	/**
-	 * Create the application.
+	 * Constructeur de Interface Menu qui mets les éléments de la fenetre.
 	 */
 	public InterfaceMenu() {
-		initialize();
-	}
-
-	/**
-	 * Initialize the contents of the frame.
-	 */
-	private void initialize() {
 		frame = new JFrame();
 		frame.setBounds(100, 100, 542, 369);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

@@ -1,46 +1,36 @@
 package vue;
 
-import java.awt.EventQueue;
-
-import javax.swing.JComponent;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import java.awt.BorderLayout;
 import javax.swing.JList;
 
 import main.Manche;
 
 import javax.swing.AbstractListModel;
-import java.awt.FlowLayout;
-import java.awt.CardLayout;
-import java.awt.GridLayout;
 import java.awt.Font;
 import javax.swing.JButton;
-import javax.swing.AbstractAction;
 import java.awt.event.ActionEvent;
-import javax.swing.Action;
 import java.awt.event.ActionListener;
 
-// TODO: Auto-generated Javadoc
 /**
  * The Class InterfaceVariante.
  */
 public class InterfaceVariante {
 
-	/** The frame. */
+	/** La fenetre */
 	private JFrame frame;
 	
-	/** The list. */
+	/** Liste des variantes. */
 	private JList<Object> list;
 	
-	/** The btn choisir variante. */
+	/** Bouton choisir variante. */
 	private JButton btnChoisirVariante;
 	
-	/** The manche. */
+	/** La manche. */
 	private Manche manche;
 
 	/**
-	 * Create the application.
+	 * Constructeur de la variante
 	 *
 	 * @param aFrame the a frame
 	 * @param manche the manche
@@ -54,7 +44,7 @@ public class InterfaceVariante {
 	}
 
 	/**
-	 * Initialize the contents of the frame.
+	 * Initialisation des composants de la fenetre.
 	 */
 	private void initialize() {
 		frame.setBounds(100, 100, 453, 354);
@@ -97,15 +87,5 @@ public class InterfaceVariante {
 		btnChoisirVariante.setFont(new Font("Dialog", Font.PLAIN, 12));
 		btnChoisirVariante.setBounds(138, 214, 144, 23);
 		frame.getContentPane().add(btnChoisirVariante);
-	}
-
-	/**
-	 * Gets the frame.
-	 *
-	 * @return the frame
-	 */
-	public JFrame getFrame() {
-		// TODO Auto-generated method stub
-		return frame;
 	}
 }

@@ -9,8 +9,8 @@ import effet.EffetRejouer;
  */
 public class VarianteMinimale extends Variante {
 	
-	/**
-	 * Instantiates a new variante minimale.
+	/* (non-Javadoc)
+	 * @see variante.Variante#Variante()
 	 */
 	public VarianteMinimale() {
 		super();

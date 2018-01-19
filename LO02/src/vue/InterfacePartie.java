@@ -23,41 +23,25 @@ import java.awt.event.ActionEvent;
  */
 public class InterfacePartie {
 
-	/** The frame. */
+	/** La fenetre */
 	private JFrame frame;
 	
 	/** The text field. */
 	private JTextField textField;
 	
-	/** The I as. */
+	/** HashMap des IAs */
 	private HashMap<String, JCheckBox> IAs;
 	
-	/** The diffs. */
+	/** HashMap des difficultés */
 	private HashMap<String,JRadioButton> diffs;
 	
-	/** The lancer. */
+	/** Button lancer. */
 	private JButton lancer;
 	
 	/**
-	 * Launch the application.
-	 * 
-	 * 	public static void main(String[] args) {
-	 * 		EventQueue.invokeLater(new Runnable() {
-	 * 			public void run() {
-	 * 				try {
-	 * 					InterfacePartie window = new InterfacePartie();
-	 * 					window.frame.setVisible(true);
-	 * 				} catch (Exception e) {
-	 * 					e.printStackTrace();
-	 * 				}
-	 * 			}
-	 * 		});
-	 * 	}
-	 * 
-	 * 	/**
-	 * Create the application.
+	 * Constructeur qui permet de récupérer la fenetre et initialiser les composants.
 	 *
-	 * @param aFrame the a frame
+	 * @param aFrame La fenetre
 	 */
 	public InterfacePartie(JFrame aFrame) {
 		this.frame = aFrame;
@@ -68,7 +52,7 @@ public class InterfacePartie {
 	}
 
 	/**
-	 * Initialize the contents of the frame.
+	 * Initialise les composants
 	 */
 	private void initialize() {
 		frame.setBounds(100, 100, 542, 369);

@@ -20,44 +20,43 @@ import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-// TODO: Auto-generated Javadoc
 /**
- * The Class InterfaceManche.
+ * La Classe InterfaceManche qui correspond à la vue de la manche.
  */
 public class InterfaceManche implements Observer {
 
-	/** The frame. */
+	/** La fenetre. */
 	private JFrame frame;
 	
-	/** The manche. */
+	/** la manche. */
 	private Manche manche;
 	
-	/** The moi. */
+	/** moi qui correspond au joueur physique. */
 	private Joueur moi;
 	
-	/** The le tas. */
+	/** le tas. */
 	private Tas leTas;
 	
-	/** The couleurs. */
+	/** Les boutons couleurs et cartes du joueur. */
 	private JButton[] cartesJ,couleurs;
 	
-	/** The choisir. */
+	/** Textes de la vue. */
 	private JLabel carteV,tourDe,choisir;
 	
-	/** The controleur. */
+	/** Controleur manche. */
 	private ControleurManche controleur;
 	
-	/** The ias. */
+	/** Tableau des IAs de la partie. */
 	private JLabel[] ias;
 	
-	/** The attente. */
+	/** boolean attente. */
 	private Boolean attente = false;
 	
-	/** The piocher. */
+	/** Bouton piocher. */
 	private JButton piocher;
 	
 	/**
-	 * Launch the application.
+	 * Getter Attente
 	 *
 	 * @return the attente
 	 */
@@ -67,19 +66,19 @@ public class InterfaceManche implements Observer {
 	}
 
 	/**
-	 * Sets the attente.
+	 * Setter attente.
 	 *
-	 * @param attente the new attente
+	 * @param attente vrai ou faux
 	 */
 	public void setAttente(Boolean attente) {
 		this.attente = attente;
 	}
 
 	/**
-	 * Create the application.
+	 * Constructeur que permet de mettre en place la fenetre.
 	 *
-	 * @param frame the frame
-	 * @param manche the manche
+	 * @param frame la fenetre
+	 * @param manche la manche
 	 */
 	public InterfaceManche(JFrame frame, Manche manche) {
 		
@@ -103,7 +102,7 @@ public class InterfaceManche implements Observer {
 	}
 
 	/**
-	 * Initialize the contents of the frame.
+	 * Initialisation de la fenetre (avant de lancer la manche).
 	 */
 	private void initialize() {
 		frame.setBounds(200, 50, 870, 640);
@@ -138,9 +137,23 @@ public class InterfaceManche implements Observer {
 	/* (non-Javadoc)
 	 * @see java.util.Observer#update(java.util.Observable, java.lang.Object)
 	 */
+	/**
+	 * Methode update lié à l'implementation de observer.
+	 * En fonction de notification des objets que la classe observe la vue réagira autrement.
+	 */
 	@Override
 	public void update(Observable o, Object arg) {
 		// TODO Auto-generated method stub
+		System.out.println("COME ON");
+		System.out.println(o);
+		if (o instanceof JoueurPhysique) {
+			System.out.println("T ES LA?");
+			controleur = new ControleurManche(cartesJ,(JoueurPhysique) moi,frame,manche,piocher);
+			if (!attente) {
+				new VueTexte((JoueurPhysique) moi);	
+			}		
+		}
+		
 		if (o instanceof Joueur) {
 			if (arg instanceof String) {
 				JLabel effet = new JLabel((String) arg);
@@ -204,17 +217,11 @@ public class InterfaceManche implements Observer {
 			this.frame.getContentPane().add(tourDe);
 			this.frame.repaint();
 		}
-		
-		if (o instanceof JoueurPhysique) {
-			controleur = new ControleurManche(cartesJ,(JoueurPhysique) moi,frame,manche,piocher);
-			if (!attente) {
-				new VueTexte((JoueurPhysique) moi);	
-			}		
-		}
+	
 	}
 	
 	/**
-	 * Afficher couleurs.
+	 * Méthode qui affiche les boutons couleurs
 	 */
 	public void afficherCouleurs() {
 		couleurs = new JButton[4];
@@ -236,7 +243,7 @@ public class InterfaceManche implements Observer {
 	}
 	
 	/**
-	 * Affichage cartes.
+	 * Méthode qui affiche les cartes du joueur dans la fenetre.
 	 */
 	public void affichageCartes() {
 		moi.trierCartes();
@@ -258,7 +265,7 @@ public class InterfaceManche implements Observer {
 	}
 	
 	/**
-	 * Affichage I as.
+	 * Méthode qui affiche les IAs avec leurs nombres de cartes.
 	 */
 	public void affichageIAs() {
 		for (int i = 0; i < (Partie.getInstance().getLesJoueurs().size()-1); i++) {

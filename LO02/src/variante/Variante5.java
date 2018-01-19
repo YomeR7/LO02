@@ -12,8 +12,8 @@ import variante.Variante;
  */
 public class Variante5 extends Variante {
 	
-	/**
-	 * Instantiates a new variante 5.
+	/* (non-Javadoc)
+	 * @see variante.Variante#Variante()
 	 */
 	public Variante5() {
 		super();

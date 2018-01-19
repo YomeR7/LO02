@@ -5,17 +5,14 @@ import java.util.Comparator;
 import java.util.Scanner;
 
 import jeu.Carte;
-import jeu.Paquet;
-import jeu.Tas;
 import main.Manche;
 
-// TODO: Auto-generated Javadoc
 /**
  * The Class JoueurPhysique.
  */
 public class JoueurPhysique extends Joueur {
 	
-	/** The attente vue. */
+	/** attente vue. */
 	private boolean attenteVue = true;
 
 	/**
@@ -37,18 +34,18 @@ public class JoueurPhysique extends Joueur {
 	}
 
 	/**
-	 * Instantiates a new joueur physique.
+	 * Constructeur du joueur physique.
 	 *
-	 * @param nom the nom
-	 * @param id the id
+	 * @param nom le nom
+	 * @param id id
 	 */
 	public JoueurPhysique(String nom, byte id) {
 		super(nom, id);
 		setCarteChoisi(new Carte());
 	}
-
-	/* (non-Javadoc)
-	 * @see joueurs.Joueur#afficherCartes()
+	
+	/**
+	 * La méthode afficherCartes permet d'afficher dans console ces cartes puis choisir une carte.
 	 */
 	public void afficherCartes() {
 		for (int i = 0; i < sesCartes.size(); i++) {
@@ -56,15 +53,12 @@ public class JoueurPhysique extends Joueur {
 		}
 		choisirUneCarteC(laManche);
 	}
-	
-	/* (non-Javadoc)
-	 * @see joueurs.Joueur#afficherCartesG()
-	 */
-	public void afficherCartesG() {
-	}
 
-	/* (non-Javadoc)
-	 * @see joueurs.Joueur#choisirUneCarte(main.Manche)
+	/**
+	 * La méthode redefinie permet de mettre en attente le thread.
+	 * Tant que l'utilisateur de choisi pas de carte on ne continue pas.
+	 * 
+	 * @param laManche la manche
 	 */
 	public void choisirUneCarte(Manche laManche) {
 		super.choisirUneCarte(laManche);
@@ -74,7 +68,7 @@ public class JoueurPhysique extends Joueur {
 			try {
 				Thread.sleep(1000);
 			} catch (InterruptedException e) {
-				// TODO Auto-generated caxtch block
+				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}
@@ -82,9 +76,10 @@ public class JoueurPhysique extends Joueur {
 	}
 	
 	/**
-	 * Choisir une carte C.
+	 * Choisir une carte mode console.
+	 * Permet de choisir une carte via la console
 	 *
-	 * @param laManche the la manche
+	 * @param laManche la manche
 	 */
 	public void choisirUneCarteC(Manche laManche) {
 		// TODO Auto-generated method stub
@@ -96,8 +91,6 @@ public class JoueurPhysique extends Joueur {
 			carteChoisi = sesCartes.get(numCarte - 1);
 			// System.out.println(carteChoisi);
 			this.finirTour();
-		} else if (numCarte == 13) {
-			System.out.println(laManche.getLeTas().getCartesDessous());
 		} else if (numCarte > sesCartes.size()) {
 			System.out.println("Tu n'as pas autant de cartes! Choisis une carte entre 1 et " + sesCartes.size());
 			this.choisirUneCarte(this.laManche);
@@ -108,25 +101,25 @@ public class JoueurPhysique extends Joueur {
 
 	}
 
-	/* (non-Javadoc)
-	 * @see joueurs.Joueur#trierCartes()
+	/**
+	 * La méthode permet de trier les cartes grâce à une double comparaison
 	 */
 	public void trierCartes() {
 		Collections.sort(sesCartes, new Comparator<Carte>() {
 			@Override
 			public int compare(Carte c1, Carte c2) {
-				if (c1.getCouleur().compareTo(c2.getCouleur()) == 0) { // Si la couleur est égale pour les deux cartes
-																		// comparés
-					return c1.getValeur().compareTo(c2.getValeur()); // Alors on compare les valeur
-				} else { // Sinon, les cartes ont une couleur différente
-					return c1.getCouleur().compareTo(c2.getCouleur()); // Le tri doit s'effectuer sur la couleur
+				if (c1.getCouleur().compareTo(c2.getCouleur()) == 0) {
+																		
+					return c1.getValeur().compareTo(c2.getValeur()); 
+				} else {
+					return c1.getCouleur().compareTo(c2.getCouleur());
 				}
 			}
 		});
 	}
 
-	/* (non-Javadoc)
-	 * @see joueurs.Joueur#finirTour()
+	/*
+	 * La méthode permet de finir le tour et débloquer l'attente
 	 */
 	public void finirTour() {
 		// TODO Auto-generated method stub

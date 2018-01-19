@@ -1,5 +1,5 @@
 /**
- *  Package des joueurs
+ *  Package des joueurs.
  * 
  * @author Florian
  *

@@ -12,8 +12,8 @@ import variante.Variante;
  */
 public class VarianteCarteMaou extends Variante {
 
-	/**
-	 * Instantiates a new variante carte maou.
+	/* (non-Javadoc)
+	 * @see variante.Variante#Variante()
 	 */
 	public VarianteCarteMaou() {
 		super();

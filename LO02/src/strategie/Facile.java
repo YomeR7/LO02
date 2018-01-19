@@ -1,13 +1,10 @@
 package strategie;
 
-import jeu.Paquet;
-import jeu.Tas;
 import joueurs.Joueur;
 import main.Manche;
 
-// TODO: Auto-generated Javadoc
 /**
- * The Class Facile.
+ * La Classe Facile.
  */
 public class Facile implements Difficulte {
 

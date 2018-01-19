@@ -3,25 +3,24 @@ package vue;
 import joueurs.JoueurPhysique;
 import main.Manche;
 
-// TODO: Auto-generated Javadoc
 /**
- * The Class VueTexteCouleur.
+ * The Class VueTexteCouleur. Permet de choisir une couleur en ligne de commande
  */
 public class VueTexteCouleur implements Runnable{
 	
-	/** The moi. */
+	/** moi. */
 	private JoueurPhysique moi;
 	
-	/** The la manche. */
+	/** la manche. */
 	private Manche laManche;
 
 	/**
-	 * Instantiates a new vue texte couleur.
+	 * Constructeur de la vue qui lance un thread pour la console
 	 *
-	 * @param joueur the joueur
-	 * @param manche the manche
+	 * @param joueur le joueur
+	 * @param manche la manche
 	 */
-	VueTexteCouleur(JoueurPhysique joueur, Manche manche) {
+	public VueTexteCouleur(JoueurPhysique joueur, Manche manche) {
 		this.laManche = manche;
 		this.moi = joueur;
 		Thread t = new Thread(this);
